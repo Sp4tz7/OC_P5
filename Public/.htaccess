@@ -1,0 +1,7 @@
+#URL rewriting mode
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^admin/ bootstrap.php?app=Backend [QSA,L]
+RewriteRule ^(.*)$ bootstrap.php?app=Frontend [QSA,L]
