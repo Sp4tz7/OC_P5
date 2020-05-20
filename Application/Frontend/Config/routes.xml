@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
     <route url="/" module="Blog" action="index"></route>
-    <route url="/blog-(\d*)" module="Blog" action="blog" vars="id"></route>
+    <route url="/blog/([a-z0-9\-]*/$)" module="Blog" action="blog" vars="id"></route>
 </routes>

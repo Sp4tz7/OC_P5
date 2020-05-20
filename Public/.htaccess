@@ -1,7 +1,9 @@
 #URL rewriting mode
-RewriteEngine On
-
+<IfModule mod_rewrite.c>
+RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
 RewriteRule ^admin/ bootstrap.php?app=Backend [QSA,L]
 RewriteRule ^(.*)$ bootstrap.php?app=Frontend [QSA,L]
+</IfModule>
