@@ -5,7 +5,7 @@ namespace Core;
 class Page extends ApplicationComponent
 {
     protected $contentFile;
-    protected $contentDir;
+    protected $templateDir;
     protected $vars = [];
     protected $name;
     protected $app;
@@ -21,15 +21,16 @@ class Page extends ApplicationComponent
 
     public function getGeneratedPage()
     {
-        $contentDir = ! empty($this->contentDir) ? $this->contentDir : APP_DIR.'Templates/'.$this->app->getEnv();
-        if ( ! file_exists($contentDir)) {
-            throw new \RuntimeException('The view '.$contentDir.' does not exist');
+        $templateDir = ! empty($this->templateDir) ? $this->templateDir : APP_DIR.'Templates/'.$this->app->getEnv();
+
+        if ( ! file_exists($templateDir) ) {
+            throw new \RuntimeException('The view '.$templateDir.' does not exist');
         }
         $loader = new \Twig\Loader\FilesystemLoader(
             [
                 APP_DIR.'Templates/'.$this->app->getEnv(),
                 APP_DIR.'Templates/'.$this->app->getEnv().'/Views/',
-                APP_DIR.'Templates/'.$this->app->getEnv().'/Views/'.$this->app->getName().'/',
+                $this->dirExists(APP_DIR.'Templates/'.$this->app->getEnv().'/Views/'.$this->app->getName().'/'),
             ]
         );
         $twig   = new \Twig\Environment(
@@ -46,9 +47,16 @@ class Page extends ApplicationComponent
             ],
         ];
         $page = array_merge($page, $this->getVars());
-        echo $twig->render($this->contentFile,$page);
+        echo $twig->render($this->contentFile, $page);
 
 
+    }
+
+    public function dirExists($dir){
+        if(is_dir($dir)){
+            return $dir;
+        }
+        return false;
     }
 
     public function getVars()
@@ -56,13 +64,13 @@ class Page extends ApplicationComponent
         return $this->vars;
     }
 
-    public function setContentDir($contentDir)
+    public function setTemplateDir($templateDir)
     {
-        if ( ! is_string($contentDir) || empty($contentDir)) {
+        if ( ! is_string($templateDir) || empty($templateDir)) {
             throw new \InvalidArgumentException('The view directory is not valid');
         }
 
-        $this->contentDir = $contentDir;
+        $this->templateDir = $templateDir;
     }
 
     public function getName()

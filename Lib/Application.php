@@ -75,6 +75,7 @@ class Application
         } catch (\RuntimeException $e) {
             if ($e->getCode() == Router::NO_ROUTE) {
                 $this->httpResponse->redirect404();
+                return false;
             }
         }
 

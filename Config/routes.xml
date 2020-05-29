@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
     <!-- ADMIN ROUTES -->
-    <route url="/admin/" env="Backend" app="Admin" action="dashboard"></route>
-    <route url="/admin/post/add/" env="Backend" app="AdminPost" action="add"></route>
-    <route url="/admin/post/edit/([0-9]*)/" env="Backend" app="AdminPost" action="edit"></route>
-    <route url="/admin/post/delete/([0-9]*)/" env="Backend" app="AdminPost" action="delete"></route>
-    <route url="/admin/user/add/" env="Backend" app="AdminUser" action="add"></route>
-    <route url="/admin/user/edit/([0-9]*)/" env="Backend" app="AdminUser" action="edit"></route>
-    <route url="/admin/user/delete/([0-9]*)/" env="Backend" app="AdminUser" action="delete"></route>
-    <route url="/admin/comment/add/" env="Backend" app="AdminComment" action="add"></route>
-    <route url="/admin/comment/edit/([0-9]*)/" env="Backend" app="AdminComment" action="edit"></route>
-    <route url="/admin/comment/delete/([0-9]*)/" env="Backend" app="AdminComment" action="delete"></route>
+    <route url="/admin/" env="Backend" app="Backend" action="dashboard"></route>
     <!-- FRONTEND ROUTES -->
-    <route url="/" env="Frontend" app="Blog" action="home"></route>
-    <route url="/login/" env="Frontend" app="User" action="login"></route>
-    <route url="/logout/" env="Frontend" app="User" action="logout"></route>
-    <route url="/register/" env="Frontend" app="User" action="register"></route>
-    <route url="/blog/" env="Frontend" app="Post" action="list"></route>
-    <route url="/blog/([a-z0-9\-]*)\/" env="Frontend" app="Post" action="category"
-           var="category,slug"></route>
-    <route url="/blog/([a-z0-9\-]*)\/([a-z0-9\-]*)/" env="Frontend" app="Post" action="post"
-           var="category,slug"></route>
+    <route url="/" env="Frontend" app="Frontend" action="home"></route>
 </routes>
