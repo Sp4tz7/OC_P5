@@ -1,0 +1,68 @@
+{% extends "layout.twig" %}
+{% block main %}
+    {% embed 'modal-layout.twig' with {
+        'title' : 'CONFIRMATION REQUIRED',
+        'body': 'Are you sure you want to delete this user?',
+        'button': 'DELETE',
+        'id': 'deleteUser'} %}
+    {% endembed %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Users</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><a href="/admin/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Users</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header"><i class="fas fa-table mr-1"></i>Liste of all users</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Nickname</th>
+                            <th>Email</th>
+                            <th>Pending</th>
+                            <th>Approved</th>
+                            <th>Role</th>
+                            <th>Active</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Nickname</th>
+                            <th>Email</th>
+                            <th>Pending</th>
+                            <th>Approved</th>
+                            <th>Role</th>
+                            <th>Active</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.getFirstname() }} {{ user.getLastname() }}</td>
+                                <td>{{ user.getNickname() }}</td>
+                                <td>{{ user.getEmail() }}</td>
+                                <td>{{ user.getPending() }}</td>
+                                <td>{{ user.getApproved() }}</td>
+                                <td>{{ user.getRole() }}</td>
+                                <td><i class="fas fa-{% if user.getActive() %}check{% else %}cross{% endif %}"></i></td>
+                                <td><a href="/admin/user/edit/{{ user.getId() }}"><i class="fas fa-edit"></i></a>
+                                    {% if user.getRole() != 'SUPERADMIN' %}
+                                    <a href="#" data-target="#modal" data-toggle="modal"><i
+                                                class="fas fa-trash"></i></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

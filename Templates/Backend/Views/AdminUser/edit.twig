@@ -1,0 +1,84 @@
+{% extends "layout.twig" %}
+{% block main %}
+    <div class="container-fluid">
+        <h1 class="mt-4">User</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item "><a href="/admin/">Dashboard</a></li>
+            <li class="breadcrumb-item "><a href="/admin/users/">Users</a></li>
+            <li class="breadcrumb-item active">{{ action|default('Edit')|capitalize }}</li>
+        </ol>
+        <div class="row">
+            {% if not editUser %}
+                <div class="alert alert-danger">
+                    <button class="close" data-close="alert"></button>
+                    <span>{{ error }}</span>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <div class="card light bordered">
+                        <div class="card-header tabbable-line">
+                            <div class="caption caption-md">
+                                <i class="icon-globe theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">{{ editUser.getFirstname() ~ ' ' ~ editUser.getLastname()|default('Add new') }}</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form role="form" action="/admin/user/{{ action|default('edit/'~ editUser.getID()) }}/" method="post">
+                                <div class="form-group">
+                                    <label class="control-label">First name</label>
+                                    <input type="text" placeholder="First name" class="form-control" required
+                                           name="firstname" value="{{ editUser.getFirstname() }}"></div>
+                                <div class="form-group">
+                                    <label class="control-label">Last name</label>
+                                    <input type="text" placeholder="Last name" class="form-control" name="lastname"
+                                           value="{{ editUser.getLastname() }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">User name</label>
+                                    <input type="text" placeholder="User name" class="form-control" name="username"
+                                           value="{{ editUser.getNickname() }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <input type="text" placeholder="Email" class="form-control" name="email"
+                                           value="{{ editUser.getEmail() }}" required></div>
+                                <div class="form-group">
+                                    <label class="control-label">Role</label>
+                                    <select class="custom-select" name="role" required {% if user.getRole() == 'SUPERADMIN' and not action %}disabled{% endif %}>
+                                        <option value="">Choose a role</option>
+                                        <option value="SUPERADMIN" {% if editUser.getRole() == 'SUPERADMIN' and not action  %}selected{% endif %}>
+                                            SUPERADMIN
+                                        </option>
+                                        <option value="ADMIN" {% if editUser.getRole() == 'ADMIN' %}selected{% endif %}>
+                                            ADMIN
+                                        </option>
+                                        <option value="MEMBER" {% if editUser.getRole() == 'MEMBER' %}selected{% endif %}>
+                                            MEMBER
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="active" id="active"
+                                               value="1" {% if user.getRole() == 'SUPERADMIN'  and not action %}disabled{% endif %}
+                                               {% if user.getActive() %}checked{% endif %}>
+                                        <label class="custom-control-label" for="active">Activate account</label>
+                                    </div>
+                                </div>
+                                <div class="margiv-top-10">
+                                    <input type="hidden" name="edit_user" value="{{ editUser.getID() }}">
+                                    {% if user.getRole() == 'SUPERADMIN' and not action  %}
+                                        <input type="hidden" name="role" value="SUPERADMIN">
+                                        <input type="hidden" name="active" value="1">
+                                    {% endif %}
+                                    <input type="text" name="token" value="{{ token }}">
+                                    <input type="submit" class="btn green" value="{{ button|default('Save Changes') }}">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

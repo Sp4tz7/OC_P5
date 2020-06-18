@@ -13,11 +13,13 @@
     <div class="row align-items-center my-5">
         <div class="card text-white bg-secondary m-auto p-4 text-center">
             <form class="login-form" action="/login/" method="post">
-                <h3 class="form-title font-green">Sign In</h3>
-                <div class="alert alert-danger d-none">
-                    <button class="close" data-close="alert"></button>
-                    <span>  </span>
-                </div>
+                <h3 class="form-title font-green mb-4">Sign In</h3>
+                {% if error %}
+                    <div class="alert alert-danger">
+                        <button class="close" data-close="alert"></button>
+                        <span>{{ error }}</span>
+                    </div>
+                {% endif %}
                 <div class="form-group">
                     <label class="control-label d-none">Username or Email</label>
                     <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off"
@@ -27,7 +29,8 @@
                     <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off"
                            placeholder="Password" name="password" required></div>
                 <div class="form-actions">
-                    <button type="submit" class="btn green uppercase" name="login_user">Login</button>
+                    <input type="hidden" name="login_user">
+                    <button type="submit" class="btn green uppercase">Login</button>
                     <label class="rememberme check mt-checkbox mt-checkbox-outline">
                         <input type="checkbox" name="remember" value="1">Remember
                         <span></span>
@@ -47,8 +50,9 @@
                     <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email"
                            name="email"></div>
                 <div class="form-actions">
+                    <input type="hidden" name="reset_password">
                     <button type="button" id="back-btn" class="btn green btn-outline mr-3">Back</button>
-                    <button type="submit" class="btn btn-success uppercase pull-right" name="reset_password">Submit
+                    <button type="submit" class="btn btn-success uppercase pull-right">Submit
                     </button>
                 </div>
             </form>
@@ -82,9 +86,9 @@
                     <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
                            placeholder="Re-type Your Password" name="rpassword"></div>
                 <div class="form-actions">
+                    <input type="hidden" name="register_user">
                     <button type="button" id="register-back-btn" class="btn green btn-outline mr-3">Back</button>
-                    <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right"
-                            name="register_user">Submit
+                    <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit
                     </button>
                 </div>
             </form>
