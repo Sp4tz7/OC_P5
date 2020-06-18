@@ -1,4 +1,5 @@
 <?php
+session_name('OCP5_MYBLOG');
 session_start();
 
 define('APP_DIR', __DIR__.'/../');
