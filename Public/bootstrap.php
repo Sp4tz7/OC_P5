@@ -2,7 +2,7 @@
 session_name('OCP5_MYBLOG');
 session_start();
 
-define('APP_DIR', __DIR__.'/../');
+include_once '../Config/Config.php';
 require_once APP_DIR.'vendor/autoload.php';
 
 try {
