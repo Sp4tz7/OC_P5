@@ -2,10 +2,10 @@
 
 namespace Controller\Backend;
 
-use Core\BackController;
+use Core\AbstractController;
 use Core\HTTPRequest;
 
-class BackendController extends BackController
+class BackendController extends AbstractController
 {
     public function executeDashboard(HTTPRequest $request)
     {
