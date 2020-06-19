@@ -2,10 +2,10 @@
 
 namespace Controller\Frontend;
 
-use Core\BackController;
+use Core\AbstractController;
 use Core\HTTPRequest;
 
-class FrontendController extends BackController
+class FrontendController extends AbstractController
 {
     public function executeHome(HTTPRequest $request)
     {

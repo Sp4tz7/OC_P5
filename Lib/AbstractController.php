@@ -4,7 +4,7 @@ namespace Core;
 
 use Application\PDO\PDOFactory;
 
-abstract class BackController extends ApplicationComponent
+abstract class AbstractController extends ApplicationComponent
 {
     protected $action = '';
     protected $app = '';
