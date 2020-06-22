@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<routes>
+    <!-- ADMIN ROUTES -->
+    <route url="/admin/" env="Backend" app="Backend" action="dashboard"></route>
+    <!-- FRONTEND ROUTES -->
+    <route url="/" env="Frontend" app="Frontend" action="home"></route>
+</routes>
