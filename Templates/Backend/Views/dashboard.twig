@@ -1,1 +1,132 @@
-ADMIN DASHBOARD
+{% extends "layout.twig" %}
+{% block main %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="card light bordered">
+                    <div class="card-header tabbable-line">
+                        <div class="caption">
+                            <i class="icon-bubbles font-dark hide"></i>
+                            <span class="caption-subject font-dark bold uppercase">My Comments</span>
+                        </div>
+                        <ul class="nav nav-tabs float-right">
+                            <li>
+                                <a href="#comments_pending" data-toggle="tab" aria-expanded="true" class="active"> Pending </a>
+                            </li>
+                            <li class="">
+                                <a href="#comments_approved" data-toggle="tab" aria-expanded="false"> Approved </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="comments_pending">
+                                <div class="comments">
+                                    <div class="comment">
+                                        <div class="comment-body test">
+                                            <div class="comment-info">
+                                                <span class="comment-author">Firstname Lastname</span>
+                                                <span class="comment-date float-right">26 Feb, 10:30AM</span>
+                                            </div>
+                                            <div class="comment-text"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </div>
+                                            <div class="comment-details">
+                                                <span class="comment-status comment-status-pending">Pending</span>
+                                                <ul class="comment-actions float-right">
+                                                    <li>
+                                                        <a href="#" class="quick-edit">Quick Edit</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/category/post-slug/">View</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Delete</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="comment-body d-none">
+                                            <div class="comment-info">
+                                                <span class="comment-author">Firstname Lastname</span>
+                                                <span class="comment-date float-right">26 Feb, 10:30AM</span>
+                                            </div>
+                                            <form>
+                                            <div class="comment-text form-group">
+                                                <label for="exampleFormControlTextarea1">Example textarea</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1321" rows="3">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</textarea>  </div>
+                                            <div class="comment-details">
+                                                 <ul class="comment-actions float-right">
+                                                    <li>
+                                                        <a href="#" class="save" data-id="exampleFormControlTextarea1321">Save</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="cancel" data-id="exampleFormControlTextarea1321">Cancel</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="comment">
+                                        <div class="comment-body">
+                                            <div class="comment-info">
+                                                <span class="comment-author">Firstname Lastname</span>
+                                                <span class="comment-date float-right">12 Feb, 08:30AM</span>
+                                            </div>
+                                            <div class="comment-text"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </div>
+                                            <div class="comment-details">
+                                                <span class="comment-status comment-status-rejected">Rejected</span>
+                                                <ul class="comment-actions float-right">
+                                                    <li>
+                                                        <a href="#" class="quick-edit">Quick Edit</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">View</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Delete</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END: Comments -->
+                            </div>
+                            <div class="tab-pane" id="comments_approved">
+                                <!-- BEGIN: Comments -->
+                                <div class="comments">
+                                    <div class="comment">
+
+                                        <div class="comment-body">
+                                            <div class="comment-info">
+                                                <span class="comment-author">Firstname Lastname</span>
+                                                <span class="comment-date float-right">26 Feb, 10:30AM</span>
+                                            </div>
+                                            <div class="comment-text"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy. </div>
+                                            <div class="comment-details">
+                                                <span class="comment-status comment-status-approved">Approved</span>
+                                                <ul class="comment-actions float-right">
+                                                    <li>
+                                                        <a href="#">View</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Delete</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END: Comments -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
