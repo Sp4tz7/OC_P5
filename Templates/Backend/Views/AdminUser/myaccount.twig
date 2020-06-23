@@ -50,8 +50,8 @@
                                         <input type="text" placeholder="Email" class="form-control" name="email"
                                                value="{{ user.getEmail() }}"></div>
                                     <div class="margiv-top-10">
+                                        <input type="hidden" name="token" value="{{ token }}">
                                         <input type="submit" name="edit_user" class="btn green" value="Save Changes">
-
                                     </div>
                                 </form>
                             </div>
@@ -64,9 +64,9 @@
                                         <label class="control-label">Re-type New Password</label>
                                         <input type="password" class="form-control" name="rpassword"></div>
                                     <div class="margin-top-10">
+                                        <input type="hidden" name="token" value="{{ token }}">
                                         <input type="submit" name="change_password" class="btn green"
                                                value="Change Password">
-
                                     </div>
                                 </form>
                             </div>
@@ -128,9 +128,9 @@
                                         </tbody>
                                     </table>
                                     <div class="margin-top-10">
+                                        <input type="hidden" name="token" value="{{ token }}">
                                         <input type="submit" name="edit_user_settings" class="btn green"
                                                value="Save Changes">
-
                                     </div>
                                 </form>
                             </div>

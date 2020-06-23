@@ -44,9 +44,9 @@
                                            value="{{ editUser.getEmail() }}" required></div>
                                 <div class="form-group">
                                     <label class="control-label">Role</label>
-                                    <select class="custom-select" name="role" required {% if user.getRole() == 'SUPERADMIN' and not action %}disabled{% endif %}>
+                                    <select class="custom-select" name="role" required {% if editUser.getId() == 1 %}disabled{% endif %}>
                                         <option value="">Choose a role</option>
-                                        <option value="SUPERADMIN" {% if editUser.getRole() == 'SUPERADMIN' and not action  %}selected{% endif %}>
+                                        <option value="SUPERADMIN" {% if editUser.getRole() == 'SUPERADMIN'%}selected{% endif %}>
                                             SUPERADMIN
                                         </option>
                                         <option value="ADMIN" {% if editUser.getRole() == 'ADMIN' %}selected{% endif %}>
@@ -60,18 +60,18 @@
                                 <div class="form-group">
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" name="active" id="active"
-                                               value="1" {% if user.getRole() == 'SUPERADMIN'  and not action %}disabled{% endif %}
+                                               value="1" {% if editUser.getId() == 1%}disabled{% endif %}
                                                {% if user.getActive() %}checked{% endif %}>
                                         <label class="custom-control-label" for="active">Activate account</label>
                                     </div>
                                 </div>
                                 <div class="margiv-top-10">
                                     <input type="hidden" name="edit_user" value="{{ editUser.getID() }}">
-                                    {% if user.getRole() == 'SUPERADMIN' and not action  %}
+                                    {% if user.getId() == 1 and editUser.getID() == 1 and not action  %}
                                         <input type="hidden" name="role" value="SUPERADMIN">
                                         <input type="hidden" name="active" value="1">
                                     {% endif %}
-                                    <input type="text" name="token" value="{{ token }}">
+                                    <input type="hidden" name="token" value="{{ token }}">
                                     <input type="submit" class="btn green" value="{{ button|default('Save Changes') }}">
                                 </div>
                             </form>
