@@ -390,6 +390,7 @@ h6, .h6 {
   font-size: 1rem;
 }
 
+
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
@@ -3932,6 +3933,27 @@ input[type=button].btn-block {
   margin-top: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.card .nav-tabs li {
+ padding: 0 5px;
+}
+.card .nav-tabs {
+  border-bottom: none;
+}
+.card .nav-tabs li a {
+  margin: 0;
+  padding: 12px 13px 13px;
+  font-size: 13px;
+  color: #666;
+}
+.card .nav-tabs li a.active {
+  background: 0 0;
+  border-bottom: 4px solid #36c6d3;
+  position: relative;
+}
+.card .nav-tabs li a:hover {
+  text-decoration: none;
+  border-bottom: 4px solid #36c6d394;
 }
 
 .nav-pills .nav-link {
@@ -10211,4 +10233,55 @@ body {
 }
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
+}
+
+
+.green {
+  color: #FFF;
+  background-color: #32c5d2;
+  border-color: #32c5d2;
+}
+.comment{
+  padding: 1em;
+  border-bottom: 3px solid #e9ecef;
+}
+
+.comment:hover{
+  background-color: #f8f9fa ;
+}
+
+.comment-author {
+  display: inline-block;
+  margin: 0 0 10px;
+  color: #060606;
+  font-weight: 600;
+}
+
+.comment-text {
+  color: #999;
+}
+.comment-status {
+  text-transform: uppercase;
+}
+.comment-status.comment-status-pending {
+  color: #B8C0F5;
+}
+.comment-status.comment-status-approved {
+  color: #32c5d2;
+}
+.comment-status.comment-status-rejected {
+  color: #e7505a;
+}
+.comment-actions li {
+  display: inline-block;
+}
+.comment-actions li a{
+  text-transform: uppercase;
+  color: #999;
+  padding: 0 5px;
+}
+pre {
+  z-index: 10000;
+  position: relative;
+  background-color: #fff;
 }
