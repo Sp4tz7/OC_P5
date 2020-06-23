@@ -4,17 +4,16 @@ The OpenClassRooms P5
 **Framework structure:**
 * Config
 * Lib (namespace \Core)
-    * Form
 * Public
   * css
   * img
   * js
+  * plugins
 * Src (namespace \Application)
     * Controller
         * Frontend
         * Backend
     * Entity
-    * FormBuilder
     * Model
     * Pdo
     * Service
@@ -23,6 +22,7 @@ The OpenClassRooms P5
         * Views
     * Frontend
         * Views
+    * Mail
 * Vendor
 
 **Documentation**

@@ -23,7 +23,7 @@ class Page extends ApplicationComponent
     {
         $templateDir = ! empty($this->templateDir) ? $this->templateDir : APP_DIR.'Templates/'.$this->app->getEnv();
 
-        if ( ! file_exists($templateDir) ) {
+        if ( ! file_exists($templateDir)) {
             throw new \RuntimeException('The view '.$templateDir.' does not exist');
         }
         $loader = new \Twig\Loader\FilesystemLoader(
@@ -41,21 +41,28 @@ class Page extends ApplicationComponent
         );
         $twig->addExtension(new \Twig\Extension\DebugExtension());
 
-        $page = [
-            'page' => [
-                'title' => 'test',
+        $token = $this->app->setCsrfToken();
+        $page  = [
+            'page'  => [
+                'body_id' => $this->app->getAction(),
             ],
+            'flash' => $this->app->hasFlash() ? $this->app->getFlash() : false,
+            'token' => $token,
+            'siteName' => SITE_NAME,
         ];
+
         $page = array_merge($page, $this->getVars());
         echo $twig->render($this->contentFile, $page);
-
+        $this->app->getHttpResponse()->setSession('token', $token);
 
     }
 
-    public function dirExists($dir){
-        if(is_dir($dir)){
+    public function dirExists($dir)
+    {
+        if (is_dir($dir)) {
             return $dir;
         }
+
         return false;
     }
 
