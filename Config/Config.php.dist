@@ -4,6 +4,9 @@ namespace Config;
 
 define('APP_DIR', __DIR__.'/../');
 define('SITE_URL', '');                                         // Enter the full site url including https
+define('TIME_ZONE', 'Europe/Zurich');                           // Change your timezone if needed
+define('PASSWORD_MIN_LENGTH', 6);
+define('SITE_NAME', 'MY Blog');
 
 final class config
 {
