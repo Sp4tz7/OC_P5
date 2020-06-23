@@ -2,6 +2,16 @@
 <routes>
     <!-- ADMIN ROUTES -->
     <route url="/admin/" env="Backend" app="Backend" action="dashboard"></route>
+    <route url="/admin/access-denied/" env="Backend" app="Backend" action="accessDenied"></route>
+    <route url="/admin/users/" env="Backend" app="AdminUser" action="users"></route>
+    <route url="/admin/user/add/" env="Backend" app="AdminUser" action="add"></route>
+    <route url="/admin/user/edit/([0-9]*)/" env="Backend" app="AdminUser" action="edit" vars="id"></route>
+    <route url="/admin/my-account/" env="Backend" app="AdminUser" action="myAccount"></route>
     <!-- FRONTEND ROUTES -->
     <route url="/" env="Frontend" app="Frontend" action="home"></route>
+    <route url="/register/" env="Frontend" app="User" action="register"></route>
+    <route url="/login/" env="Frontend" app="User" action="login"></route>
+    <route url="/logout/" env="Frontend" app="User" action="logout"></route>
+    <route url="/new-password/([a-z0-9]*)/" env="Frontend" app="User" action="newPassword" vars="token"></route>
+    <route url="/new-activation-link/([a-z0-9]*)/" env="Frontend" app="User" action="newActivation" vars="token"></route>
 </routes>

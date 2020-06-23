@@ -1,0 +1,119 @@
+{% extends "layout.twig" %}
+{% block nav %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="row align-items-center mb-5">
+        <div class="logo">
+            <a href="/">
+                <img src="http://placehold.it/200x100" alt="My blog"></a>
+        </div>
+    </div>
+    <div class="row align-items-center my-5">
+        <div class="card text-white bg-secondary m-auto p-4 text-center">
+            <form class="login-form" action="/login/" method="post">
+                <h3 class="form-title font-green mb-4">Sign In</h3>
+                {% if flash %}
+                    <div class="alert alert-{{ flash.type }}">
+                        <button class="close" data-close="alert"></button>
+                        <span>{{ flash.message['content']|raw }}</span>
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label class="control-label d-none">Username or Email</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off"
+                           placeholder="Username or Email" name="username" value="{{ username }}" required></div>
+                <div class="form-group">
+                    <label class="control-label d-none">Password</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off"
+                           placeholder="Password" name="password" required></div>
+                <div class="form-actions">
+                    <input type="hidden" name="login_user">
+                    <button type="submit" class="btn green uppercase">Login</button>
+                    <label class="rememberme check mt-checkbox mt-checkbox-outline">
+                        <input type="checkbox" name="remember" value="1">Remember
+                        <span></span>
+                    </label>
+                    <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                </div>
+                <div class="create-account bg-white">
+                    <p>
+                        <a href="javascript:;" id="register-btn" class="uppercase text-dark">Create an account</a>
+                    </p>
+                </div>
+            </form>
+            <form class="forget-form d-none" action="/new-password/new/" method="post">
+                <h3 class="font-green">Forget Password ?</h3>
+                <p class="alert alert-info text-left"> Enter your e-mail address below to reset your password. </p>
+                <div class="form-group">
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email"
+                           name="email"></div>
+                <div class="form-actions">
+                    <input type="hidden" name="reset_password">
+                    <button type="button" id="back-btn" class="btn green btn-outline mr-3">Back</button>
+                    <button type="submit" class="btn btn-success uppercase pull-right">Submit
+                    </button>
+                </div>
+            </form>
+            <form class="register-form d-none" action="/register/" method="post">
+                <h3 class="font-green">Sign Up</h3>
+                {% if flash %}
+                    <div class="alert alert-{{ flash.type }}">
+                        <button class="close" data-close="alert"></button>
+                        <span>{{ flash.message['content'] }}</span>
+                    </div>
+                {% endif %}
+                <p class="hint"> Enter your personal details below: </p>
+                <div class="form-group">
+                    <label class="control-label d-none">Firstname</label>
+                    <input class="form-control placeholder-no-fix" type="text" placeholder="Firstname" name="firstname"
+                           value="{{ form.firstname }}" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label d-none">Lastname</label>
+                    <input class="form-control placeholder-no-fix" type="text" placeholder="Lastname" name="lastname"
+                           value="{{ form.lastname }}" required>
+                </div>
+                <div class="form-group">
+                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                    <label class="control-label d-none">Email</label>
+                    <input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="email"
+                           value="{{ form.email }}" required></div>
+                <p class="hint"> Enter your account details below: </p>
+                <div class="form-group">
+                    <label class="control-label d-none">Username</label>
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username"
+                           name="username" value="{{ form.username }}" required></div>
+                <div class="form-group">
+                    <label class="control-label d-none">Password</label>
+                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
+                           id="register_password" required
+                           placeholder="Password" name="password" value="{{ form.password }}"></div>
+                <div class="form-group">
+                    <label class="control-label d-none">Re-type Your Password</label>
+                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
+                           placeholder="Re-type Your Password" name="rpassword" required></div>
+                <div class="form-actions">
+                    <input type="hidden" name="register_user">
+                    <button type="button" id="register-back-btn" class="btn green btn-outline mr-3">Back</button>
+                    <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    <footer class="py-2">
+        <div class="text-center">
+            <div class="text-white">Copyright &copy; sp4tz {{ "now"|date("Y") }} </div>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block custom_script %}
+    <script src="/js/scripts.js"></script>
+{% endblock %}
+
+

@@ -1,0 +1,143 @@
+{% extends "layout.twig" %}
+{% block main %}
+    <div class="container-fluid">
+        <h1 class="mt-4">My account</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><a href="/admin/">Dashboard</a></li>
+            <li class="breadcrumb-item active">My account</li>
+        </ol>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card light bordered">
+                    <div class="card-header tabbable-line">
+                        <div class="caption caption-md">
+                            <i class="icon-globe theme-font hide"></i>
+                            <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
+                            <ul class="nav nav-tabs float-right">
+                                <li>
+                                    <a href="#tab_1_1" data-toggle="tab" class="active">Personal Info</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_1_2" data-toggle="tab">Change Password</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_1_3" data-toggle="tab">Privacy Settings</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <!-- PERSONAL INFO TAB -->
+                            <div class="tab-pane active" id="tab_1_1">
+                                <form role="form" action="/admin/my-account/" method="post">
+                                    <div class="form-group">
+                                        <label class="control-label">First name</label>
+                                        <input type="text" placeholder="First name" class="form-control"
+                                               name="firstname" value="{{ user.getFirstname() }}"></div>
+                                    <div class="form-group">
+                                        <label class="control-label">Last name</label>
+                                        <input type="text" placeholder="Last name" class="form-control" name="lastname"
+                                               value="{{ user.getLastname() }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">User name</label>
+                                        <input type="text" placeholder="User name" class="form-control" name="username"
+                                               value="{{ user.getNickname() }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input type="text" placeholder="Email" class="form-control" name="email"
+                                               value="{{ user.getEmail() }}"></div>
+                                    <div class="margiv-top-10">
+                                        <input type="hidden" name="token" value="{{ token }}">
+                                        <input type="submit" name="edit_user" class="btn green" value="Save Changes">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="tab_1_2">
+                                <form action="/admin/my-account/" method="post">
+                                    <div class="form-group">
+                                        <label class="control-label">New Password</label>
+                                        <input type="password" class="form-control" name="password"></div>
+                                    <div class="form-group">
+                                        <label class="control-label">Re-type New Password</label>
+                                        <input type="password" class="form-control" name="rpassword"></div>
+                                    <div class="margin-top-10">
+                                        <input type="hidden" name="token" value="{{ token }}">
+                                        <input type="submit" name="change_password" class="btn green"
+                                               value="Change Password">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="tab_1_3">
+                                <form action="/admin/my-account/" method="post">
+                                    <table class="table table-light table-hover">
+                                        <tbody>
+                                        <tr>
+                                            <td> Show my full name.</td>
+                                            <td>
+                                                <div class="mt-radio-inline">
+                                                    <label class="mt-radio">
+                                                        <input type="radio" name="show_name" value="1"
+                                                               {% if user.getShowFullName() %}checked{% endif %}> Yes
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="mt-radio">
+                                                        <input type="radio" name="show_name" value="0"
+                                                               {% if not user.getShowFullName() %}checked{% endif %}> No
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> Send me an email when a user replay to my comment.</td>
+                                            <td>
+                                                <div class="mt-radio-inline">
+                                                    <label class="mt-radio">
+                                                        <input type="radio" name="send_email_reply" value="1"
+                                                               {% if user.getSendEmailReplay() %}checked{% endif %}> Yes
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="mt-radio">
+                                                        <input type="radio" name="send_email_reply" value="0"
+                                                               {% if not user.getSendEmailReplay() %}checked{% endif %}> No
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> Send me an email when my comment is approved.</td>
+                                            <td>
+                                                <div class="mt-radio-inline">
+                                                    <label class="mt-radio">
+                                                        <input type="radio" name="send_email_approve" value="1"
+                                                               {% if user.getSendEmailApprove() %}checked{% endif %}> Yes
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="mt-radio">
+                                                        <input type="radio" name="send_email_approve" value="0"
+                                                               {% if not user.getSendEmailApprove() %}checked{% endif %}> No
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="margin-top-10">
+                                        <input type="hidden" name="token" value="{{ token }}">
+                                        <input type="submit" name="edit_user_settings" class="btn green"
+                                               value="Save Changes">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
