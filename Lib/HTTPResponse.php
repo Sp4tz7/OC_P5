@@ -9,6 +9,7 @@ class HTTPResponse extends ApplicationComponent
     public function redirect($location)
     {
         header('Location: '.$location);
+        die();
     }
 
     public function redirect404()
@@ -30,12 +31,11 @@ class HTTPResponse extends ApplicationComponent
         return $this->page->getGeneratedPage();
     }
 
-    public function setPage(Page $page)
+    public function killKookie($name)
     {
-        $this->page = $page;
+        $this->setCookie($name, '', time() - 360 , '/');
     }
 
-    // Set last argument to true by default
     public function setCookie(
         $name,
         $value = '',
@@ -43,8 +43,26 @@ class HTTPResponse extends ApplicationComponent
         $path = null,
         $domain = null,
         $secure = false,
-        $httpOnly = true
+        $httpOnly = false
     ) {
         setcookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
+    }
+
+    public function killSession($name)
+    {
+        unset($_SESSION[$name]);
+
+    }
+
+    public function setPage(Page $page)
+    {
+        $this->page = $page;
+    }
+
+    // Set last argument to true by default
+
+    public function setSession($name, $value)
+    {
+        $_SESSION[$name] = $value;
     }
 }

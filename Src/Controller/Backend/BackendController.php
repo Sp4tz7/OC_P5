@@ -10,5 +10,8 @@ class BackendController extends AbstractController
     public function executeDashboard(HTTPRequest $request)
     {
     }
+    public function executeAccessDenied(HTTPRequest $request)
+    {
+    }
 
 }

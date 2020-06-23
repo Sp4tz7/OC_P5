@@ -51,7 +51,7 @@ class Mailer
             $mail->Body    = $twig->render(
                 $this->template,
                 $vars
-            );;
+            );
 
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 

@@ -26,10 +26,10 @@ class HTTPRequest extends ApplicationComponent
 
     public function getSession($key)
     {
-        return $this->sessionExist($key) ? $_SESSION[$key] : null;
+        return $this->sessionExists($key) ? $_SESSION[$key] : null;
     }
 
-    public function sessionExist($key)
+    public function sessionExists($key)
     {
         return isset($_SESSION[$key]);
     }
@@ -42,6 +42,11 @@ class HTTPRequest extends ApplicationComponent
     public function getDataPost($key)
     {
         return $this->postExists($key) ? $_POST[$key] : null;
+    }
+
+    public function getAllPost()
+    {
+        return isset($_POST) ? $_POST : null;
     }
 
     public function postExists($key)
