@@ -1,0 +1,8 @@
+{% extends "login.twig" %}
+{% block custom_script %}
+    {{ parent() }}
+    <script>
+    $('.login-form').addClass('d-none');
+    $('.register-form').removeClass('d-none');
+    </script>
+{% endblock %}

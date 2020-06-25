@@ -1,0 +1,28 @@
+{
+  "name": "sp4tz7/oc_p5",
+  "description": "The OpenClassRooms P5 project",
+  "type": "project",
+  "require": {
+    "phpmailer/phpmailer": "^6.1",
+    "twig/twig": "^3.0",
+    "grimmlink/toastr": "2.1.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Config\\": "Config",
+      "Core\\": "Lib",
+      "Application\\": "Src",
+      "Model\\": "Src/Model",
+      "Entity\\": "Src/Entity",
+      "Service\\": "Src/Service",
+      "Controller\\Frontend\\": "Src/Controller/Frontend",
+      "Controller\\Backend\\": "Src/Controller/Backend"
+    }
+  },
+  "authors": [
+    {
+      "name": "sp4tz",
+      "email": "sp4tz7@gmail.com"
+    }
+  ]
+}
