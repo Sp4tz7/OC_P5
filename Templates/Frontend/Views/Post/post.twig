@@ -1,0 +1,45 @@
+{% extends "layout.twig" %}
+{% block content %}
+    {% if post.getActive() %}
+        <div class="row align-items-center">
+            <div class="mt-5 col-md-12">
+                {% include 'breadcrumb.twig' %}
+            </div>
+            <article class="col-md-12">
+                <div class="row my-5">
+                    <div class="col-md-12">
+                        <a href="/post/{{ post.getCategorySlug()|default('all') }}/"> <i
+                                    class="fas fa-arrow-circle-left"></i></a>
+                        <span class="font-weight-bold">{{ post.getAuthor() }} / </span>
+                        <span class="text-muted pl-1">{{ post.getDateAdd()|date('D d/m/Y') }}</span>
+                        {% if user.getId() == post.getCreatedBy() %}
+                            <a href="/admin/post/edit/{{ post.getId() }}/" class="float-right text-muted m-1">Edit</a>
+                        {% endif %}
+                        <span class="float-right badge badge-secondary mt-2">{{ post.getCategoryName() }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if post.getImageUrl() %}
+                            <figure>
+                                <img src="/img/post/{{ post.getImageUrl() }}" class="img-fluid">
+                            </figure>
+                        {% endif %}
+                        <h1 class="text-center display-3">{{ post.getTitle() }}</h1>
+                        <div class="lead text-center mb-5">{{ post.getAbstractContent()|raw|nl2br }}</div>
+                        <span class="float-right"></span>
+                        <div class="my-5 text-justify">{{ post.getContent()|raw|nl2br }}</div>
+                        <span class="float-right text-muted mb-5">Last edited: {{ post.getDateAdd()|date('D d/m/Y') }}</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+        {% if posts|length > 1 %}
+            <div class="dropdown-divider"></div>
+            <span class="h3">Related posts</span>
+            <div class="row align-items-center my-3">
+                {% embed 'extend-list.twig' with {'limit': 3, 'category_id' : post.getCategoryId(), 'pagination': true } %}{% endembed %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

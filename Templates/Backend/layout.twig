@@ -14,7 +14,7 @@
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">{{ siteName }}</a>
+    <a class="navbar-brand" href="/">{{ siteName }} </a>
     <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
     </button>
     <!-- Navbar-->
@@ -40,6 +40,13 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard </a>
                     {% if user.getRole() != 'MEMBER' %}
+                        <div class="sb-sidenav-menu-heading">Posts</div>
+                        <a class="nav-link" href="/admin/posts/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                            List</a>
+                        <a class="nav-link" href="/admin/post/add/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                            Add</a>
                         <div class="sb-sidenav-menu-heading">Users</div>
                         <a class="nav-link" href="/admin/users/">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>

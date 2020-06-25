@@ -124,7 +124,7 @@ class Application
     public function setEnv($env)
     {
 
-        if ( ! is_string($env) || empty($env)) {
+        if (!is_string($env) || empty($env)) {
             throw new \InvalidArgumentException('The environment name should be a valid string');
         }
 
@@ -151,7 +151,7 @@ class Application
      */
     public function setAppName($name)
     {
-        if ( ! is_string($name) || empty($name)) {
+        if (!is_string($name) || empty($name)) {
             throw new \InvalidArgumentException('The application name should be a valid string');
         }
 
@@ -160,7 +160,7 @@ class Application
 
     public function setCsrfToken()
     {
-        if ( ! $this->httpRequest->sessionExists('token')) {
+        if (!$this->httpRequest->sessionExists('token')) {
             return bin2hex(random_bytes(32));
         }
 
@@ -180,6 +180,11 @@ class Application
     {
         if ($this->getHttpRequest()->postExists('token')
             and $this->getHttpRequest()->getDataPost('token') === $this->getHttpRequest()->getSession('token')) {
+            return true;
+        }
+
+        if ($this->getHttpRequest()->getExists('token')
+            and $this->getHttpRequest()->getDataGet('token') === $this->getHttpRequest()->getSession('token')) {
             return true;
         }
 

@@ -2,6 +2,10 @@ body {
     padding-top: 56px;
 }
 
+#content {
+    min-height: 76.3vh;
+}
+
 footer {
     position: relative;
     bottom: 0;
@@ -18,6 +22,29 @@ footer {
 
 #login .card, #register .card, #newpassword .card {
     width: 400px;
+}
+
+.page-quick-sidebar-wrapper {
+    transition: right .3s;
+    z-index: 9999;
+    position: fixed;
+    top: 30%;
+    bottom: 0;
+    width: 150px;
+    right: -150px;
+    overflow: hidden;
+}
+
+.page-quick-sidebar-wrapper.active {
+    right: 0;
+}
+
+#categories span {
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1.25em;
+    line-height: 1.2;
 }
 
 

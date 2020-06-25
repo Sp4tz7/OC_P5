@@ -9,11 +9,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>{{ body }}</p>
+                    <p>{{ body|raw }}</p>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" name="token" id="{{ id }}Token" value="{{ token }}">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="{{ id }}">{{ button }}</button>
+                    <a href="#" class="btn btn-primary" id="{{ id }}">{{ button }}</a>
                 </div>
             </div>
         </div>
