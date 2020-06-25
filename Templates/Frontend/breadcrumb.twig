@@ -1,0 +1,13 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        {% if category and post.getTitle() %}
+            <li class="breadcrumb-item"><a href="/post/{{ category.category_slug }}/">{{ category.category_name }}</a></li>
+            {% else %}
+                <li class="breadcrumb-item active" aria-current="page">{{ category.category_name }}</li>
+        {% endif %}
+        {% if post.getTitle() %}
+            <li class="breadcrumb-item active" aria-current="page">{{ post.getTitle() }}</li>
+        {% endif %}
+    </ol>
+</nav>

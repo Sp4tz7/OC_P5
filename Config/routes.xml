@@ -7,6 +7,11 @@
     <route url="/admin/user/add/" env="Backend" app="AdminUser" action="add"></route>
     <route url="/admin/user/edit/([0-9]*)/" env="Backend" app="AdminUser" action="edit" vars="id"></route>
     <route url="/admin/my-account/" env="Backend" app="AdminUser" action="myAccount"></route>
+    <route url="/admin/posts/" env="Backend" app="AdminPost" action="posts"></route>
+    <route url="/admin/post/add/" env="Backend" app="AdminPost" action="add"></route>
+    <route url="/admin/post/edit/([0-9]*)/" env="Backend" app="AdminPost" action="edit" vars="id"></route>
+    <route url="/admin/post/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminPost" action="delete" vars="id,token"></route>
+    <route url="/admin/category/add/" env="Backend" app="AdminPost" action="addCategory"></route>
     <!-- FRONTEND ROUTES -->
     <route url="/" env="Frontend" app="Frontend" action="home"></route>
     <route url="/register/" env="Frontend" app="User" action="register"></route>
@@ -14,4 +19,6 @@
     <route url="/logout/" env="Frontend" app="User" action="logout"></route>
     <route url="/new-password/([a-z0-9]*)/" env="Frontend" app="User" action="newPassword" vars="token"></route>
     <route url="/new-activation-link/([a-z0-9]*)/" env="Frontend" app="User" action="newActivation" vars="token"></route>
+    <route url="/post/[a-z0-9\-]*/([a-z0-9\-]*)/" env="Frontend" app="Post" action="post" vars="slug"></route>
+    <route url="/post/([a-z0-9\-]*)/" env="Frontend" app="Post" action="list" vars="category"></route>
 </routes>

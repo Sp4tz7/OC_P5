@@ -26,6 +26,10 @@ class HTTPResponse extends ApplicationComponent
         header($header);
     }
 
+    public function setJson($data){
+        return json_encode($data);
+    }
+
     public function send()
     {
         return $this->page->getGeneratedPage();
