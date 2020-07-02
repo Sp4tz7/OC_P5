@@ -26,5 +26,8 @@ The OpenClassRooms P5
 * Vendor
 
 **Documentation**
+
+Use the Dump_php_blog.sql file to install the database
+
 * Diagrams
 * Db
