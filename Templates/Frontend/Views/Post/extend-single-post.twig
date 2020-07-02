@@ -1,8 +1,10 @@
 <div class="col-md-4 mb-5">
     <div class="card h-100">
         <div class="card-body">
+
             <a class="badge badge-info float-right mb-2"
                href="/post/{{ single_post.getCategorySlug()|default('all') }}/">{{ single_post.getCategoryName() }} </a>
+            <span class="float-right mx-2 badge badge-info"><i class="far fa-comments"></i> {{ single_post.getNbComments() }}</span>
             <span style="font-size: 75%" class="text-muted float-left mb-2">{{ single_post.getDateAdd()|date('d M Y') }} </span>
             {% if single_post.getImageUrl() %}
                 <img src="/img/post/{{ single_post.getImageUrl() }}" class="img-fluid mb-3"/>
@@ -12,7 +14,7 @@
         </div>
         <div class="card-footer">
             <a href="/post/{{ single_post.getCategorySlug()|default('all') }}/{{ single_post.getSlug() }}/"
-               class="btn btn-primary btn-sm">Read article</a>
+               class="btn green btn-sm">Read article</a>
             {% if user.getId() == single_post.getCreatedBy() %}
                 <a href="/admin/post/edit/{{ single_post.getId() }}/" class="float-right text-muted">Edit</a>
             {% endif %}

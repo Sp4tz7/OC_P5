@@ -14,10 +14,11 @@ class Mailer
     protected $subject;
     protected $vars = [];
     protected $message;
+    protected $email_to;
 
     public function sendEmail()
     {
-        if ( ! $this->user or ! $this->template or empty($this->vars)) {
+        if (!$this->email_to or !$this->template or empty($this->vars)) {
             throw new Exception('Not all params are set correctly to send an email');
 
             return;
@@ -42,7 +43,7 @@ class Mailer
 
             //Recipients
             $mail->setFrom($data['mail_from']['mail'], $data['mail_from']['name']);
-            $mail->addAddress($this->user->getEmail());
+            $mail->addAddress($this->email_to);
             $mail->addReplyTo($data['mail_reply_to']['mail'], $data['mail_reply_to']['name']);
 
             // Content
@@ -75,9 +76,15 @@ class Mailer
         $this->subject = $subject;
     }
 
-    public function setEmailData(\Entity\User $user)
+    public function setUserData(\Entity\User $user)
     {
-        $this->user = $user;
+        $this->user     = $user;
+        $this->email_to = $user->getEmail();
+    }
+
+    public function setEmailTo($email)
+    {
+        $this->email_to = $email;
     }
 
     public function setVars($vars)

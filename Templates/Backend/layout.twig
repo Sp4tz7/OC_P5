@@ -39,14 +39,7 @@
                     <a class="nav-link" href="/admin/">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard </a>
-                    {% if user.getRole() != 'MEMBER' %}
-                        <div class="sb-sidenav-menu-heading">Posts</div>
-                        <a class="nav-link" href="/admin/posts/">
-                            <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
-                            List</a>
-                        <a class="nav-link" href="/admin/post/add/">
-                            <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
-                            Add</a>
+                    {% if user.getRole() == 'SUPERADMIN' %}
                         <div class="sb-sidenav-menu-heading">Users</div>
                         <a class="nav-link" href="/admin/users/">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
@@ -54,6 +47,17 @@
                         <a class="nav-link" href="/admin/user/add/">
                             <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
                             Add</a>
+                        <div class="sb-sidenav-menu-heading">Posts</div>
+                        <a class="nav-link" href="/admin/posts/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                            List</a>
+                        <a class="nav-link" href="/admin/post/add/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                            Add</a>
+                        <div class="sb-sidenav-menu-heading">Comments</div>
+                        <a class="nav-link" href="/admin/comments/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
+                            List</a>
                     {% endif %}
                 </div>
             </div>

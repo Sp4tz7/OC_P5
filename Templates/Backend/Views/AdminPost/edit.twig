@@ -27,71 +27,77 @@
                             <div class="caption caption-md">
                                 <i class="icon-globe theme-font hide"></i>
                                 <span class="caption-subject font-blue-madison bold uppercase">{{ editPost.getTitle()|default('Add new') }}</span>
-                                <a href="/post/{{ editPost.getCategorySlug()|default('uncategorized') }}/{{ editPost.getSlug() }}/" class="float-right">View post</a>
+                                <a href="/post/{{ editPost.getCategorySlug()|default('uncategorized') }}/{{ editPost.getSlug() }}/"
+                                   class="float-right">View post</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <form role="form" action="/admin/post/{{ action|default('edit/'~ editPost.getID()) }}/"
                                   method="post" enctype="multipart/form-data">
                                 <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label class="control-label">Title</label>
-                                                <input type="text" placeholder="Title" class="form-control" name="title"
-                                                       value="{{ editPost.getTitle() }}" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="control-label">Category</label>
-                                                <select class="custom-select" name="category_id" id="categories" required>
-                                                    <option value="">Choose a category</option>
-                                                    {% for category in categories %}
-                                                        <option value="{{ category.id }}"
-                                                                {% if category.id == editPost.getCategoryId() %}selected{% endif %}>{{ category.category_name }}</option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2 ">
-                                                <div class="mt-4">
-                                                    <a href="#" data-toggle="modal" data-target="#modal"
-                                                       class="btn btn-outline-info mt-2">New category</a>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Title</label>
+                                                    <input type="text" placeholder="Title" class="form-control"
+                                                           name="title"
+                                                           value="{{ editPost.getTitle() }}" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label">Category</label>
+                                                    <select class="custom-select" name="category_id" id="categories"
+                                                            required>
+                                                        <option value="">Choose a category</option>
+                                                        {% for category in categories %}
+                                                            <option value="{{ category.id }}"
+                                                                    {% if category.id == editPost.getCategoryId() %}selected{% endif %}>{{ category.category_name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2 ">
+                                                    <div class="mt-4">
+                                                        <a href="#" data-toggle="modal" data-target="#modal"
+                                                           class="btn btn-outline-info mt-2">New category</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Abstract</label>
-                                        <textarea rows="2" class="form-control"
-                                                  name="abstract_content">{{ editPost.getAbstractContent()|raw }}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Content</label>
-                                        <textarea rows="13" class="form-control"
-                                                  name="content">{{ editPost.getContent()|raw }}</textarea>
+                                        <div class="form-group">
+                                            <label class="control-label">Abstract</label>
+                                            <textarea rows="2" class="form-control"
+                                                      name="abstract_content">{{ editPost.getAbstractContent()|raw }}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Content</label>
+                                            <textarea rows="13" class="form-control"
+                                                      name="content">{{ editPost.getContent()|raw }}</textarea>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" name="active" id="active"
-                                                   value="1" {% if editPost.getActive() %}checked{% endif %}>
-                                            <label class="custom-control-label" for="active">Active</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" name="active"
+                                                       id="active"
+                                                       value="1" {% if editPost.getActive() %}checked{% endif %}>
+                                                <label class="custom-control-label" for="active">Active</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    </div>
-                                <div class="col-md-4">
-                                    <div class="">
-                                        <label class="control-label">Header image</label>
-                                        {% if image %}
-                                            <img src="{{ image }}" class="img-thumbnail">
-                                        {% endif %}
-                                        <div class="form-control-file">
-                                            <input type="file" name="blog_image" id="blog_image" class="mt-1">
-                                            <p><span class="text-muted">Please choos 16/9 ratio for your image</span></p>
-                                        </div>
+                                    <div class="col-md-4">
+                                        <div class="">
+                                            <label class="control-label">Header image</label>
+                                            {% if image %}
+                                                <img src="{{ image }}" class="img-thumbnail">
+                                            {% endif %}
+                                            <div class="form-control-file">
+                                                <input type="file" name="blog_image" id="blog_image" class="mt-1">
+                                                <p>
+                                                    <span class="text-muted">Please choos 16/9 ratio for your image</span>
+                                                </p>
+                                            </div>
 
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                                 <div class="margiv-top-10">
                                     <input type="hidden" name="{{ button|lower|default('edit') }}_post"

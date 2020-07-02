@@ -1,5 +1,8 @@
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+    <span class="breadcrumb breadcrumb-title float-left">
+        {% if post.getTitle() %}{{ post.getTitle() }}{% endif %}
+    </span>
+    <ol class="breadcrumb float-right">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
         {% if category and post.getTitle() %}
             <li class="breadcrumb-item"><a href="/post/{{ category.category_slug }}/">{{ category.category_name }}</a></li>

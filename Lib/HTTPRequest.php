@@ -19,6 +19,10 @@ class HTTPRequest extends ApplicationComponent
         return $this->getExists($key) ? $_GET[$key] : null;
     }
 
+    public function getReferrer(){
+        return $_SERVER['HTTP_REFERER'];
+    }
+
     public function getExists($key)
     {
         return isset($_GET[$key]);
