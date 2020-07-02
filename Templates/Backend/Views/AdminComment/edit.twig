@@ -1,0 +1,74 @@
+{% extends "layout.twig" %}
+{% block main %}
+    {% embed 'modal-layout.twig' with {
+        'title' : 'ADD NEW CATEGORY',
+        'body': '<div class="form-group"><label class="control-label">New category name</label>
+    <input type="text" placeholder="Name" class="form-control" name="category_name" id="category_name" required></div>',
+        'button': 'Save',
+        'id': 'addCommentCategory'} %}
+    {% endembed %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Comment</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item "><a href="/admin/">Dashboard</a></li>
+            <li class="breadcrumb-item "><a href="/admin/comments/">Comments</a></li>
+            <li class="breadcrumb-item active">Edit</li>
+        </ol>
+        <div class="row">
+            {% if not editComment %}
+                <div class="alert alert-danger">
+                    <button class="close" data-close="alert"></button>
+                    <span>{{ error }}</span>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <div class="card light bordered">
+                        <div class="card-header tabbable-line">
+                            <div class="caption caption-md">
+                                <i class="icon-globe theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">{{ editComment.getPost() }}</span>
+                                <a href="/post/{{ post.getCategorySlug()|default('all') }}/{{ post.getSlug() }}/#{{ editComment.getId() }}"
+                                   class="float-right">View comment</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form role="form"
+                                  action="/admin/comment/{{ action|default('edit/'~ editComment.getID()) }}/"
+                                  method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label class="control-label">Message</label>
+                                            <textarea rows="13" class="form-control"
+                                                      name="message">{{ editComment.getMessage()|raw }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Visibility</label>
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" name="active"
+                                                       id="active"
+                                                       value="APPROVED" {% if editComment.getStatus() == 'APPROVED' %}checked{% endif %}>
+                                                <label class="custom-control-label" for="active">Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="hidden" name="{{ button|lower|default('edit') }}_comment"
+                                               value="{{ editComment.getId() }}">
+                                        <input type="hidden" name="token" value="{{ token }}">
+                                        <input type="submit" class="btn green"
+                                               value="{{ button|default('Save Changes') }}">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

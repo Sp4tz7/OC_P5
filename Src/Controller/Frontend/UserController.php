@@ -13,6 +13,7 @@ class UserController extends AbstractController
     public function executeLogin(HTTPRequest $request, HTTPResponse $response)
     {
         $userManager = $this->managers->getManagerOf('User');
+        $redirect = $request->postExists('redirect')? $request->getDataPost('redirect'): '/login/';
 
         // Automatic login from session
         if ($request->sessionExists('UserAuth')) {
@@ -34,7 +35,7 @@ class UserController extends AbstractController
                     }
                 }
             } else {
-                $response->redirect('/logout/');
+                $response->redirect('/login/');
             }
 
         }
@@ -46,7 +47,7 @@ class UserController extends AbstractController
 
             if (is_object($user) and $user->getPassword() == '') {
                 $this->app->setFlash(
-                    'warning',
+                    'error',
                     [
                         'content' => 'Your account has not been verified.<br/> Please check your email inbox 
 <strong>or</strong> <a href="/new-activation-link/'.$user->getToken().'">send a new activation link</a> ',
@@ -57,7 +58,7 @@ class UserController extends AbstractController
             }
 
             if (is_object($user) and password_verify($request->getDataPost('password'), $user->getPassword())) {
-                if ( ! $user->getActive()) {
+                if (!$user->getActive()) {
                     $this->app->setFlash('danger', ['content' => 'Your account has been deactivated']);
 
                     return false;
@@ -71,11 +72,13 @@ class UserController extends AbstractController
                         '/'
                     );
                 }
-                $response->redirect('/admin/');
+                $this->app->setFlash('success', ['content' => 'You hav successfully logged in.']);
+                $response->redirect($redirect);
 
             } else {
                 $this->page->addVar('username', $request->getDataPost('username'));
-                $this->app->setFlash('danger', ['content' => 'The username or the password is not valid']);
+                $this->app->setFlash('error', ['content' => 'The username or the password is not valid']);
+                $response->redirect($redirect);
             }
         }
 
@@ -94,16 +97,16 @@ class UserController extends AbstractController
 
             $mail = new Mailer();
             $mail->setEmailTemplate('new_user.twig');
-            $mail->setEmailData($user);
+            $mail->setUserData($user);
             $mail->setEmailSubject('New account');
             $mail->setVars(
                 [
                     'BLOGNAME' => SITE_NAME,
-                    'TOKEN'    => $token['token'],
+                    'TOKEN' => $token['token'],
                     'SITE_URL' => SITE_URL,
-                    'TITLE'    => 'Account activation',
+                    'TITLE' => 'Account activation',
                     'SUBTITLE' => 'A new account has been created',
-                    'MESSAGE'  => 'Hi '.$user->getFirstname().'. You requested a new account on '.SITE_NAME.'.
+                    'MESSAGE' => 'Hi '.$user->getFirstname().'. You requested a new account on '.SITE_NAME.'.
                 You can activate it by following this link and set a new password.',
                 ]
             );
@@ -127,6 +130,7 @@ class UserController extends AbstractController
     public function executeNewPassword(HTTPRequest $request, HTTPResponse $response)
     {
         $userManager = $this->managers->getManagerOf('User');
+        $redirect = $request->postExists('redirect')? $request->getDataPost('redirect'): '/login/';
 
         // Sent from new password from
         if ($request->postExists('reset_password')) {
@@ -134,23 +138,23 @@ class UserController extends AbstractController
             $user  = $userManager->getByNicknameOrEmail($email);
             $token = $this->app->setToken();
             if (is_object($user)) {
-                if ( ! $user->getActive()) {
-                    $this->app->setFlash('danger', ['content' => 'Your account has been deactivated']);
+                if (!$user->getActive()) {
+                    $this->app->setFlash('error', ['content' => 'Your account has been deactivated']);
 
                     return false;
                 }
                 $mail = new Mailer();
                 $mail->setEmailTemplate('new_password.twig');
-                $mail->setEmailData($user);
+                $mail->setUserData($user);
                 $mail->setEmailSubject('New password');
                 $mail->setVars(
                     [
                         'BLOGNAME' => SITE_NAME,
-                        'TOKEN'    => $token['token'],
+                        'TOKEN' => $token['token'],
                         'SITE_URL' => SITE_URL,
-                        'TITLE'    => 'New password',
+                        'TITLE' => 'New password',
                         'SUBTITLE' => 'You asked for a new password',
-                        'MESSAGE'  => 'Hi '.$user->getFirstname().'. You requested a new password on '.SITE_NAME.' ',
+                        'MESSAGE' => 'Hi '.$user->getFirstname().'. You requested a new password on '.SITE_NAME.' ',
                     ]
                 );
 
@@ -166,14 +170,14 @@ class UserController extends AbstractController
                     'content' => 'Please Check your emails. We have sent to you a new password request',
                 ]
             );
-            $response->redirect('/login/');
+            $response->redirect($redirect);
         }
 
         // Get from email (url)
         $token = $request->getDataGet('token');
         $user  = $userManager->getByToken($token);
 
-        if ( ! is_object($user)) {
+        if (!is_object($user)) {
             $this->page->set404();
 
             return false;
@@ -184,11 +188,11 @@ class UserController extends AbstractController
 
         if ($tokenValidity < $date) {
             $this->app->setFlash(
-                'danger',
+                'error',
                 ['content' => 'This link has expired']
             );
 
-            $response->redirect('/login/');
+            $response->redirect($redirect);
         }
 
         // Sent from generate password from
@@ -198,12 +202,12 @@ class UserController extends AbstractController
             $rPassword = $request->getDataPost('rpassword');
 
             if ($password !== $rPassword) {
-                $this->app->setFlash('danger', ['content' => 'The passwords does not match']);
+                $this->app->setFlash('error', ['content' => 'The passwords does not match']);
 
                 return false;
             } elseif (strlen($password) < PASSWORD_MIN_LENGTH) {
                 $this->app->setFlash(
-                    'danger',
+                    'error',
                     ['content' => 'The passwords should be min '.PASSWORD_MIN_LENGTH.' character length']
                 );
 
@@ -215,11 +219,11 @@ class UserController extends AbstractController
             $result = $userManager->save($user);
 
             if ($result != 1) {
-                $this->app->setFlash('danger', ['content' => $result]);
+                $this->app->setFlash('error', ['content' => $result]);
             } else {
 
                 $this->app->setFlash('success', ['content' => 'The password has been changed']);
-                $response->redirect('/login/');
+                $response->redirect($redirect);
             }
         }
 
@@ -230,11 +234,13 @@ class UserController extends AbstractController
     {
         $response->killKookie('User');
         $response->killSession('UserAuth');
-        $response->redirect('/login/');
+        $this->app->setFlash('success', ['content' => 'You successfully logged out.']);
+        $response->redirect('/');
     }
 
     public function executeRegister(HTTPRequest $request, HTTPResponse $response)
     {
+        $redirect = $request->postExists('redirect')? $request->getDataPost('redirect'): '/login/';
         if ($request->postExists('register_user')) {
             $userManager = $this->managers->getManagerOf('User');
             $nickname    = $request->getDataPost('username');
@@ -245,15 +251,18 @@ class UserController extends AbstractController
             $this->page->addVar('form', $request->getAllPost());
 
             if ($password !== $rPassword) {
-                $this->app->setFlash('danger', ['content' => 'The passwords does not match']);
+                $this->app->setFlash('error', ['content' => 'The passwords does not match']);
+                $response->redirect($redirect);
 
                 return false;
             } elseif ($userManager->getByNicknameOrEmail($email)) {
-                $this->app->setFlash('danger', ['content' => 'The email has already been taken']);
+                $this->app->setFlash('error', ['content' => 'The email has already been taken']);
+                $response->redirect($redirect);
 
                 return false;
             } elseif ($userManager->getByNicknameOrEmail($nickname)) {
-                $this->app->setFlash('danger', ['content' => 'The username is not available']);
+                $this->app->setFlash('error', ['content' => 'The username is not available']);
+                $response->redirect($redirect);
 
                 return false;
             }
@@ -276,23 +285,23 @@ class UserController extends AbstractController
 
             $mail = new Mailer();
             $mail->setEmailTemplate('new_user.twig');
-            $mail->setEmailData($user);
+            $mail->setUserData($user);
             $mail->setEmailSubject('New account');
             $mail->setVars(
                 [
                     'BLOGNAME' => SITE_NAME,
-                    'TOKEN'    => $token['token'],
+                    'TOKEN' => $token['token'],
                     'SITE_URL' => SITE_URL,
-                    'TITLE'    => 'New account',
+                    'TITLE' => 'New account',
                     'SUBTITLE' => 'A new account has been created',
-                    'MESSAGE'  => 'Hi '.$user->getFirstname().'. You requested a new account on '.SITE_NAME.'.
+                    'MESSAGE' => 'Hi '.$user->getFirstname().'. You requested a new account on '.SITE_NAME.'.
                 You can activate it by following this link and set a new password.',
                 ]
             );
 
             $result = $userManager->save($user);
             if ($result != 1) {
-                $this->app->setFlash('danger', $result);
+                $this->app->setFlash('error', $result);
             } else {
                 if ($mail->sendEmail()) {
                     $this->app->setFlash(
@@ -302,7 +311,7 @@ class UserController extends AbstractController
                         to your email address',
                         ]
                     );
-                    $response->redirect('/login/');
+                    $response->redirect($redirect);
                 }
             }
         }

@@ -23,23 +23,25 @@ class PostManagerPDO extends PostManager
 
     public function getList($start = -1, $limit = -1, $categoryId = null)
     {
-        $sql = "SELECT p.*, pc.category_name, pc.category_slug, 
+        $sql = "SELECT p.*, pc.category_name, pc.category_slug, COUNT(c.id) AS 'nb_comments',
                 IF(author.show_full_name, CONCAT(author.firstname, ' ', author.lastname), author.nickname) AS 'author', 
                 IF(editor.show_full_name, CONCAT(editor.firstname, ' ', editor.lastname), editor.nickname) AS 'editor' 
                 FROM post AS p 
                 LEFT JOIN post_category AS pc ON p.category_id = pc.id
+                LEFT JOIN comment AS c ON p.id = c.post_id AND c.status = 'APPROVED'
                 LEFT JOIN user AS author ON p.created_by = author.id 
                 LEFT JOIN user AS editor ON p.edited_by = editor.id ";
 
         if (is_int($categoryId)) {
             $sql .= " WHERE p.category_id = $categoryId ";
         }
-
+        $sql .= ' GROUP BY p.id';
         $sql .= " ORDER BY UNIX_TIMESTAMP(p.date_add) DESC ";
 
         if ($start != -1 || $limit != -1) {
             $sql .= ' LIMIT '.(int)$limit.' OFFSET '.(int)$start;
         }
+
 
         $request = $this->dao->query($sql);
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Post');

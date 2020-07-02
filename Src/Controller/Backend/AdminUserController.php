@@ -90,6 +90,7 @@ class AdminUserController extends AbstractController
 
     public function executeUsers(HTTPRequest $request, HTTPResponse $response)
     {
+        $this->adminOnly();
         $userManager = $this->managers->getManagerOf('User');
         $this->page->addVar('users', $userManager->getList());
 
@@ -115,7 +116,7 @@ class AdminUserController extends AbstractController
 
             $mail = new Mailer();
             $mail->setEmailTemplate('new_user.twig');
-            $mail->setEmailData($user);
+            $mail->setUserData($user);
             $mail->setEmailSubject('New account');
             $mail->setVars(
                 [

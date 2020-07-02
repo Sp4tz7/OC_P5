@@ -2,6 +2,7 @@
 
 namespace Core;
 
+
 class Page extends ApplicationComponent
 {
     protected $contentFile;
@@ -40,6 +41,7 @@ class Page extends ApplicationComponent
             ]
         );
         $twig->addExtension(new \Twig\Extension\DebugExtension());
+        $twig->addExtension(new \Twig\Extra\String\StringExtension());
 
         $token = $this->app->setCsrfToken();
         $page  = [

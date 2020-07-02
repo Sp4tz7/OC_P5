@@ -22,6 +22,7 @@
                             <th>Category</th>
                             <th>Title</th>
                             <th>Author</th>
+                            <th>#Comments</th>
                             <th>Date</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -32,6 +33,7 @@
                             <th>Category</th>
                             <th>Title</th>
                             <th>Author</th>
+                            <th>#Comments</th>
                             <th>Date</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -43,6 +45,7 @@
                                 <td>{{ post.getCategoryName() }}</td>
                                 <td>{{ post.getTitle() }}</td>
                                 <td>{{ post.getAuthor() }}</td>
+                                <td>{{ post.getNbComments() }}</td>
                                 <td>{{ post.getDateAdd()|date("d/m/Y") }}</td>
                                 <td><i class="fas fa-{% if post.getActive() %}check{% else %}cross{% endif %}"></i></td>
                                 <td><a href="/admin/post/edit/{{ post.getId() }}"><i class="fas fa-edit"></i></a>

@@ -20,6 +20,7 @@ class Post extends Entity
     protected $author;
     protected $created_by;
     protected $edited_by;
+    protected $nb_comments;
     protected $active;
 
     /**
@@ -28,6 +29,14 @@ class Post extends Entity
     public function getCategorySlug()
     {
         return $this->category_slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbComments()
+    {
+        return $this->nb_comments;
     }
 
     /**

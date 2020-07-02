@@ -1,9 +1,6 @@
 {% extends "layout.twig" %}
 {% block content %}
     <div class="row align-items-center my-5">
-        <div class=" col-md-12">
-            {% include 'breadcrumb.twig' %}
-        </div>
         <div class="col-md-12">
             <button type="button" class="float-right btn btn-outline-info quick-sidebar-toggler mt-5"
                     data-toggle="collapse" aria-expanded="false">
@@ -19,7 +16,7 @@
         <div class="col-md-12">
             {% if posts %}
                 <div class="row"> {% embed 'extend-list.twig' with {'pagination': true} %}{% endembed %}</div>
-                {% else %}
+            {% else %}
                 <div class="text-center alert alert-info">There is no post for this category at the moment.</div>
             {% endif %}
         </div>
