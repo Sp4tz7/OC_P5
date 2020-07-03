@@ -10,13 +10,13 @@
     <route url="/admin/posts/" env="Backend" app="AdminPost" action="posts"></route>
     <route url="/admin/post/add/" env="Backend" app="AdminPost" action="add"></route>
     <route url="/admin/post/edit/([0-9]*)/" env="Backend" app="AdminPost" action="edit" vars="id"></route>
-    <route url="/admin/post/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminPost" action="delete" vars="id,token"></route>
+    <route url="/admin/post/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminPost" action="delete" vars="id,csrf_token"></route>
     <route url="/admin/category/add/" env="Backend" app="AdminPost" action="addCategory"></route>
     <route url="/admin/comments/" env="Backend" app="AdminComment" action="comments"></route>
     <route url="/admin/comment/edit/([0-9]*)/" env="Backend" app="AdminComment" action="edit" vars="id"></route>
-    <route url="/admin/comment/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="delete" vars="id,token"></route>
-    <route url="/admin/comment/approve/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="approve" vars="id,token"></route>
-    <route url="/admin/comment/reject/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="reject" vars="id,token"></route>
+    <route url="/admin/comment/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="delete" vars="id,csrf_token"></route>
+    <route url="/admin/comment/approve/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="approve" vars="id,csrf_token"></route>
+    <route url="/admin/comment/reject/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="reject" vars="id,csrf_token"></route>
     <!-- FRONTEND ROUTES -->
     <route url="/" env="Frontend" app="Frontend" action="home"></route>
     <route url="/register/" env="Frontend" app="User" action="register"></route>

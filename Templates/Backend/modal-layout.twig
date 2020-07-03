@@ -12,7 +12,7 @@
                     <p>{{ body|raw }}</p>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="token" id="{{ id }}Token" value="{{ token }}">
+                    <input type="hidden" name="csrf_token" id="{{ id }}Token" value="{{ csrf_token }}">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a href="#" class="btn btn-primary" id="{{ id }}">{{ button }}</a>
                 </div>

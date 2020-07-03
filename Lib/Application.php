@@ -158,48 +158,12 @@ class Application
         $this->$name = strtolower($name);
     }
 
-    public function setCsrfToken()
-    {
-        if (!$this->httpRequest->sessionExists('token')) {
-            return bin2hex(random_bytes(32));
-        }
-
-        return $this->httpRequest->getSession('token');
-
-    }
-
-    public function setToken($length = 16, $validity = '+1 day')
-    {
-        $token          = bin2hex(random_bytes($length));
-        $token_validity = (new \DateTime('now', new \DateTimeZone(TIME_ZONE)))->modify($validity);
-
-        return ['token' => $token, 'validity' => $token_validity->format('Y-m-d H:i:s')];
-    }
-
-    public function compareCsrfToken()
-    {
-        if ($this->getHttpRequest()->postExists('token')
-            and $this->getHttpRequest()->getDataPost('token') === $this->getHttpRequest()->getSession('token')) {
-            return true;
-        }
-
-        if ($this->getHttpRequest()->getExists('token')
-            and $this->getHttpRequest()->getDataGet('token') === $this->getHttpRequest()->getSession('token')) {
-            return true;
-        }
-
-        return false;
-    }
 
     public function getHttpRequest()
     {
         return $this->httpRequest;
     }
 
-    public function killCsrfToken()
-    {
-        $this->httpResponse->killSession('token');
-    }
 
     public function getFlash()
     {

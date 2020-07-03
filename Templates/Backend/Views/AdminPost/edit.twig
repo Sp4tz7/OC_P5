@@ -102,7 +102,7 @@
                                 <div class="margiv-top-10">
                                     <input type="hidden" name="{{ button|lower|default('edit') }}_post"
                                            value="{{ editPost.getId() }}">
-                                    <input type="hidden" name="token" value="{{ token }}">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
                                     <input type="submit" class="btn green" value="{{ button|default('Save Changes') }}">
                                 </div>
                             </form>

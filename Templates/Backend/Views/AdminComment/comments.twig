@@ -57,9 +57,9 @@
                                     <a href="/admin/comment/edit/{{ comment.getId() }}"><i class="fas fa-edit"></i></a>
                                     <a href="#" data-target="#modal" data-toggle="modal" data-id="{{ comment.getId() }}"
                                        class="delete_comment mx-2"><i class="fas fa-trash"></i></a>
-                                    <a href="/admin/comment/approve/{{ comment.getId() }}/{{ token }}/"
+                                    <a href="/admin/comment/approve/{{ comment.getId() }}/{{ csrf_token }}/"
                                        class="approve_comment"><i class="fas fa-check"></i></a>
-                                    <a href="/admin/comment/reject/{{ comment.getId() }}/{{ token }}/"
+                                    <a href="/admin/comment/reject/{{ comment.getId() }}/{{ csrf_token }}/"
                                        class="reject_comment mx-2"><i class="fas fa-times"></i></a>
                                 </td>
                             </tr>
@@ -77,7 +77,7 @@
     <script>
         $(document).ready(function () {
             $('.delete_comment').on('click', function () {
-                $('#deleteComment').attr('href', '/admin/comment/delete/' + $(this).data('id') + '/{{ token }}/');
+                $('#deleteComment').attr('href', '/admin/comment/delete/' + $(this).data('id') + '/{{ csrf_token }}/');
             });
         });
     </script>

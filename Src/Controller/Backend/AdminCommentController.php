@@ -3,6 +3,7 @@
 namespace Controller\Backend;
 
 use Core\AbstractController;
+use Core\FormManager;
 use Core\HTTPRequest;
 use Core\HTTPResponse;
 use Core\Mailer;
@@ -19,7 +20,8 @@ class AdminCommentController extends AbstractController
 
     public function executeDelete(HTTPRequest $request, HTTPResponse $response)
     {
-        if ($request->getExists('id') and $this->app->compareCsrfToken()) {
+        $form = new FormManager();
+        if ($request->getExists('id') and $form->compareCsrfToken()) {
             $commentManager = $this->managers->getManagerOf('Comment');
             $commentManager->delete($request->getDataGet('id'));
             $this->app->setFlash(
@@ -36,7 +38,8 @@ class AdminCommentController extends AbstractController
 
     public function executeApprove(HTTPRequest $request, HTTPResponse $response)
     {
-        if ($request->getExists('id') and $this->app->compareCsrfToken()) {
+        $form = new FormManager();
+        if ($request->getExists('id') and $form->compareCsrfToken()) {
             $commentManager = $this->managers->getManagerOf('Comment');
             $postManager    = $this->managers->getManagerOf('Post');
             $userManager    = $this->managers->getManagerOf('User');
@@ -102,12 +105,13 @@ class AdminCommentController extends AbstractController
 
     public function executeReject(HTTPRequest $request, HTTPResponse $response)
     {
-        if ($request->getExists('id') and $this->app->compareCsrfToken()) {
+        $form = new FormManager();
+        if ($request->getExists('id') and $form->compareCsrfToken()) {
             $commentManager = $this->managers->getManagerOf('Comment');
             $postManager    = $this->managers->getManagerOf('Post');
             $userManager    = $this->managers->getManagerOf('User');
 
-            $comment        = $commentManager->getUnique($request->getDataGet('id'));
+            $comment = $commentManager->getUnique($request->getDataGet('id'));
             $comment->setStatus('REJECTED');
             $commentManager->save($comment);
             $this->app->setFlash(
@@ -149,8 +153,10 @@ class AdminCommentController extends AbstractController
         $commentManager = $this->managers->getManagerOf('Comment');
         $userManager    = $this->managers->getManagerOf('User');
         $postManager    = $this->managers->getManagerOf('Post');
+        $form = new FormManager();
+
         if ($request->postExists('edit_comment') and ($request->getDataPost('edit_comment') === $request->getDataGet('id'))) {
-            if ($this->app->compareCsrfToken()) {
+            if ($form->compareCsrfToken()) {
                 $comment = $commentManager->getUnique($request->getDataPost('edit_comment'));
                 $user    = $userManager->getUnique($request->getSession('UserAuth'));
 
@@ -185,7 +191,7 @@ class AdminCommentController extends AbstractController
                         ]
                     );
                 }
-                $this->app->killCsrfToken();
+                $form->killCsrfToken();
             } else {
                 $this->app->setFlash(
                     'error',

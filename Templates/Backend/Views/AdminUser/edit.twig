@@ -71,7 +71,7 @@
                                         <input type="hidden" name="role" value="SUPERADMIN">
                                         <input type="hidden" name="active" value="1">
                                     {% endif %}
-                                    <input type="hidden" name="token" value="{{ token }}">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
                                     <input type="submit" class="btn green" value="{{ button|default('Save Changes') }}">
                                 </div>
                             </form>

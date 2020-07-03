@@ -67,7 +67,7 @@
     <script>
         $(document).ready(function () {
             $('.delete_post').on('click', function () {
-                $('#deletePost').attr('href', '/admin/post/delete/'+$(this).data('id')+'/{{ token }}/');
+                $('#deletePost').attr('href', '/admin/post/delete/'+$(this).data('id')+'/{{ csrf_token }}/');
             });
         });
     </script>
