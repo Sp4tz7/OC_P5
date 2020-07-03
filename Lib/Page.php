@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use Core\FormManager;
 
 class Page extends ApplicationComponent
 {
@@ -43,12 +44,15 @@ class Page extends ApplicationComponent
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         $twig->addExtension(new \Twig\Extra\String\StringExtension());
 
-        $token = $this->app->setCsrfToken();
+        $form = new FormManager();
+        $csrf_token = $form->setCsrfToken();
+        $token = $form->setToken();
         $page  = [
             'page'  => [
                 'body_id' => $this->app->getAction(),
             ],
             'flash' => $this->app->hasFlash() ? $this->app->getFlash() : false,
+            'csrf_token' => $csrf_token,
             'token' => $token,
             'siteName' => SITE_NAME,
         ];

@@ -3,6 +3,7 @@
 namespace Controller\Backend;
 
 use Core\AbstractController;
+use Core\FormManager;
 use Core\HTTPRequest;
 use Core\HTTPResponse;
 use Core\Mailer;
@@ -14,9 +15,10 @@ class AdminUserController extends AbstractController
     {
         $userManager = $this->managers->getManagerOf('User');
         $user        = $userManager->getUnique($request->getSession('UserAuth'));
+        $form = new FormManager();
 
         // Change password
-        if ($request->postExists('change_password') and $this->app->compareCsrfToken()) {
+        if ($request->postExists('change_password') and $form->compareCsrfToken()) {
 
             $password  = $request->getDataPost('password');
             $rPassword = $request->getDataPost('rpassword');
@@ -40,13 +42,13 @@ class AdminUserController extends AbstractController
                 'success',
                 ['content' => 'The passwords has been changed']
             );
-
+            $form->killCsrfToken();
             $response->redirect('/admin/my-account/');
 
         }
 
         // Change privacy settings
-        if ($request->postExists('edit_user_settings') and $this->app->compareCsrfToken()) {
+        if ($request->postExists('edit_user_settings') and $form->compareCsrfToken()) {
             $user->setSendEmailApprove($request->getDataPost('send_email_approve'));
             $user->setSendEmailReplay($request->getDataPost('send_email_reply'));
             $user->setShowFullName($request->getDataPost('show_name'));
@@ -56,13 +58,13 @@ class AdminUserController extends AbstractController
                 'success',
                 ['content' => 'The settings has been updated']
             );
-
+            $form->killCsrfToken();
             $response->redirect('/admin/my-account/');
 
         }
 
         // Update user personal information
-        if ($request->postExists('edit_user') and $this->app->compareCsrfToken()) {
+        if ($request->postExists('edit_user') and $form->compareCsrfToken()) {
             $user->setFirstname($request->getDataPost('firstname'));
             $user->setLastname($request->getDataPost('lastname'));
             $user->setNickname($request->getDataPost('username'));
@@ -83,6 +85,7 @@ class AdminUserController extends AbstractController
                     ['content' => 'You personal data has been updated']
                 );
             }
+            $form->killCsrfToken();
             $response->redirect('/admin/my-account/');
 
         }
@@ -100,8 +103,9 @@ class AdminUserController extends AbstractController
     {
         $userManager = $this->managers->getManagerOf('User');
         $user        = new User();
-        if ($request->postExists('edit_user') and $this->app->compareCsrfToken()) {
-            $token = $this->app->setToken();
+        $form = new FormManager();
+        if ($request->postExists('edit_user') and $form->compareCsrfToken()) {
+            $token = $form->setToken();
             $user->setFirstname($request->getDataPost('firstname'));
             $user->setLastname($request->getDataPost('lastname'));
             $user->setNickname($request->getDataPost('username'));
@@ -148,7 +152,7 @@ class AdminUserController extends AbstractController
                             'content' => 'The new user has been created and an email is sent to the user',
                         ]
                     );
-
+                    $form->killCsrfToken();
                     $response->redirect('/admin/user/add/');
                 }
             }
@@ -162,8 +166,10 @@ class AdminUserController extends AbstractController
         $this->adminOnly();
 
         $userManager = $this->managers->getManagerOf('User');
+        $form = new FormManager();
+
         if ($request->postExists('edit_user') and ($request->getDataPost('edit_user') === $request->getDataGet('id'))) {
-            if ($this->app->compareCsrfToken()) {
+            if ($form->compareCsrfToken()) {
                 $user = $userManager->getUnique($request->getDataPost('edit_user'));
                 $user->setFirstname($request->getDataPost('firstname'));
                 $user->setLastname($request->getDataPost('lastname'));
@@ -193,7 +199,7 @@ class AdminUserController extends AbstractController
                         ]
                     );
                 }
-                $this->app->killCsrfToken();
+                $form->killCsrfToken();
             } else {
                 $this->app->setFlash(
                     'error',

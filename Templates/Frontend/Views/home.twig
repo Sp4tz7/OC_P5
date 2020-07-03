@@ -2,25 +2,111 @@
 {% block breadcrumb %}
 {% endblock %}
 {% block content %}
-    <div class="row align-items-center my-5">
-        <div class="col-lg-7">
-            <img class="img-fluid rounded mb-4 mb-lg-0" src="http://placehold.it/900x400" alt="">
-        </div>
-        <div class="col-lg-5">
-            <h1 class="font-weight-light">Business Name or Tagline</h1>
-            <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it
-                makes a great use of the standard Bootstrap core components. Feel free to use this template for any
-                project you want!</p>
-            <a class="btn btn-primary" href="#">Call to Action!</a>
+
+    <div class="content-box">
+        <div class="container">
+            <div class="row align-items-center my-5">
+                <div class="col-lg-7">
+                    <img class="img-fluid rounded mb-4 mb-lg-0" src="/img/home.jpg" alt="">
+                </div>
+                <div class="col-lg-5">
+                    <h1 class="font-weight-light">David SIKER</h1>
+                    <h2 class="font-weight-light">Full-Stack DEVELOPER</h2>
+                    <p>Since many years yet, I write different kinds of code that handle frontend and backend tasks for
+                        a
+                        Swiss WEB Agency.</p>
+                    <a class="btn green" href="#">READ MY CV</a>
+                </div>
+            </div>
+            <div class="card text-white bg-secondary my-5 py-4 text-center">
+                <div class="card-body">
+                    <p class="text-white m-0"><cite>“Always code as if the guy who ends up maintaining your code will be
+                            a
+                            violent psychopath who knows where you live.” - John F. Woods</cite></p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="card text-white bg-secondary my-5 py-4 text-center">
-        <div class="card-body">
-            <p class="text-white m-0">This call to action card is a great place to showcase some important information
-                or display a clever tagline!</p>
+
+    <div class="content-box bg-dark text-white p-5">
+        <div class="container">
+            <div class="c-content-feature-2-grid">
+                <div class="c-content-title-1 mb-3">
+                    <h3 class="text-center mb-3">Services I Do</h3>
+                    <div class="center-separator"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 my-2">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">Web Design</h4>
+                            <p>I build frontend and backend custom websites.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-2">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fab fa-symfony"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">Symfony DEV</h4>
+                            <p>I build robust websites based on the powerful symfony framework.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-2">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">SEO Consulting</h4>
+                            <p>Let me review your website to detect potential SEO issues.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-2">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">Languages</h4>
+                            <p>I write different kind of languages such as PHP or Python.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-2">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">PrestaShop expert</h4>
+                            <p>I develop custom modules for all PrestaShop stores.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-2">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">Hosting</h4>
+                            <p>Lorem ipsum sit dolor eamet dolore adipiscing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        {% embed 'Post/extend-list.twig' with {'limit': 3, 'pagination': false} %}{% endembed %}
+
+    <div class="content-box p-5">
+        <div class="container">
+            <div class="c-content-title-1 mb-3">
+                <h3 class="text-center mb-3">My Blog</h3>
+                <div class="center-separator"></div>
+            </div>
+            <div class="row">
+                {% embed 'Post/extend-list.twig' with {'limit': 3, 'pagination': false} %}{% endembed %}
+            </div>
+            <div class="text-center">
+                 <a href="/post/all/" class="btn green">View ALL</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
