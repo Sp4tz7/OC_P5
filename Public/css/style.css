@@ -177,3 +177,13 @@ footer {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
+
+.framework div {
+    max-width: 13em;
+}
+.framework div:hover {
+    border: solid 2px;
+}
+nav {
+    border-bottom: 2px solid #32c5d2;
+}
