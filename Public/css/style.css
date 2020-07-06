@@ -187,3 +187,28 @@ footer {
 nav {
     border-bottom: 2px solid #32c5d2;
 }
+
+.card-text.bg-info {
+    display: inline-block;
+    font-size: 0.8em;
+    margin: .25rem;
+    padding: .5rem;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+}
+.social li {
+    float: right;
+}
+.social .svg-inline--fa {
+    position: relative;
+    background: #f2f2f2;
+    text-align: center;
+    color: #cccccc;
+    width: 2.5em;
+    height: 2.5em;
+    padding: 5px;
+    margin: 2px;
+}.social .svg-inline--fa:hover {
+     background-color: #32c5d2; color: #ffffff;
+ }

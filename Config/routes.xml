@@ -28,4 +28,6 @@
     <route url="/post/([0-9]*)/" env="Frontend" app="Post" action="id" vars="id"></route>
     <route url="/post/([a-z0-9\-]*)/" env="Frontend" app="Post" action="list" vars="category"></route>
     <route url="/post/comment/add/([0-9]*)/" env="Frontend" app="Post" action="addComment" vars="id"></route>
+    <route url="/contact/" env="Frontend" app="Frontend" action="contact"></route>
+
 </routes>
