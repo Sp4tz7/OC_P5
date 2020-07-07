@@ -1,0 +1,30 @@
+{% extends "layout.twig" %}
+{% block content %}
+    <div class="content-box">
+        <div class="container">
+            <div class="row align-items-center my-5">
+                <h1 class="display-2 mb-5">Sitemap</h1>
+            </div>
+            <div class="row">
+                <ul class="list-group col-md-4 my-2">
+                    <li class="list-group-item bg-dark text-white">Common</li>
+                    {% for url in urls.pages %}
+                        <li class="list-group-item"><a href="{{ url.loc }}" class="text-muted">{{ url.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul class="list-group col-md-4 my-2">
+                    <li class="list-group-item bg-dark text-white">Blog Categories</li>
+                    {% for url in urls.categories %}
+                        <li class="list-group-item"><a href="{{ url.loc }}" class="text-muted">{{ url.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul class="list-group col-md-4 my-2">
+                    <li class="list-group-item bg-dark text-white">Blog posts</li>
+                    {% for url in urls.posts %}
+                        <li class="list-group-item"><a href="{{ url.loc }}" class="text-muted">{{ url.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

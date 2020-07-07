@@ -8,6 +8,7 @@ use Core\FormManager;
 use Core\HTTPRequest;
 use Core\HTTPResponse;
 use Core\Mailer;
+use Core\SiteMapsManager;
 
 class FrontendController extends AbstractController
 {
@@ -78,5 +79,14 @@ class FrontendController extends AbstractController
                 $response->redirect('/contact/');
             }
         }
+    }
+
+    public function executeSitemaps()
+    {
+        $sitemap = new SiteMapsManager();
+        $sitemap->createSiteMap();
+        $urls = $sitemap->getUrls();
+        $this->page->addVar('urls', $urls);
+
     }
 }

@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
     <!-- ADMIN ROUTES -->
-    <route url="/admin/" env="Backend" app="Backend" action="dashboard"></route>
-    <route url="/admin/access-denied/" env="Backend" app="Backend" action="accessDenied"></route>
-    <route url="/admin/users/" env="Backend" app="AdminUser" action="users"></route>
-    <route url="/admin/user/add/" env="Backend" app="AdminUser" action="add"></route>
-    <route url="/admin/user/edit/([0-9]*)/" env="Backend" app="AdminUser" action="edit" vars="id"></route>
-    <route url="/admin/my-account/" env="Backend" app="AdminUser" action="myAccount"></route>
-    <route url="/admin/posts/" env="Backend" app="AdminPost" action="posts"></route>
-    <route url="/admin/post/add/" env="Backend" app="AdminPost" action="add"></route>
-    <route url="/admin/post/edit/([0-9]*)/" env="Backend" app="AdminPost" action="edit" vars="id"></route>
-    <route url="/admin/post/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminPost" action="delete" vars="id,csrf_token"></route>
-    <route url="/admin/category/add/" env="Backend" app="AdminPost" action="addCategory"></route>
-    <route url="/admin/comments/" env="Backend" app="AdminComment" action="comments"></route>
-    <route url="/admin/comment/edit/([0-9]*)/" env="Backend" app="AdminComment" action="edit" vars="id"></route>
-    <route url="/admin/comment/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="delete" vars="id,csrf_token"></route>
-    <route url="/admin/comment/approve/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="approve" vars="id,csrf_token"></route>
-    <route url="/admin/comment/reject/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="reject" vars="id,csrf_token"></route>
+    <route url="/admin/" env="Backend" app="Backend" action="dashboard" sitemap="0"></route>
+    <route url="/admin/access-denied/" env="Backend" app="Backend" action="accessDenied" sitemap="0"></route>
+    <route url="/admin/users/" env="Backend" app="AdminUser" action="users" sitemap="0"></route>
+    <route url="/admin/user/add/" env="Backend" app="AdminUser" action="add" sitemap="0"></route>
+    <route url="/admin/user/edit/([0-9]*)/" env="Backend" app="AdminUser" action="edit" vars="id" sitemap="0"></route>
+    <route url="/admin/my-account/" env="Backend" app="AdminUser" action="myAccount" sitemap="0"></route>
+    <route url="/admin/posts/" env="Backend" app="AdminPost" action="posts" sitemap="0"></route>
+    <route url="/admin/post/add/" env="Backend" app="AdminPost" action="add" sitemap="0"></route>
+    <route url="/admin/post/edit/([0-9]*)/" env="Backend" app="AdminPost" action="edit" vars="id" sitemap="0"></route>
+    <route url="/admin/post/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminPost" action="delete" vars="id,csrf_token" sitemap="0"></route>
+    <route url="/admin/category/add/" env="Backend" app="AdminPost" action="addCategory" sitemap="0"></route>
+    <route url="/admin/comments/" env="Backend" app="AdminComment" action="comments" sitemap="0"></route>
+    <route url="/admin/comment/edit/([0-9]*)/" env="Backend" app="AdminComment" action="edit" vars="id" sitemap="0"></route>
+    <route url="/admin/comment/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="delete" vars="id,csrf_token" sitemap="0"></route>
+    <route url="/admin/comment/approve/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="approve" vars="id,csrf_token" sitemap="0"></route>
+    <route url="/admin/comment/reject/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminComment" action="reject" vars="id,csrf_token" sitemap="0"></route>
     <!-- FRONTEND ROUTES -->
-    <route url="/" env="Frontend" app="Frontend" action="home"></route>
-    <route url="/register/" env="Frontend" app="User" action="register"></route>
-    <route url="/login/" env="Frontend" app="User" action="login"></route>
-    <route url="/logout/" env="Frontend" app="User" action="logout"></route>
-    <route url="/new-password/([a-z0-9]*)/" env="Frontend" app="User" action="newPassword" vars="token"></route>
-    <route url="/new-activation-link/([a-z0-9]*)/" env="Frontend" app="User" action="newActivation" vars="token"></route>
-    <route url="/post/[a-z0-9\-]*/([a-z0-9\-]*)/" env="Frontend" app="Post" action="post" vars="slug"></route>
-    <route url="/post/([0-9]*)/" env="Frontend" app="Post" action="id" vars="id"></route>
-    <route url="/post/([a-z0-9\-]*)/" env="Frontend" app="Post" action="list" vars="category"></route>
-    <route url="/post/comment/add/([0-9]*)/" env="Frontend" app="Post" action="addComment" vars="id"></route>
-    <route url="/contact/" env="Frontend" app="Frontend" action="contact"></route>
+    <route url="/" env="Frontend" app="Frontend" action="home" sitemap="1"></route>
+    <route url="/register/" env="Frontend" app="User" action="register" sitemap="0"></route>
+    <route url="/login/" env="Frontend" app="User" action="login" sitemap="1"></route>
+    <route url="/logout/" env="Frontend" app="User" action="logout" sitemap="0"></route>
+    <route url="/new-password/([a-z0-9]*)/" env="Frontend" app="User" action="newPassword" vars="token" sitemap="0"></route>
+    <route url="/new-activation-link/([a-z0-9]*)/" env="Frontend" app="User" action="newActivation" vars="token" sitemap="0"></route>
+    <route url="/post/[a-z0-9\-]*/([a-z0-9\-]*)/" env="Frontend" app="Post" action="post" vars="slug" sitemap="0"></route>
+    <route url="/post/([0-9]*)/" env="Frontend" app="Post" action="id" vars="id" sitemap="0"></route>
+    <route url="/post/([a-z0-9\-]*)/" env="Frontend" app="Post" action="list" vars="category" sitemap="0"></route>
+    <route url="/post/comment/add/([0-9]*)/" env="Frontend" app="Post" action="addComment" vars="id" sitemap="0"></route>
+    <route url="/contact/" env="Frontend" app="Frontend" action="contact" sitemap="1"></route>
+    <route url="/sitemap/" env="Frontend" app="Frontend" action="sitemaps" sitemap="1"></route>
 
 </routes>
