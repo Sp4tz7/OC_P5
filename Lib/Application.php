@@ -167,15 +167,10 @@ class Application
 
     public function getFlash()
     {
-        $flash = $this->httpRequest->getSession('flash');
-        $this->httpResponse->killSession('flash');
+        $flash = $this->httpRequest->getSession('flashes');
+        $this->httpResponse->killSession('flashes');
 
         return $flash;
-    }
-
-    public function hasFlash()
-    {
-        return $this->httpRequest->sessionExists('flash');
     }
 
     /**
@@ -186,7 +181,17 @@ class Application
      */
     public function setFlash($type = 'success', array $data)
     {
-        $this->httpResponse->setSession('flash', ['message' => $data, 'type' => $type]);
+        if ($this->hasFlash()) {
+            $this->httpResponse->addToSession('flashes', ['message' => $data, 'type' => $type]);
+        } else {
+            $this->httpResponse->setSession('flashes', [['message' => $data, 'type' => $type]]);
+        }
+
+    }
+
+    public function hasFlash()
+    {
+        return $this->httpRequest->sessionExists('flashes');
     }
 
 }

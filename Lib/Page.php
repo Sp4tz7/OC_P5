@@ -51,7 +51,7 @@ class Page extends ApplicationComponent
             'page'  => [
                 'body_id' => $this->app->getAction(),
             ],
-            'flash' => $this->app->hasFlash() ? $this->app->getFlash() : false,
+            'flashes' => $this->app->hasFlash() ? $this->app->getFlash() : false,
             'csrf_token' => $csrf_token,
             'token' => $token,
             'siteName' => SITE_NAME,

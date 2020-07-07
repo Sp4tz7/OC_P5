@@ -48,7 +48,7 @@ class AdminPostController extends AbstractController
         $postManager = $this->managers->getManagerOf('Post');
         $userManager = $this->managers->getManagerOf('User');
         $post        = new Post();
-        $form = new FormManager();
+        $form        = new FormManager();
 
         if ($request->postExists('add_post') and $form->compareCsrfToken()) {
             $post = new Post();
@@ -98,7 +98,7 @@ class AdminPostController extends AbstractController
     private function uploadImage($name)
     {
         // Image not mandatory
-        if (!$_FILES["blog_image"]["name"]) {
+        if (!$_FILES["blog_image"]["tmp_name"]) {
             return false;
         }
 
@@ -123,7 +123,7 @@ class AdminPostController extends AbstractController
         }
 
         // Check file size
-        if ($_FILES["blog_image"]["size"] > 500000) {
+        if ($_FILES["blog_image"]["size"] > 320000000) {
             $this->app->setFlash(
                 'error',
                 [
@@ -193,7 +193,7 @@ class AdminPostController extends AbstractController
     public function executeAddCategory(HTTPRequest $request, HTTPResponse $response)
     {
         $postManager = $this->managers->getManagerOf('Post');
-        $form = new FormManager();
+        $form        = new FormManager();
 
         if ($request->postExists('category_name')) {
             if ($form->compareCsrfToken()) {
@@ -235,7 +235,7 @@ class AdminPostController extends AbstractController
 
         $postManager = $this->managers->getManagerOf('Post');
         $userManager = $this->managers->getManagerOf('User');
-        $form = new FormManager();
+        $form        = new FormManager();
 
         if ($request->postExists('edit_post') and ($request->getDataPost('edit_post') === $request->getDataGet('id'))) {
             if ($form->compareCsrfToken()) {
@@ -263,6 +263,7 @@ class AdminPostController extends AbstractController
                 $active = $request->postExists('active') ? 1 : 0;
                 $post->setActive($active);
                 $image_name = $this->uploadImage($post->getSlug());
+
                 if ($image_name) {
                     $post->setImageUrl($image_name);
                 }

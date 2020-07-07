@@ -40,6 +40,7 @@ class HTTPResponse extends ApplicationComponent
         $this->setCookie($name, '', time() - 360 , '/');
     }
 
+    // Set last argument to true by default
     public function setCookie(
         $name,
         $value = '',
@@ -63,7 +64,11 @@ class HTTPResponse extends ApplicationComponent
         $this->page = $page;
     }
 
-    // Set last argument to true by default
+
+    public function addToSession($name, $value)
+    {
+        array_push($_SESSION[$name], $value);
+    }
 
     public function setSession($name, $value)
     {
