@@ -1,0 +1,43 @@
+{% extends "layout.twig" %}
+{% block nav %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="row align-items-center mb-5">
+        <div class="logo">
+            <a href="/">
+                <img src="http://placehold.it/200x100" alt="My blog"></a>
+        </div>
+    </div>
+    <div class="row align-items-center my-5">
+        <div class="card text-white bg-secondary m-auto p-4 text-center">
+            <form class="login-form" action="/login/" method="post">
+                <h3 class="form-title font-green">Logged out</h3>
+                <p class="text-left">User, you have looged out. Enter your password to login again.</p>
+                <div class="row">
+                <div class="form-group col-md-8">
+                    <label class="control-label d-none">Password</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off"
+                           placeholder="Password" name="password" required></div>
+                <div class="form-actions col-md-4">
+                    <button type="submit" class="btn green uppercase" name="login_user">Login</button>
+                </div>
+        </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    <footer class="py-2">
+        <div class="text-center">
+            <div class="text-white"> Copyright &copy; sp4tz {{ "now"|date("Y") }} </div>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block custom_script %}
+    <script src="/js/scripts.js"></script>
+{% endblock %}
+
+

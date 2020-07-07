@@ -1,0 +1,29 @@
+{% extends "layout.twig" %}
+{% block nav %}
+{% endblock %}
+{% block breadcrumb %}
+{% endblock %}
+{% block content %}
+    <div class="row align-items-center mb-5">
+        <div class="logo">
+            <h1 class="text-white">{{ siteName }}</h1>
+        </div>
+    </div>
+    <div class="row align-items-center my-5">
+        <div class="card text-white bg-secondary m-auto p-4 text-center">
+            {% include 'Form/login-form.twig' %}
+            {% include 'Form/password-form.twig' %}
+            {% include 'Form/register-form.twig' %}
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    <footer class="py-2">
+        <div class="text-center">
+            <div class="text-white">Copyright &copy; sp4tz {{ "now"|date("Y") }} </div>
+        </div>
+    </footer>
+{% endblock %}
+{% block custom_script %}
+    <script src="/js/scripts.js"></script>
+{% endblock %}

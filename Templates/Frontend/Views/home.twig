@@ -1,0 +1,210 @@
+{% extends "layout.twig" %}
+{% block breadcrumb %}
+{% endblock %}
+{% block content %}
+
+    <div class="content-box">
+        <div class="container">
+            <div class="row align-items-center my-5">
+                <div class="col-lg-7">
+                    <img class="img-fluid rounded mb-4 mb-lg-0" src="/img/home.jpg" alt="">
+                </div>
+                <div class="col-lg-5">
+                    <h1 class="font-weight-light">David SIKER</h1>
+                    <h2 class="font-weight-light">Full-Stack DEVELOPER</h2>
+                    <p>Since many years yet, I write different kinds of code that handle frontend and backend tasks for
+                        a
+                        Swiss WEB Agency.</p>
+                    <a class="btn green" href="/pdf/CV-SIKER-DAVID.pdf" target="_blank">Download my CV</a>
+                </div>
+            </div>
+            <div class="card text-white bg-secondary my-5 py-4 text-center">
+                <div class="card-body">
+                    <p class="text-white m-0"><cite>“Always code as if the guy who ends up maintaining your code will be
+                            a
+                            violent psychopath who knows where you live.” - John F. Woods</cite></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-box bg-dark text-white p-5">
+        <div class="container">
+            <div class="c-content-feature-2-grid">
+                <div class="c-content-title-1 mb-3">
+                    <h3 class="text-center mb-3">Services I Do</h3>
+                    <div class="center-separator"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 my-5">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">Full-Stack DEV</h4>
+                            <p>I build frontend and backend custom websites.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-5">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fab fa-symfony"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">Symfony DEV</h4>
+                            <p>I build robust websites based on the powerful symfony framework.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-5">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">SEO Consulting</h4>
+                            <p>Let me review your website to detect potential SEO issues.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-5">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">Languages</h4>
+                            <p>I write different kind of languages such as PHP or Python.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-5">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">PrestaShop expert</h4>
+                            <p>I develop custom modules for all PrestaShop stores.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 my-5">
+                        <div class="c-content-feature">
+                            <div class="c-icon-wrapper float-left mr-3">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h4 class="c-font-uppercase c-title">DataBase</h4>
+                            <p>I set up MySQL databases using the standard conventions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-box p-5">
+        <div class="container">
+            <div class="c-content-title-1 mb-3">
+                <h3 class="text-center mb-3">My Blog</h3>
+                <div class="center-separator"></div>
+            </div>
+            <div class="row">
+                {% embed 'Post/extend-list.twig' with {'limit': 3, 'pagination': false} %}{% endembed %}
+            </div>
+            <div class="text-center">
+                <a href="/post/all/" class="btn green">View ALL</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content-box p-5 bg-light">
+        <div class="container">
+            <div class="c-content-title-1 mb-3">
+                <h3 class="text-center mb-3">My Skills</h3>
+                <div class="center-separator"></div>
+            </div>
+            <div class="row m-3">
+                <div class="col-md-1"><span class="badge badge-info">PHP</span></div>
+                <div class="col-md-11">
+                    <div class="progress mt-1">
+                        <div class="progress-bar green" role="progressbar" style="width: 95%" aria-valuenow="25"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-3">
+                <div class="col-md-1"><span class="badge badge-info">Python</span></div>
+                <div class="col-md-11">
+                    <div class="progress mt-1">
+                        <div class="progress-bar green" role="progressbar" style="width: 70%" aria-valuenow="25"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-3">
+                <div class="col-md-1"><span class="badge badge-info">jQuery</span></div>
+                <div class="col-md-11">
+                    <div class="progress mt-1">
+                        <div class="progress-bar green" role="progressbar" style="width: 80%" aria-valuenow="25"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-3">
+                <div class="col-md-1"><span class="badge badge-info">CSS 3</span></div>
+                <div class="col-md-11">
+                    <div class="progress mt-1">
+                        <div class="progress-bar green" role="progressbar" style="width: 90%" aria-valuenow="25"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-3">
+                <div class="col-md-1"><span class="badge badge-info">HTML5</span></div>
+                <div class="col-md-11">
+                    <div class="progress mt-1">
+                        <div class="progress-bar green" role="progressbar" style="width: 95%" aria-valuenow="25"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-3">
+                <div class="col-md-1"><span class="badge badge-info">Coffee</span></div>
+                <div class="col-md-11">
+                    <div class="progress mt-1">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="25"
+                             aria-valuemin="0" aria-valuemax="100"><span>Too much!!!</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box p-5 bg-white">
+        <div class="content-box p-5">
+            <div class="container">
+                <div class="c-content-title-1 mb-3">
+                    <h3 class="text-center mb-3">Framework</h3>
+                    <div class="center-separator"></div>
+                </div>
+                <div class="row m-auto framework">
+                    <div class="border rounded border-info m-auto">
+                        <div class="card-body text-info">
+                            <img src="/img/prestashop.jpg" class="img-fluid" alt="PrestaShop">
+                        </div>
+                    </div>
+                    <div class="border rounded border-info m-auto">
+                        <div class="card-body text-info">
+                            <img src="/img/magento.jpg" class="img-fluid" alt="Magento">
+                        </div>
+                    </div>
+                    <div class="border rounded border-info m-auto">
+                        <div class="card-body text-info">
+                            <img src="/img/wordpress.jpg" class="img-fluid" alt="Wordpress">
+                        </div>
+                    </div>
+                    <div class="border rounded border-info m-auto">
+                        <div class="card-body text-info">
+                            <img src="/img/symfony.jpg" class="img-fluid" alt="symfony">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+{% endblock %}

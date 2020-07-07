@@ -1,0 +1,45 @@
+{% extends "layout.twig" %}
+{% block content %}
+    <div class="content-box">
+        <div class="container align-items-center "><h1 class="font-weight-light m-auto">Contact</h1>
+            <div class="row  my-5">
+                <div class="col-md-9">
+                    <div class="c-contact">
+                        <div class="c-content-title-1">
+                            <h3 class="c-font-uppercase c-font-bold">Hire me!</h3>
+                            <div class="c-line-left"></div>
+                            <p class="c-font-lowercase">Looking for a new website or enhancing a current project? Feel
+                                free to contact me.</p>
+                        </div>
+                        {% include 'User/Form/contact-form.twig' %}
+                    </div>
+                </div>
+                <div class="card col-md-3 text-md-right py-4">
+                    <div class="card-body">
+                        <h3 class="card-title">David SIKER</h3></div>
+                    <div class="card-body">
+                        <div class="card-text bg-info">Address</div>
+                        <p class="card-text text-muted">Chemin du Couvent 87,<br>2300 La Chaux-de-Fonds<br>Switzerland
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text bg-info">Contacts</div>
+                        <p class="text-muted"><strong>T</strong> +41 79 698 23 60</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text bg-info">Social</div>
+                        <br>
+                        <ul class="social my-2">
+                            <li class="list-group"><a href="https://twitter.com/sp4tz" target="_blank" class="bg-black"><i
+                                            class="fab fa-twitter"></i></a></li>
+                            <li class="list-group"><a href="https://facebook.com/sikerdavid" target="_blank"><i
+                                            class="fab fa-facebook"></i></a></li>
+                            <li class="list-group"><a href="https://linkedin.com/in/siker" target="_blank"><i
+                                            class="fab fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

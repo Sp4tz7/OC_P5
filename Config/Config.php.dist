@@ -1,0 +1,36 @@
+<?php
+
+namespace Config;
+
+define('APP_DIR', __DIR__.'/../');
+define('SITE_URL', '');                                         // Enter the full site url including https
+define('TIME_ZONE', 'Europe/Zurich');                           // Change your timezone if needed
+define('PASSWORD_MIN_LENGTH', 6);
+define('SITE_NAME', 'MY Blog');
+
+final class config
+{
+    public const ReCaptchaSecret = ''                           // Enter your secret from https://www.google.com/recaptcha
+
+    public static function getDbSettings()
+    {
+        return [
+            'host'     => '',                                   // Enter your host path
+            'dbname'   => '',                                   // Enter your database name
+            'username' => '',                                   // Enter your database username
+            'password' => '',                                   // Enter your database password
+        ];
+    }
+
+    public static function getSmtpSettings()
+    {
+        return [
+            'host'          => '',                              // Enter your smtp host path
+            'port'          => 587,                             // Enter your smtp port
+            'username'      => '',                              // Enter your smtp username
+            'password'      => '',                              // Enter your smtp password
+            'mail_from'     => ['mail' => '', 'name' => ''],    // Enter your email and name sender
+            'mail_reply_to' => ['mail' => '', 'name' => ''],    // Enter your email and name to reply to
+        ];
+    }
+}

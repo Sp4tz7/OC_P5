@@ -1,0 +1,16 @@
+{% for single_post in posts|slice(0,limit|default(10)) %}
+    {% if single_post.getActive() %}
+        {% if category_id %}
+            {% if single_post.getCategoryId() == category_id and single_post.getId() != post.getId()%}
+                {% include 'Post/extend-single-post.twig' %}
+            {% endif %}
+            {% else %}
+                {% include 'Post/extend-single-post.twig' %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+{% if pagination %}
+    <div class="col-md-12">
+        {% include 'pagination.twig' %}
+    </div>
+{% endif %}

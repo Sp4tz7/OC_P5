@@ -1,0 +1,129 @@
+{% extends "layout.twig" %}
+{% block main %}
+    {% embed 'modal-layout.twig' with {
+        'title' : 'CONFIRMATION REQUIRED',
+        'body': 'Are you sure you want to delete this comment?',
+        'button': 'DELETE',
+        'id': 'deleteComment'} %}
+    {% endembed %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="card light bordered">
+                    <div class="card-header tabbable-line">
+                        <div class="caption">
+                            <i class="icon-bubbles font-dark hide"></i>
+                            <span class="caption-subject font-dark bold uppercase">My Comments</span>
+                        </div>
+                        <ul class="nav nav-tabs float-right">
+                            <li>
+                                <a href="#comments_pending" data-toggle="tab" aria-expanded="true" class="active">
+                                    Pending </a>
+                            </li>
+                            <li>
+                                <a href="#comments_approved" data-toggle="tab" aria-expanded="false"> Approved </a>
+                            </li>
+                            <li>
+                                <a href="#comments_rejected" data-toggle="tab" aria-expanded="false"> Rejected </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="comments_pending">
+                                <div class="comments">
+                                    {% for pendingComment in pendingComments %}
+                                        <div class="comment">
+                                            <div class="comment-body test">
+                                                <div class="comment-info">
+                                                    <span class="comment-author">{{ pendingComment.getPost() }}</span>
+                                                    <span class="comment-date float-right">{{ pendingComment.getDateAdd()|date('d M Y, H:i')|upper }}</span>
+                                                </div>
+                                                <div class="comment-text">{{ pendingComment.getMessage() }} </div>
+                                                <div class="comment-details">
+                                                    <span class="comment-status comment-status-pending">Pending</span>
+                                                    <ul class="comment-actions float-right">
+                                                        <li>
+                                                            <a href="#" data-target="#modal" data-toggle="modal" data-id="{{ pendingComment.getId() }}"
+                                                               class="delete_comment">Delete</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="comments_approved">
+                                <div class="comments">
+                                    {% for comment in comments %}
+                                        <div class="comment">
+                                            <div class="comment-body">
+                                                <div class="comment-info">
+                                                    <span class="comment-author">{{ comment.getPost() }}</span>
+                                                    <span class="comment-date float-right">{{ comment.getDateAdd()|date('d M Y, H:i')|upper }}</span>
+                                                </div>
+                                                <div class="comment-text">{{ comment.getMessage() }} </div>
+                                                <div class="comment-details">
+                                                    <span class="comment-status comment-status-approved">Approved</span>
+                                                    <ul class="comment-actions float-right">
+                                                        <li>
+                                                            <a href="/post/{{ comment.getPostId() }}/">View</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="comments_rejected">
+                                <div class="comments">
+                                    {% if rejectedComments|length == 0 %}
+                                        <div class="alert alert-info">
+                                            <p>No rejected comments. nice!</p>
+                                        </div>
+                                    {% endif %}
+                                    {% for rejectedComment in rejectedComments %}
+                                        <div class="comment">
+                                            <div class="comment-body">
+                                                <div class="comment-info">
+                                                    <span class="comment-author">{{ rejectedComment.getPost() }}</span>
+                                                    <span class="comment-date float-right">{{ rejectedComment.getDateAdd()|date('d M Y, H:i')|upper }}</span>
+                                                </div>
+                                                <div class="comment-text">{{ rejectedComment.getMessage() }} </div>
+                                                <div class="comment-details">
+                                                    <span class="comment-status comment-status-rejected">Rejected</span>
+                                                    <ul class="comment-actions float-right">
+                                                        <li>
+                                                            <a href="#">Delete</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_script %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('.delete_comment').on('click', function () {
+                $('#deleteComment').attr('href', '/admin/comment/delete/'+$(this).data('id')+'/{{ token }}/');
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "layout.twig" %}
+{% block mail_body %}
+
+        <tr>
+            <td class="p0-15-30" style="padding: 0px 40px 45px 40px;">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="h2 pb15"
+                            style="color:#ffffff; font-family:'Playfair Display', Georgia, serif; font-size:35px; line-height:46px; text-align:center; font-style:italic; padding-bottom:15px;">
+                            <multiline>{{ TITLE }}
+                            </multiline>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="h5 pb30"
+                            style="color:#ffd5ab; font-family:'Playfair Display', Georgia, serif; font-size:16px; line-height:24px; text-align:center; padding-bottom:30px;">
+                            <multiline>{{ SUBTITLE }}</multiline>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text"
+                            style="color:#a3a3a3; font-family:'Playfair Display', Georgia, serif; font-size:16px; line-height:30px; text-align:left;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text"
+                            style="color:#ffffff; font-family:'Playfair Display', Georgia, serif; font-size:16px; line-height:30px; text-align:center;">
+                            <p>{{ MESSAGE }}</p>
+                            <table cellpadding="0" ; cellspacing="0" width="100%"
+                                   class="text"
+                                   style="color:#ffffff; font-family:'Playfair Display', Georgia, serif; margin-top:25px; font-size:16px; line-height:30px; text-align:left;">
+                                <tr>
+                                    <td>Account name:</td>
+                                    <td>{{ USER.getFirstname() ~ ' ' ~ USER.getLastname() }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td>{{ USER.getEmail() }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Username:</td>
+                                    <td>{{ USER.getNickname() }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: top;">Password:</td>
+                                    <td><a href="{{ SITE_URL }}/new-password/{{ TOKEN }}">set new password</a></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+{% endblock %}

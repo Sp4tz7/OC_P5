@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashboard - Admin</title>
+    <link href="/css/adminstyles.css" rel="stylesheet"/>
+    <link href="/plugins/dataTables/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+    <link href="/plugins/toastr/css/toastr.css" rel="stylesheet"/>
+    <script src="/plugins/fontawesome/js/font-awesome.min.js"></script>
+</head>
+<body class="sb-nav-fixed">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">{{ siteName }} </a>
+    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
+    </button>
+    <!-- Navbar-->
+    <ul class="navbar-nav ml-auto ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="/admin/my-account/">My account</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout/">Logout</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="/admin/">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard </a>
+                    {% if user.getRole() == 'SUPERADMIN' %}
+                        <div class="sb-sidenav-menu-heading">Users</div>
+                        <a class="nav-link" href="/admin/users/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            List</a>
+                        <a class="nav-link" href="/admin/user/add/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                            Add</a>
+                        <div class="sb-sidenav-menu-heading">Posts</div>
+                        <a class="nav-link" href="/admin/posts/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                            List</a>
+                        <a class="nav-link" href="/admin/post/add/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                            Add</a>
+                        <div class="sb-sidenav-menu-heading">Comments</div>
+                        <a class="nav-link" href="/admin/comments/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
+                            List</a>
+                    {% endif %}
+                </div>
+            </div>
+    <div class="sb-sidenav-footer">
+        <div class="small">Logged in as: {{ user.getNickname() }}</div>
+
+    </div>
+    </nav>
+</div>
+<div id="layoutSidenav_content">
+    <main>
+        {% block main %}
+
+        {% endblock %}
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; {{ siteName }} | Sp4tz {{ "now"|date("Y") }}</div>
+
+            </div>
+        </div>
+    </footer>
+</div>
+</div>
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/js/scripts.js"></script>
+<script src="/plugins/chart/js/chart.min.js"></script>
+<script src="/plugins/dataTables/js/jquery.dataTables.min.js"></script>
+<script src="/plugins/dataTables/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/toastr/js/toastr.min.js"></script>
+{% block custom_script %}
+    <script src="/js/admin.js"></script>
+{% endblock %}
+<script>
+    {% if flashes %}
+    {% for flash in flashes %}
+    Command: toastr.{{ flash.type }}("{{ flash.message['content'] }}", "{{ flash.message['title'] }}")
+    {% endfor %}
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    {% endif %}
+</script>
+</body>
+</html>
