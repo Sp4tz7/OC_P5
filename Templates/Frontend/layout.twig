@@ -74,8 +74,10 @@
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/plugins/toastr/js/toastr.min.js"></script>
 <script>
-    {% if flash %}
+    {% if flashes %}
+    {% for flash in flashes %}
     Command: toastr.{{ flash.type }}("{{ flash.message['content'] }}", "{{ flash.message['title'] }}")
+    {% endfor %}
     toastr.options = {
         "closeButton": true,
         "debug": false,

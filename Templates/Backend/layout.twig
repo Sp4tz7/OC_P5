@@ -94,8 +94,10 @@
     <script src="/js/admin.js"></script>
 {% endblock %}
 <script>
-    {% if flash %}
+    {% if flashes %}
+    {% for flash in flashes %}
     Command: toastr.{{ flash.type }}("{{ flash.message['content'] }}", "{{ flash.message['title'] }}")
+    {% endfor %}
     toastr.options = {
         "closeButton": true,
         "debug": false,
