@@ -10,6 +10,7 @@ define('SITE_NAME', 'MY Blog');
 
 final class config
 {
+    public const ReCaptchaSecret = ''                           // Enter your secret from https://www.google.com/recaptcha
 
     public static function getDbSettings()
     {
