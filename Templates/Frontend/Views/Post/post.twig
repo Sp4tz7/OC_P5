@@ -1,114 +1,122 @@
 {% extends "layout.twig" %}
 {% block content %}
-    {% if post.getActive() %}
-        <div class="row align-items-center">
-            <article class="col-md-12">
-                <div class="row my-5">
-                    <div class="col-md-12">
-                        <div class="post-author">
-                            <span class="font-weight-bold">{{ post.getAuthor() }} / </span>
-                            <span class="text-muted pl-1">{{ post.getDateAdd()|date('D d/m/Y') }}</span>
-                            {% if user.getId() == post.getCreatedBy() %}
-                                <a href="/admin/post/edit/{{ post.getId() }}/"
-                                   class="float-right text-muted ml-2">Edit</a>
-                            {% endif %}
-                            <span class="float-right badge badge-secondary mt-1">{{ post.getCategoryName() }}</span>
-                            <div class="float-right m-1 text-muted" style="font-size: 75%">
-                                <i class="far fa-comments"></i>
-                                <a href="#comments" class="text-muted "> {{ comments|length }} comments</a></div>
-                        </div>
+    <div class="content-box">
+        <div class="container">
+            {% if post.getActive() %}
 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        {% if post.getImageUrl() %}
-                            <figure>
-                                <img src="/img/post/{{ post.getImageUrl() }}" class="img-fluid">
-                            </figure>
-                        {% endif %}
-                        <h1 class="text-center display-3">{{ post.getTitle() }}</h1>
-                        <div class="lead text-center mb-5">{{ post.getAbstractContent()|raw|nl2br }}</div>
-                        <span class="float-right"></span>
-                        <div class="my-5 text-justify">{{ post.getContent()|raw|nl2br }}</div>
-                        <span class="float-right text-muted mb-5">Last edited: {{ post.getDateAdd()|date('D d/m/Y') }}</span>
-                    </div>
-                </div>
-                <div class="row" id="comments">
-                    <div class="col-md-12">
-                        <span class="h4">{{ comments|length }} Comments</span>
-                        <div class="left-separator"></div>
-                    </div>
-                    {% set url = '/post/'~post.getCategorySlug() ~'/'~ post.getSlug()~'/#comments' %}
-                    {% for comment in comments %}
-                        {% if not comment.getParentId() %}
-                            <div class="col-md-12 mb-4" id="comment{{ comment.getId() }}">
-                                <div>
-                                    <a href="javascript:;" class="reply badge badge-info float-right"
-                                       data-comment-id="{{ comment.getId() }}">Reply</a>
-                                    <span class="font-weight-bold">{{ comment.getAuthor()|upper }}</span>
-                                    on {{ comment.getDateAdd()|date('d M Y, H:i')|upper }}
+                <div class="row align-items-center">
+                    <article class="col-md-12">
+                        <div class="row my-5">
+                            <div class="col-md-12">
+                                <div class="post-author">
+                                    <span class="font-weight-bold">{{ post.getAuthor() }} / </span>
+                                    <span class="text-muted pl-1">{{ post.getDateAdd()|date('D d/m/Y') }}</span>
+                                    {% if user.getId() == post.getCreatedBy() %}
+                                        <a href="/admin/post/edit/{{ post.getId() }}/"
+                                           class="float-right text-muted ml-2">Edit</a>
+                                    {% endif %}
+                                    <span class="float-right badge badge-secondary mt-1">{{ post.getCategoryName() }}</span>
+                                    <div class="float-right m-1 text-muted" style="font-size: 75%">
+                                        <i class="far fa-comments"></i>
+                                        <a href="#comments" class="text-muted "> {{ comments|length }} comments</a>
+                                    </div>
                                 </div>
-                                <div class="mb-3">{{ comment.getMessage() }}</div>
-                                <div class="col-md-12">
-                                    {% embed 'Form/comment-form.twig' with {'col': 5, 'display': 'd-none', 'parentCommentId': comment.getId()} %} {% endembed %}
-                                </div>
+
                             </div>
-                            {% for subComment in comments %}
-                                {% if subComment.getParentId() == comment.getId() %}
-                                    <div class="col-md-12 offset-1 mb-5" id="comment{{ subComment.getId() }}">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if post.getImageUrl() %}
+                                    <figure>
+                                        <img src="/img/post/{{ post.getImageUrl() }}" class="img-fluid">
+                                    </figure>
+                                {% endif %}
+                                <h1 class="text-center display-3">{{ post.getTitle() }}</h1>
+                                <div class="lead text-center mb-5">{{ post.getAbstractContent()|raw|nl2br }}</div>
+                                <span class="float-right"></span>
+                                <div class="my-5 text-justify">{{ post.getContent()|raw|nl2br }}</div>
+                                <span class="float-right text-muted mb-5">Last edited: {{ post.getDateAdd()|date('D d/m/Y') }}</span>
+                            </div>
+                        </div>
+                        <div class="row" id="comments">
+                            <div class="col-md-12">
+                                <span class="h4">{{ comments|length }} Comments</span>
+                                <div class="left-separator"></div>
+                            </div>
+                            {% set url = '/post/'~post.getCategorySlug() ~'/'~ post.getSlug()~'/#comments' %}
+                            {% for comment in comments %}
+                                {% if not comment.getParentId() %}
+                                    <div class="col-md-12 mb-4" id="comment{{ comment.getId() }}">
                                         <div>
-                                            <span class="font-weight-bold">{{ subComment.getAuthor()|upper }}</span>
-                                            responded to <span class="font-weight-bold">{{ comment.getAuthor()|upper }}</span> on {{ subComment.getDateAdd()|date('d M Y, H:i')|upper }}
+                                            <a href="javascript:;" class="reply badge badge-info float-right"
+                                               data-comment-id="{{ comment.getId() }}">Reply</a>
+                                            <span class="font-weight-bold">{{ comment.getAuthor()|upper }}</span>
+                                            on {{ comment.getDateAdd()|date('d M Y, H:i')|upper }}
                                         </div>
-                                        <div>{{ subComment.getMessage() }}</div>
+                                        <div class="mb-3">{{ comment.getMessage() }}</div>
+                                        <div class="col-md-12">
+                                            {% embed 'Form/comment-form.twig' with {'col': 5, 'display': 'd-none', 'parentCommentId': comment.getId()} %} {% endembed %}
+                                        </div>
+                                    </div>
+                                    {% for subComment in comments %}
+                                        {% if subComment.getParentId() == comment.getId() %}
+                                            <div class="col-md-12 offset-1 mb-5" id="comment{{ subComment.getId() }}">
+                                                <div>
+                                                    <span class="font-weight-bold">{{ subComment.getAuthor()|upper }}</span>
+                                                    responded to <span
+                                                            class="font-weight-bold">{{ comment.getAuthor()|upper }}</span>
+                                                    on {{ subComment.getDateAdd()|date('d M Y, H:i')|upper }}
+                                                </div>
+                                                <div>{{ subComment.getMessage() }}</div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                            {% for pendingComment in pendingComments %}
+                                {% if pendingComment.getUserId() == user.getId() %}
+                                    <div class="col-md-12 mb-4 alert alert-warning">
+                                        <div><span class="badge badge-warning float-right">Pending</span>
+                                            <span class="font-weight-bold">{{ pendingComment.getAuthor()|upper }}</span>
+                                            on {{ pendingComment.getDateAdd()|date('d M Y, H:i')|upper }}
+                                        </div>
+                                        <div>{{ pendingComment.getMessage() }}</div>
                                     </div>
                                 {% endif %}
                             {% endfor %}
-                        {% endif %}
-                    {% endfor %}
-                    {% for pendingComment in pendingComments %}
-                        {% if pendingComment.getUserId() == user.getId() %}
-                            <div class="col-md-12 mb-4 alert alert-warning">
-                                <div><span class="badge badge-warning float-right">Pending</span>
-                                    <span class="font-weight-bold">{{ pendingComment.getAuthor()|upper }}</span>
-                                    on {{ pendingComment.getDateAdd()|date('d M Y, H:i')|upper }}
-                                </div>
-                                <div>{{ pendingComment.getMessage() }}</div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div class="row" id="message">
-                    <div class="col-md-12">
-                        <span class="h4">Leave a comment</span>
-                        <div class="left-separator"></div>
-                        {% if user %}
-                            {% embed 'Form/comment-form.twig' with {'rows': 8} %} {% endembed %}
-                        {% else %}
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <div class="card m-auto p-5">
-                                        {% embed 'User/Form/login-form.twig' with {'url': url, 'class': 'sbg-secondary'} %}{% endembed %}
-                                        {% embed 'User/Form/password-form.twig' with {'url': url} %}{% endembed %}
-                                        {% embed 'User/Form/register-form.twig' with {'url': url} %}{% endembed %}
+                        </div>
+                        <div class="row" id="message">
+                            <div class="col-md-12">
+                                <span class="h4">Leave a comment</span>
+                                <div class="left-separator"></div>
+                                {% if user %}
+                                    {% embed 'Form/comment-form.twig' with {'rows': 8} %} {% endembed %}
+                                {% else %}
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="card m-auto p-5">
+                                                {% embed 'User/Form/login-form.twig' with {'url': url, 'class': 'sbg-secondary'} %}{% endembed %}
+                                                {% embed 'User/Form/password-form.twig' with {'url': url} %}{% endembed %}
+                                                {% embed 'User/Form/register-form.twig' with {'url': url} %}{% endembed %}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                {% endif %}
                             </div>
-                        {% endif %}
-                    </div>
+                        </div>
+                    </article>
                 </div>
-            </article>
+                {% if posts|length > 1 %}
+                    <div class="dropdown-divider my-4"></div>
+                    <span class="h4">Related posts</span>
+                    <div class="left-separator"></div>
+                    <div class="row align-items-center my-3">
+                        {% embed 'extend-list.twig' with {'limit': 3, 'category_id' : post.getCategoryId(), 'pagination': true } %}{% endembed %}
+                    </div>
+                {% endif %}
+            {% endif %}
         </div>
-        {% if posts|length > 1 %}
-            <div class="dropdown-divider my-4"></div>
-            <span class="h4">Related posts</span>
-            <div class="left-separator"></div>
-            <div class="row align-items-center my-3">
-                {% embed 'extend-list.twig' with {'limit': 3, 'category_id' : post.getCategoryId(), 'pagination': true } %}{% endembed %}
-            </div>
-        {% endif %}
-    {% endif %}
+    </div>
 {% endblock %}
 {% block custom_script %}
     <script src="/js/scripts.js"></script>
