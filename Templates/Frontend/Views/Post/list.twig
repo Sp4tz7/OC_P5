@@ -2,19 +2,10 @@
 {% block content %}
     <div class="content-box">
         <div class="container">
+            <button type="button" class="float-right btn btn-outline-info quick-sidebar-toggler" data-toggle="collapse"
+                    aria-expanded="false"><i id="arrow" class="fas fa-arrow-left"></i> CATEGORIES
+            </button>
             <div class="row align-items-center my-5">
-                <div class="col-md-12">
-                    <button type="button" class="float-right btn btn-outline-info quick-sidebar-toggler mt-5"
-                            data-toggle="collapse" aria-expanded="false">
-                        <span><i id="arrow" class="fas fa-arrow-left"></i> CATEGORIES  </span>
-                    </button>
-                    <h1 class="display-2 mb-5">
-                        {% if category.id %}
-                            <a href="/post/all/"><i class="fas fa-arrow-circle-left"></i></a>
-                        {% endif %}
-                        {{ category.category_name }}
-                    </h1>
-                </div>
                 <div class="col-md-12">
                     {% if posts %}
                         <div class="row"> {% embed 'extend-list.twig' with {'pagination': true} %}{% endembed %}</div>

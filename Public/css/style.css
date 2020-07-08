@@ -4,11 +4,21 @@ html {
 
 body {
     padding-top: 56px;
+    font-family: Hack, monospace;
 }
 
 a:hover {
     color: #32c5d2 !important;
 
+}
+
+a.btn.green:hover{
+    background-color: #17a2b8;
+    color: #ffffff!important;
+}
+
+p {
+    font-size: 0.8em;
 }
 
 cite {
@@ -101,11 +111,14 @@ footer {
     font-size: 16px;
     font-weight: 400;
 }
+a.post-list {
+    font-size: 1em;
+}
 
 .breadcrumb-title {
     color: #000000;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 2em;
     letter-spacing: 1px;
 }
 

@@ -6,12 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="David Siker <sp4tz7@gmail.com>">
-        <title>{{ page.title }}</title>
+        <title>
+            {% if title %}
+                {{ title ~ ' | ' ~ siteName }}
+            {% else %}
+                {{ siteName }}
+            {% endif %}
+        </title>
         <!-- Bootstrap core CSS -->
         <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/style.css" rel="stylesheet">
         <script src="/plugins/fontawesome/js/font-awesome.min.js"></script>
         <link href="/plugins/toastr/css/toastr.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/hack-font/3.003/web/hack.min.css" rel="stylesheet"/>
         {% block custom_sytle %}
         {% endblock %}
     {% endblock %}

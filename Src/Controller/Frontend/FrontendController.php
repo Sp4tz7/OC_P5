@@ -17,6 +17,7 @@ class FrontendController extends AbstractController
         $postManager = $this->managers->getManagerOf('Post');
         $posts       = $postManager->getList();
         $this->page->addVar('posts', $posts);
+        $this->page->addVar('title', 'Home');
     }
 
     public function executeContact(HTTPRequest $request, HTTPResponse $response)
@@ -79,6 +80,8 @@ class FrontendController extends AbstractController
                 $response->redirect('/contact/');
             }
         }
+
+        $this->page->addVar('title', 'Contact');
     }
 
     public function executeSitemaps()
@@ -87,6 +90,7 @@ class FrontendController extends AbstractController
         $sitemap->createSiteMap();
         $urls = $sitemap->getUrls();
         $this->page->addVar('urls', $urls);
+        $this->page->addVar('title', 'Sitemap');
 
     }
 }

@@ -83,6 +83,8 @@ class UserController extends AbstractController
             }
         }
 
+        $this->page->addVar('title', 'Login');
+
     }
 
     public function executeNewActivation(HTTPRequest $request, HTTPResponse $response)
