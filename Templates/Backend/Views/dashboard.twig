@@ -122,7 +122,7 @@
     <script>
         $(document).ready(function () {
             $('.delete_comment').on('click', function () {
-                $('#deleteComment').attr('href', '/admin/comment/delete/'+$(this).data('id')+'/{{ token }}/');
+                $('#deleteComment').attr('href', '/admin/comment/delete/'+$(this).data('id')+'/{{ csrf_token }}/');
             });
         });
     </script>
