@@ -40,15 +40,15 @@ class HTTPResponse extends ApplicationComponent
         $this->setCookie($name, '', time() - 360 , '/');
     }
 
-    // Set last argument to true by default
+    // Set 2 last arguments to true by default
     public function setCookie(
         $name,
         $value = '',
         $expire = 0,
         $path = null,
         $domain = null,
-        $secure = false,
-        $httpOnly = false
+        $secure = true,
+        $httpOnly = true
     ) {
         setcookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
     }
