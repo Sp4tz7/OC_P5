@@ -1,16 +1,22 @@
 <nav aria-label="breadcrumb">
-    <span class="breadcrumb breadcrumb-title float-left">
-        {{ post.getTitle() }}
-    </span>
+    <h1 class="breadcrumb breadcrumb-title float-left">
+        {% if category.id %}
+            <a href="/post/{{ post.getCategorySlug()|default('all') }}/" class="post-list mr-3"><i
+                        class="fas fa-arrow-circle-left"></i></a>
+        {% endif %} {{ title }}
+    </h1>
     <ol class="breadcrumb float-right">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
-        {% if category and post.getTitle() %}
-            <li class="breadcrumb-item"><a href="/post/{{ category.category_slug }}/">{{ category.category_name }}</a></li>
-            {% else %}
-                <li class="breadcrumb-item active" aria-current="page">{{ category.category_name }}</li>
+        {% if category and category.id %}
+            <li class="breadcrumb-item"><a href="/post/all/">All posts</a>
+            </li>
         {% endif %}
-        {% if post.getTitle() %}
-            <li class="breadcrumb-item active" aria-current="page">{{ post.getTitle() }}</li>
+        {% if category and post.getTitle() %}
+            <li class="breadcrumb-item"><a href="/post/{{ category.category_slug }}/">{{ category.category_name }}</a>
+            </li>
+        {% endif %}
+        {% if title %}
+            <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
         {% endif %}
     </ol>
 </nav>

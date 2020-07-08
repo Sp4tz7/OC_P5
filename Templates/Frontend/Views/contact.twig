@@ -1,17 +1,19 @@
 {% extends "layout.twig" %}
 {% block content %}
     <div class="content-box">
-        <div class="container align-items-center "><h1 class="font-weight-light m-auto">Contact</h1>
+        <div class="container align-items-center ">
             <div class="row  my-5">
                 <div class="col-md-9">
                     <div class="c-contact">
-                        <div class="c-content-title-1">
-                            <h3 class="c-font-uppercase c-font-bold">Hire me!</h3>
+                        <div class="c-content-title-1 mb-5">
+                            <h2 class="c-font-uppercase c-font-bold">Hire me!</h2>
                             <div class="c-line-left"></div>
                             <p class="c-font-lowercase">Looking for a new website or enhancing a current project? Feel
                                 free to contact me.</p>
                         </div>
+                        <div class="pr-5">
                         {% include 'User/Form/contact-form.twig' %}
+                        </div>
                     </div>
                 </div>
                 <div class="card col-md-3 text-md-right py-4">

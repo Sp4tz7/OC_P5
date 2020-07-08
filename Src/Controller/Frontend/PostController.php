@@ -39,10 +39,14 @@ class PostController extends AbstractController
             $this->page->addVar('category', $category);
             $this->page->addVar('comments', $activeComments);
             $this->page->addVar('pendingComments', $pendingComments);
+            $this->page->addVar('title', $post->getTitle());
         } else {
             $this->page->set404();
             $this->page->addVar('content', 'This blog post does not exists');
+            $this->page->addVar('title', 'Oups! Post not found! ');
         }
+
+
 
     }
 
@@ -138,6 +142,7 @@ class PostController extends AbstractController
             $this->page->addVar('category', ['category_name' => 'All posts']);
             $posts = $postManager->getList();
             $this->page->addVar('posts', $posts);
+            $this->page->addVar('title', 'All posts');
         } else {
             $category = $postManager->getCategoryBySlug($categorySlug);
 
@@ -145,8 +150,10 @@ class PostController extends AbstractController
 
             $this->page->addVar('category', $category);
             $this->page->addVar('posts', $posts);
+            $this->page->addVar('title', $category->category_name);
         }
         $categories = $postManager->getCategories();
         $this->page->addVar('categories', $categories);
+
     }
 }

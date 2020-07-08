@@ -84,7 +84,7 @@ class SiteMapsManager
         foreach ($categories as $category) {
             array_push($urls['categories'], [
                 'name' => $category['category_name'],
-                'loc' => SITE_URL.'/'.$category['category_slug'].'/',
+                'loc' => SITE_URL.'/post/'.$category['category_slug'].'/',
                 'priority' => 0.8,
                 'lastmod' => null,
             ]);
@@ -92,11 +92,18 @@ class SiteMapsManager
         foreach ($posts as $post) {
             array_push($urls['posts'], [
                 'name' => $post->getTitle(),
-                'loc' => SITE_URL.'/'.$post->getCategorySlug().'/'.$post->getSlug().'/',
+                'loc' => SITE_URL.'/post/'.$post->getCategorySlug().'/'.$post->getSlug().'/',
                 'priority' => 0.7,
                 'lastmod' => $post->getDateEdit() ?? $post->getDateAdd(),
             ]);
         }
+
+        array_push($urls['pages'], [
+            'name' => 'Blog',
+            'loc' => SITE_URL.'/post/all/',
+            'priority' => 0.7,
+            'lastmod' => null,
+        ]);
 
         return $urls;
     }

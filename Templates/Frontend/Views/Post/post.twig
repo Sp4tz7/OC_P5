@@ -35,7 +35,7 @@
                                 <div class="lead text-center mb-5">{{ post.getAbstractContent()|raw|nl2br }}</div>
                                 <span class="float-right"></span>
                                 <div class="my-5 text-justify">{{ post.getContent()|raw|nl2br }}</div>
-                                <span class="float-right text-muted mb-5">Last edited: {{ post.getDateAdd()|date('D d/m/Y') }}</span>
+                                <span class="float-right text-muted mb-5">Last edited: {{ post.getDateEdit()|date('D d/m/Y')|default(post.getDateAdd()|date('D d/m/Y')) }}</span>
                             </div>
                         </div>
                         <div class="row" id="comments">
