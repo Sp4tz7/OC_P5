@@ -8,12 +8,12 @@ class UserManagerPDO extends UserManager
 {
     public function count()
     {
-        return $this->dao->query('SELECT COUNT(*) FROM news')->fetchColumn();
+        return $this->dao->query('SELECT COUNT(*) FROM user')->fetchColumn();
     }
 
     public function delete($id)
     {
-        $this->dao->exec('DELETE FROM news WHERE id = '.(int)$id);
+        $this->dao->exec('DELETE FROM user WHERE id = '.(int)$id);
     }
 
     public function getList($start = -1, $limit = -1)
@@ -64,9 +64,10 @@ class UserManagerPDO extends UserManager
         }
 
     }
+
     public function getByToken($token)
     {
-        $date = new \DateTime();
+        $date    = new \DateTime();
         $request = $this->dao->prepare('SELECT * FROM user WHERE token = :token');
 
         $request->bindValue(':token', $token, \PDO::PARAM_STR);
@@ -111,7 +112,7 @@ class UserManagerPDO extends UserManager
 
         try {
             return $requete->execute();
-        } catch (\PDOException $e){
+        } catch (\PDOException $e) {
             return $e->getMessage();
         }
     }
@@ -149,7 +150,7 @@ class UserManagerPDO extends UserManager
 
         try {
             return $requete->execute();
-        } catch (\PDOException $e){
+        } catch (\PDOException $e) {
             return $e->getMessage();
         }
 

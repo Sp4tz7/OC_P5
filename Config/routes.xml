@@ -6,6 +6,7 @@
     <route url="/admin/users/" env="Backend" app="AdminUser" action="users" sitemap="0"></route>
     <route url="/admin/user/add/" env="Backend" app="AdminUser" action="add" sitemap="0"></route>
     <route url="/admin/user/edit/([0-9]*)/" env="Backend" app="AdminUser" action="edit" vars="id" sitemap="0"></route>
+    <route url="/admin/user/delete/([0-9]*)/([a-z0-9]*)/" env="Backend" app="AdminUser" action="delete" vars="id,csrf_token" sitemap="0"></route>
     <route url="/admin/my-account/" env="Backend" app="AdminUser" action="myAccount" sitemap="0"></route>
     <route url="/admin/posts/" env="Backend" app="AdminPost" action="posts" sitemap="0"></route>
     <route url="/admin/post/add/" env="Backend" app="AdminPost" action="add" sitemap="0"></route>

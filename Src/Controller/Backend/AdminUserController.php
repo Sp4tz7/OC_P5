@@ -218,4 +218,22 @@ class AdminUserController extends AbstractController
         }
     }
 
+    public function executeDelete(HTTPRequest $request, HTTPResponse $response)
+    {
+        $form = new FormManager();
+        if ($request->getExists('id') and $form->compareCsrfToken()) {
+            $userManager = $this->managers->getManagerOf('User');
+            $userManager->delete($request->getDataGet('id'));
+            $this->app->setFlash(
+                'success',
+                [
+                    'title' => 'User deleted',
+                    'content' => '',
+                ]
+            );
+
+            $response->redirect('/admin/users/');
+        }
+    }
+
 }
