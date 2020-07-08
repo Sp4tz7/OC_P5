@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use Application\PDO\PDOFactory;
+use Application\Pdo\PDOFactory;
 
 class SiteMapsManager
 {

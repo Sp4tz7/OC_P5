@@ -18,10 +18,15 @@ class Mailer
 
     public function sendEmail()
     {
-        if (!$this->email_to or !$this->template or empty($this->vars)) {
-            throw new Exception('Not all params are set correctly to send an email');
+        if (!$this->email_to) {
+            throw new \Exception('No email has been set');
+        }
+        if (empty($this->template)) {
 
-            return;
+            throw new \Exception('No template has been set');
+        }
+        if (empty($this->vars)) {
+            throw new \Exception('No vars has been set');
         }
         $mail   = new PHPMailer(true);
         $loader = new \Twig\Loader\FilesystemLoader([APP_DIR.'Templates/Mail']);
@@ -64,7 +69,7 @@ class Mailer
 
     public function setEmailTemplate($template)
     {
-        $directory         = APP_DIR.'Templates/mail/';
+        $directory         = APP_DIR.'Templates/Mail/';
         $scanned_directory = array_diff(scandir($directory), array('..', '.'));
         if (in_array($template, $scanned_directory)) {
             $this->template = $template;

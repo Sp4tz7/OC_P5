@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\PDO;
+namespace Application\Pdo;
 
 use Config\Config;
 

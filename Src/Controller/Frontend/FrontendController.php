@@ -23,7 +23,7 @@ class FrontendController extends AbstractController
     {
         if ($request->postExists('contact_form')) {
             $recaptcha = new \ReCaptcha\ReCaptcha(Config::ReCaptchaSecret);
-            $resp      = $recaptcha->verify($request->getDataPost('ReCaptcha'));
+            $resp      = $recaptcha->verify($request->getDataPost('g-recaptcha-response'));
             if (!$resp->isSuccess()) {
                 $error = $resp->getErrorCodes();
                 $this->app->setFlash(
