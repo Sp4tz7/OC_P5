@@ -14,7 +14,7 @@ class UserController extends AbstractController
     public function executeLogin(HTTPRequest $request, HTTPResponse $response)
     {
         $userManager = $this->managers->getManagerOf('User');
-        $redirect = $request->postExists('redirect')? $request->getDataPost('redirect'): '/login/';
+        $redirect    = $request->postExists('redirect') ? $request->getDataPost('redirect') : '/login/';
 
         // Automatic login from session
         if ($request->sessionExists('UserAuth')) {
@@ -92,7 +92,7 @@ class UserController extends AbstractController
         $userManager = $this->managers->getManagerOf('User');
         $token       = $request->getDataGet('token');
         $user        = $userManager->getByToken($token);
-        $form = new FormManager();
+        $form        = new FormManager();
 
         if (is_object($user)) {
             $token = $form->setToken();
@@ -135,8 +135,8 @@ class UserController extends AbstractController
     public function executeNewPassword(HTTPRequest $request, HTTPResponse $response)
     {
         $userManager = $this->managers->getManagerOf('User');
-        $redirect = $request->postExists('redirect')? $request->getDataPost('redirect'): '/login/';
-        $form = new FormManager();
+        $redirect    = $request->postExists('redirect') ? $request->getDataPost('redirect') : '/login/';
+        $form        = new FormManager();
 
         // Sent from new password from
         if ($request->postExists('reset_password')) {
@@ -246,8 +246,8 @@ class UserController extends AbstractController
 
     public function executeRegister(HTTPRequest $request, HTTPResponse $response)
     {
-        $form = new FormManager();
-        $redirect = $request->postExists('redirect')? $request->getDataPost('redirect'): '/login/';
+        $form     = new FormManager();
+        $redirect = $request->postExists('redirect') ? $request->getDataPost('redirect') : '/login/';
         if ($request->postExists('register_user')) {
             $userManager = $this->managers->getManagerOf('User');
             $nickname    = $request->getDataPost('username');
@@ -263,7 +263,7 @@ class UserController extends AbstractController
 
                 return false;
             } elseif ($userManager->getByNicknameOrEmail($email)) {
-                $this->app->setFlash('error', ['content' => 'The email has already been taken']);
+                $this->app->setFlash('error', ['content' => 'This email has already been taken']);
                 $response->redirect($redirect);
 
                 return false;
@@ -301,8 +301,7 @@ class UserController extends AbstractController
                     'SITE_URL' => SITE_URL,
                     'TITLE' => 'New account',
                     'SUBTITLE' => 'A new account has been created',
-                    'MESSAGE' => 'Hi '.$user->getFirstname().'. You requested a new account on '.SITE_NAME.'.
-                You can activate it by following this link and set a new password.',
+                    'MESSAGE' => 'Hi '.$user->getFirstname().'. You requested a new account on '.SITE_NAME.'. You can activate it by following this link and set a new password.',
                 ]
             );
 
@@ -310,15 +309,24 @@ class UserController extends AbstractController
             if ($result != 1) {
                 $this->app->setFlash('error', $result);
             } else {
-                if ($mail->sendEmail()) {
+                try {
+                    $mail->sendEmail();
                     $this->app->setFlash(
                         'success',
                         [
-                            'content' => 'Thank you for registering. An email with an activation link has been sent 
-                        to your email address',
+                            'content' => 'Thank you for registering. An email with an activation link has been sent to your email address',
                         ]
                     );
                     $response->redirect($redirect);
+                } catch (\Exception $exception) {
+                    $this->app->setFlash(
+                        'error',
+                        [
+                            'title' => 'Mail could not been sent',
+                            'content' => $exception->getMessage(),
+                        ]
+                    );
+
                 }
             }
         }

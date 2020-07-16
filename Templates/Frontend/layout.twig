@@ -83,7 +83,7 @@
 <script>
     {% if flashes %}
     {% for flash in flashes %}
-    Command: toastr.{{ flash.type }}("{{ flash.message['content'] }}", "{{ flash.message['title'] }}")
+    Command: toastr.{{ flash.type }}("{{ flash.message['content']|raw|trim }}", "{{ flash.message['title']|raw|trim }}")
     {% endfor %}
     toastr.options = {
         "closeButton": true,

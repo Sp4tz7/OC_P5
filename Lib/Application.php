@@ -181,6 +181,7 @@ class Application
      */
     public function setFlash($type = 'success', array $data)
     {
+
         if ($this->hasFlash()) {
             $this->httpResponse->addToSession('flashes', ['message' => $data, 'type' => $type]);
         } else {
