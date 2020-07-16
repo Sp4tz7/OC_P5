@@ -3,7 +3,6 @@
 namespace Core;
 
 use Config\config;
-use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Mailer
@@ -62,8 +61,9 @@ class Mailer
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             return $mail->send();
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        } catch (\Exception $e) {
+
+            throw new \Exception($mail->ErrorInfo);
         }
     }
 
