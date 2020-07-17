@@ -38,11 +38,15 @@ footer {
   margin: auto;
 }
 
-#login, #register, #newpassword {
+#login,
+#register,
+#newpassword {
   background-color: #343a40;
 }
 
-#login .card, #register .card, #newpassword .card {
+#login .card,
+#register .card,
+#newpassword .card {
   width: 400px;
 }
 
@@ -148,11 +152,15 @@ a.post-list {
   color: #00a0d2;
 }
 
-#login .btn, #register .btn, #newpassword .btn {
+#login .btn,
+#register .btn,
+#newpassword .btn {
   float: left;
 }
 
-#login .btn:hover, #register .btn:hover, #newpassword .btn:hover {
+#login .btn:hover,
+#register .btn:hover,
+#newpassword .btn:hover {
   color: #fff;
   text-decoration: underline;
 }
@@ -168,7 +176,8 @@ a.post-list {
   margin-left: 8px;
 }
 
-#login input[type='checkbox'], #register input[type='checkbox'] {
+#login input[type='checkbox'],
+#register input[type='checkbox'] {
   margin: 3px;
   top: 1px;
   position: relative;
