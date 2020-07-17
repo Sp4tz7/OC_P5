@@ -1,228 +1,234 @@
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    padding-top: 56px;
-    font-family: Hack, monospace;
+  padding-top: 56px;
+  font-family: Hack, monospace;
 }
 
 a:hover {
-    color: #32c5d2 !important;
-
+  color: #32c5d2 !important;
 }
 
-a.btn.green:hover{
-    background-color: #17a2b8;
-    color: #ffffff!important;
+a.btn.green:hover {
+  background-color: #17a2b8;
+  color: #ffffff !important;
 }
 
 p {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 cite {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 #content {
-    min-height: 76.3vh;
+  min-height: 76.3vh;
 }
 
 footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
 .logo {
-    margin: auto;
+  margin: auto;
 }
 
 #login, #register, #newpassword {
-    background-color: #343a40;
+  background-color: #343a40;
 }
 
 #login .card, #register .card, #newpassword .card {
-    width: 400px;
+  width: 400px;
 }
 
 .page-quick-sidebar-wrapper {
-    transition: right .3s;
-    z-index: 9999;
-    position: fixed;
-    top: 30%;
-    bottom: 0;
-    width: 150px;
-    right: -150px;
-    overflow: hidden;
+  transition: right .3s;
+  z-index: 9999;
+  position: fixed;
+  top: 30%;
+  bottom: 0;
+  width: 150px;
+  right: -150px;
+  overflow: hidden;
 }
 
 .page-quick-sidebar-wrapper.active {
-    right: 0;
+  right: 0;
 }
 
 .c-icon-wrapper svg {
-    font-size: 5em;
-    max-width: 60px;
-    color: #32c5d2;
+  font-size: 5em;
+  max-width: 60px;
+  color: #32c5d2;
 }
 
 .left-separator {
-    width: 30px;
-    height: 3px;
-    background-color: #32c5d2;
-    margin: 10px 0 30px 0;
+  width: 30px;
+  height: 3px;
+  background-color: #32c5d2;
+  margin: 10px 0 30px 0;
 }
+
 .center-separator {
-    width: 30px;
-    height: 3px;
-    background-color: #32c5d2;
-    margin: 0 auto 30px auto;
+  width: 30px;
+  height: 3px;
+  background-color: #32c5d2;
+  margin: 0 auto 30px auto;
 }
 
 #categories span {
-    margin-bottom: .5rem;
-    font-family: inherit;
-    font-weight: 500;
-    font-size: 1.25em;
-    line-height: 1.2;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 1.25em;
+  line-height: 1.2;
 }
 
-
 .create-account {
-    margin: 24px -25px -47px;
-    padding: 15px 0 1px;
-    text-align: center;
-    -webkit-border-radius: 0 0 .25rem .25rem;
-    -moz-border-radius: 0 0 .25rem .25rem;
-    -ms-border-radius: 0 0 .25rem .25rem;
-    -o-border-radius: 0 0 .25rem .25rem;
-    border-radius: 0 0 .25rem .25rem;
+  margin: 24px -25px -47px;
+  padding: 15px 0 1px;
+  text-align: center;
+  -webkit-border-radius: 0 0 0.25rem 0.25rem;
+  -moz-border-radius: 0 0 0.25rem 0.25rem;
+  -ms-border-radius: 0 0 0.25rem 0.25rem;
+  -o-border-radius: 0 0 0.25rem 0.25rem;
+  border-radius: 0 0 0.25rem 0.25rem;
 }
 
 .breadcrumb {
-    background-color: #f7fafb;
-    margin-bottom: 0;
+  background-color: #f7fafb;
+  margin-bottom: 0;
 }
 
 .breadcrumb a {
-    color: #7f8c97;
-    font-size: 16px;
-    font-weight: 400;
+  color: #7f8c97;
+  font-size: 16px;
+  font-weight: 400;
 }
+
 a.post-list {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 .breadcrumb-title {
-    color: #000000;
-    font-weight: 500;
-    font-size: 2em;
-    letter-spacing: 1px;
+  color: #000000;
+  font-weight: 500;
+  font-size: 2em;
+  letter-spacing: 1px;
 }
 
 .li:before {
-    background: #32c5d2;
-    content: '';
-    width: 21px;
-    height: 2px;
-    float: left;
-    margin: 12px 15px 0 -36px;
+  background: #32c5d2;
+  content: '';
+  width: 21px;
+  height: 2px;
+  float: left;
+  margin: 12px 15px 0 -36px;
 }
 
-
 .post-author {
-    padding: 5px 10px;
-    border: 1px solid #eeeeee;
+  padding: 5px 10px;
+  border: 1px solid #eeeeee;
 }
 
 .forget-password {
-    font-size: 14px;
-    color: #BFBFBF;
-    float: right;
-    display: inline-block;
-    margin-top: 2px;
+  font-size: 14px;
+  color: #BFBFBF;
+  float: right;
+  display: inline-block;
+  margin-top: 2px;
 }
 
 #post .forget-password {
-    color: #00a0d2;
+  color: #00a0d2;
 }
 
 #login .btn, #register .btn, #newpassword .btn {
-    float: left;
+  float: left;
 }
 
 #login .btn:hover, #register .btn:hover, #newpassword .btn:hover {
-    color: #ffffff;
-    text-decoration: underline;
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 #breadcrumb {
-    border-top: 1px solid #f4f8f9;
-    border-bottom: 1px solid #f4f8f9;
-    padding: 25px 0;
-    background: #f7fafb;
+  border-top: 1px solid #f4f8f9;
+  border-bottom: 1px solid #f4f8f9;
+  padding: 25px 0;
+  background: #f7fafb;
 }
 
 .rememberme {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 #login input[type='checkbox'], #register input[type='checkbox'] {
-    margin: 3px;
-    top: 1px;
-    position: relative;
+  margin: 3px;
+  top: 1px;
+  position: relative;
 }
 
 .green {
-    color: #FFF;
-    background-color: #32c5d2;
-    border-color: #32c5d2;
+  color: #FFF;
+  background-color: #32c5d2;
+  border-color: #32c5d2;
 }
 
 .uppercase {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .alert-error {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }
 
 .framework div {
-    max-width: 13em;
+  max-width: 13em;
 }
+
 .framework div:hover {
-    border: solid 2px;
+  border: solid 2px;
 }
+
 nav {
-    border-bottom: 2px solid #32c5d2;
-    overflow: hidden;
+  border-bottom: 2px solid #32c5d2;
+  overflow: hidden;
 }
 
 .card-text.bg-info {
-    display: inline-block;
-    font-size: 0.8em;
-    margin: .25rem;
-    padding: .5rem;
-    text-transform: uppercase;
-    color: #fff;
-    font-weight: 700;
+  display: inline-block;
+  font-size: 0.8em;
+  margin: 0.25rem;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
 }
+
 .social li {
-    float: right;
+  float: right;
 }
+
 .social .svg-inline--fa {
-    position: relative;
-    background: #f2f2f2;
-    text-align: center;
-    color: #cccccc;
-    width: 2.5em;
-    height: 2.5em;
-    padding: 5px;
-    margin: 2px;
-}.social .svg-inline--fa:hover {
-     background-color: #32c5d2; color: #ffffff;
- }
+  position: relative;
+  background: #f2f2f2;
+  text-align: center;
+  color: #cccccc;
+  width: 2.5em;
+  height: 2.5em;
+  padding: 5px;
+  margin: 2px;
+}
+
+.social .svg-inline--fa:hover {
+  background-color: #32c5d2;
+  color: #ffffff;
+}
