@@ -61,6 +61,6 @@ abstract class Entity implements \ArrayAccess
 
     public function offsetUnset($var)
     {
-        throw new \Exception('Cannot delete any values');
+        throw new \Exception('Cannot delete '.$var);
     }
 }

@@ -67,7 +67,6 @@ class UserManagerPDO extends UserManager
 
     public function getByToken($token)
     {
-        $date    = new \DateTime();
         $request = $this->dao->prepare('SELECT * FROM blog_user WHERE token = :token');
 
         $request->bindValue(':token', $token, \PDO::PARAM_STR);

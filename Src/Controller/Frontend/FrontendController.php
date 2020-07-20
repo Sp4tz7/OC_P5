@@ -12,7 +12,7 @@ use Core\SiteMapsManager;
 
 class FrontendController extends AbstractController
 {
-    public function executeHome(HTTPRequest $request)
+    public function executeHome()
     {
         $postManager = $this->managers->getManagerOf('Post');
         $posts       = $postManager->getList();

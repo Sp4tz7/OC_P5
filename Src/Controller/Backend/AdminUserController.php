@@ -91,7 +91,7 @@ class AdminUserController extends AbstractController
         }
     }
 
-    public function executeUsers(HTTPRequest $request, HTTPResponse $response)
+    public function executeUsers()
     {
         $this->adminOnly();
         $userManager = $this->managers->getManagerOf('User');
@@ -161,7 +161,7 @@ class AdminUserController extends AbstractController
 
     }
 
-    public function executeEdit(HTTPRequest $request, HTTPResponse $response)
+    public function executeEdit(HTTPRequest $request)
     {
         $this->adminOnly();
 

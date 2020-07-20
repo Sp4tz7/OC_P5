@@ -238,8 +238,12 @@ class UserController extends AbstractController
 
     public function executeLogout(HTTPRequest $request, HTTPResponse $response)
     {
-        $response->killKookie('User');
-        $response->killSession('UserAuth');
+        if ($request->cookieExists('User')) {
+            $response->killKookie('User');
+        }
+        if ($request->sessionExists('UserAuth')) {
+            $response->killSession('UserAuth');
+        }
         $this->app->setFlash('success', ['content' => 'You successfully logged out.']);
         $response->redirect('/');
     }

@@ -20,7 +20,7 @@ class BackendController extends AbstractController
         $this->page->addVar('rejectedComments', $rejectedComments);
     }
 
-    public function executeAccessDenied(HTTPRequest $request)
+    public function executeAccessDenied()
     {
     }
 
