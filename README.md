@@ -35,9 +35,10 @@ composer install
 ### Configuration
 
 Before running this framework, you have to setup the database and the email SMTP data.
-1.  Import Database/Dump_php_blog.sql in your DBSM
-2.  Edit the Config/Config.php.dist file and enter the DB, SMTP and the other requested data
-3.  Rename Config/Config.php.**dist** to Config/Config.**php**
-4.  Point your virtual host to the **Public** directory
+1.  Import Database/Dump_php_blog.sql in your DBSM.
+2.  Edit the Config/Config.php.dist file and enter the DB, SMTP and the other requested data.
+3.  Rename Config/Config.php.**dist** to Config/Config.**php**.
+4.  Point your virtual host to the **Public** directory.
+5.  Login to your admin account using username **admin** and password **superadmin** and change your personal data.
 
 **Free Software, Hell Yeah!**

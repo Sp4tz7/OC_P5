@@ -10,24 +10,13 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Base de données :  php_blog
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table comment
---
-
-DROP TABLE IF EXISTS comment;
-CREATE TABLE IF NOT EXISTS comment (
+DROP TABLE IF EXISTS blog_comment;
+CREATE TABLE IF NOT EXISTS blog_comment (
   id int(11) NOT NULL AUTO_INCREMENT,
   parent_id int(11) DEFAULT NULL,
   post_id int(11) NOT NULL,
@@ -42,14 +31,8 @@ CREATE TABLE IF NOT EXISTS comment (
   KEY FK_PARENT (parent_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Structure de la table post
---
-
-DROP TABLE IF EXISTS post;
-CREATE TABLE IF NOT EXISTS post (
+DROP TABLE IF EXISTS blog_post;
+CREATE TABLE IF NOT EXISTS blog_post (
   id int(11) NOT NULL AUTO_INCREMENT,
   category_id int(11) DEFAULT NULL,
   title varchar(64) NOT NULL,
@@ -59,7 +42,7 @@ CREATE TABLE IF NOT EXISTS post (
   image_url varchar(128) DEFAULT NULL,
   date_add datetime NOT NULL DEFAULT current_timestamp(),
   date_edit datetime DEFAULT NULL,
-  created_by int(11) NOT NULL,
+  created_by int(11) DEFAULT NULL,
   edited_by int(11) DEFAULT NULL,
   active tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (id),
@@ -69,14 +52,8 @@ CREATE TABLE IF NOT EXISTS post (
   KEY FK_CATEGORY (category_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Structure de la table post_category
---
-
-DROP TABLE IF EXISTS post_category;
-CREATE TABLE IF NOT EXISTS post_category (
+DROP TABLE IF EXISTS blog_post_category;
+CREATE TABLE IF NOT EXISTS blog_post_category (
   id int(11) NOT NULL AUTO_INCREMENT,
   category_name varchar(55) NOT NULL,
   category_slug varchar(128) NOT NULL,
@@ -84,14 +61,8 @@ CREATE TABLE IF NOT EXISTS post_category (
   UNIQUE KEY category_slug (category_slug)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Structure de la table user
---
-
-DROP TABLE IF EXISTS user;
-CREATE TABLE IF NOT EXISTS user (
+DROP TABLE IF EXISTS blog_user;
+CREATE TABLE IF NOT EXISTS blog_user (
   id int(11) NOT NULL AUTO_INCREMENT,
   email varchar(64) NOT NULL,
   password varchar(255) DEFAULT NULL,
@@ -111,25 +82,17 @@ CREATE TABLE IF NOT EXISTS user (
   UNIQUE KEY nickname (nickname)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Contraintes pour les tables déchargées
---
+INSERT INTO blog_user (id, email, password, token, token_validity, firstname, lastname, nickname, role, register_date, active, show_full_name, send_email_replay, send_email_approve) VALUES ('1', 'admin@admin.com', '$2y$10$kRt51czl/X4PARorw5M8XuLAfxiU.sv3MDILBYBbfLHovY.33PIcC', '', NULL, 'Super', 'Admin', 'admin', 'SUPERADMIN', current_timestamp(), '1', '0', '0', '0');
 
---
--- Contraintes pour la table comment
---
-ALTER TABLE comment
-  ADD CONSTRAINT FK_BLOG FOREIGN KEY (post_id) REFERENCES post (id) ON DELETE CASCADE,
-  ADD CONSTRAINT FK_PARENT FOREIGN KEY (parent_id) REFERENCES comment (id) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT FK_USER_COMMENT FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE blog_comment
+  ADD CONSTRAINT FK_BLOG FOREIGN KEY (post_id) REFERENCES blog_post (id) ON DELETE CASCADE,
+  ADD CONSTRAINT FK_PARENT FOREIGN KEY (parent_id) REFERENCES blog_comment (id) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT FK_USER_COMMENT FOREIGN KEY (user_id) REFERENCES blog_user (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Contraintes pour la table post
---
-ALTER TABLE post
-  ADD CONSTRAINT FK_CATEGORY FOREIGN KEY (category_id) REFERENCES post_category (id) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT FK_EDIT FOREIGN KEY (edited_by) REFERENCES user (id) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT FK_USER FOREIGN KEY (created_by) REFERENCES user (id) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE blog_post
+  ADD CONSTRAINT FK_CATEGORY FOREIGN KEY (category_id) REFERENCES blog_post_category (id) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT FK_EDIT FOREIGN KEY (edited_by) REFERENCES blog_user (id) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT FK_USER FOREIGN KEY (created_by) REFERENCES blog_user (id) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

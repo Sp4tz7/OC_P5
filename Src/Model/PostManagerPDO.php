@@ -8,17 +8,17 @@ class PostManagerPDO extends PostManager
 {
     public function count()
     {
-        return $this->dao->query('SELECT COUNT(*) FROM post')->fetchColumn();
+        return $this->dao->query('SELECT COUNT(*) FROM blog_post')->fetchColumn();
     }
 
     public function getCategories()
     {
-        return $this->dao->query('SELECT * FROM post_category')->fetchAll();
+        return $this->dao->query('SELECT * FROM blog_post_category')->fetchAll();
     }
 
     public function delete($id)
     {
-        $this->dao->exec('DELETE FROM post WHERE id = '.(int)$id);
+        $this->dao->exec('DELETE FROM blog_post WHERE id = '.(int)$id);
     }
 
     public function getList($start = -1, $limit = -1, $categoryId = null)
@@ -26,11 +26,11 @@ class PostManagerPDO extends PostManager
         $sql = "SELECT p.*, pc.category_name, pc.category_slug, COUNT(c.id) AS 'nb_comments',
                 IF(author.show_full_name, CONCAT(author.firstname, ' ', author.lastname), author.nickname) AS 'author', 
                 IF(editor.show_full_name, CONCAT(editor.firstname, ' ', editor.lastname), editor.nickname) AS 'editor' 
-                FROM post AS p 
-                LEFT JOIN post_category AS pc ON p.category_id = pc.id
-                LEFT JOIN comment AS c ON p.id = c.post_id AND c.status = 'APPROVED'
-                LEFT JOIN user AS author ON p.created_by = author.id 
-                LEFT JOIN user AS editor ON p.edited_by = editor.id ";
+                FROM blog_post AS p 
+                LEFT JOIN blog_post_category AS pc ON p.category_id = pc.id
+                LEFT JOIN blog_comment AS c ON p.id = c.post_id AND c.status = 'APPROVED'
+                LEFT JOIN blog_user AS author ON p.created_by = author.id 
+                LEFT JOIN blog_user AS editor ON p.edited_by = editor.id ";
 
         if (is_int($categoryId)) {
             $sql .= " WHERE p.category_id = $categoryId ";
@@ -59,10 +59,10 @@ class PostManagerPDO extends PostManager
             "SELECT p.*, pc.category_name, pc.category_slug, 
                 IF(author.show_full_name, CONCAT(author.firstname, ' ', author.lastname), author.nickname) AS 'author', 
                 IF(editor.show_full_name, CONCAT(editor.firstname, ' ', editor.lastname), editor.nickname) AS 'editor' 
-                FROM post AS p 
-                LEFT JOIN post_category AS pc ON p.category_id = pc.id
-                LEFT JOIN user AS author ON p.created_by = author.id 
-                LEFT JOIN user AS editor ON p.edited_by = editor.id 
+                FROM blog_post AS p 
+                LEFT JOIN blog_post_category AS pc ON p.category_id = pc.id
+                LEFT JOIN blog_user AS author ON p.created_by = author.id 
+                LEFT JOIN blog_user AS editor ON p.edited_by = editor.id 
                 WHERE p.id = :id"
         );
         $request->bindValue(':id', (int)$id, \PDO::PARAM_INT);
@@ -79,7 +79,7 @@ class PostManagerPDO extends PostManager
     public function getCategoryBySlug($slug)
     {
         $request = $this->dao->prepare(
-            "SELECT * FROM post_category WHERE category_slug = :slug"
+            "SELECT * FROM blog_post_category WHERE category_slug = :slug"
         );
         $request->bindValue(':slug', $slug, \PDO::PARAM_STR);
         $request->execute();
@@ -97,10 +97,10 @@ class PostManagerPDO extends PostManager
             "SELECT p.*, pc.category_name, pc.category_slug, 
                 IF(author.show_full_name, CONCAT(author.firstname, ' ', author.lastname), author.nickname) AS 'author', 
                 IF(editor.show_full_name, CONCAT(editor.firstname, ' ', editor.lastname), editor.nickname) AS 'editor' 
-                FROM post AS p 
-                LEFT JOIN post_category AS pc ON p.category_id = pc.id
-                LEFT JOIN user AS author ON p.created_by = author.id 
-                LEFT JOIN user AS editor ON p.edited_by = editor.id 
+                FROM blog_post AS p 
+                LEFT JOIN blog_post_category AS pc ON p.category_id = pc.id
+                LEFT JOIN blog_user AS author ON p.created_by = author.id 
+                LEFT JOIN blog_user AS editor ON p.edited_by = editor.id 
                 WHERE p.slug = :slug"
         );
         $request->bindValue(':slug', $slug, \PDO::PARAM_STR);
@@ -116,7 +116,7 @@ class PostManagerPDO extends PostManager
 
     public function addCategory($name, $slug)
     {
-        $request = $this->dao->prepare('INSERT INTO post_category 
+        $request = $this->dao->prepare('INSERT INTO blog_post_category 
                                             SET category_name = :category_name, category_slug = :category_slug ');
         $request->bindValue(':category_name', $name);
         $request->bindValue(':category_slug', $slug);
@@ -134,7 +134,7 @@ class PostManagerPDO extends PostManager
     protected function add(Post $post)
     {
         $request = $this->dao->prepare(
-            'INSERT INTO post SET active = :active,
+            'INSERT INTO blog_post SET active = :active,
                                 category_id = :category_id,
                                 title = :title,
                                 slug = :slug,
@@ -167,7 +167,7 @@ class PostManagerPDO extends PostManager
     protected function modify(Post $post)
     {
         $request = $this->dao->prepare(
-            'UPDATE post SET active = :active,
+            'UPDATE blog_post SET active = :active,
                                 category_id = :category_id,
                                 title = :title,
                                 slug = :slug,
