@@ -9,7 +9,6 @@ class HTTPResponse extends ApplicationComponent
     public function redirect($location)
     {
         header('Location: '.$location);
-        die();
     }
 
     public function redirect404()
