@@ -16,9 +16,9 @@ class PostManagerPDO extends PostManager
         return $this->dao->query('SELECT * FROM blog_post_category')->fetchAll();
     }
 
-    public function delete($id)
+    public function delete($postID)
     {
-        $this->dao->exec('DELETE FROM blog_post WHERE id = '.(int)$id);
+        $this->dao->exec('DELETE FROM blog_post WHERE id = '.(int)$postID);
     }
 
     public function getList($start = -1, $limit = -1, $categoryId = null)
@@ -53,7 +53,7 @@ class PostManagerPDO extends PostManager
         return $listPosts;
     }
 
-    public function getUnique($id)
+    public function getUnique($postID)
     {
         $request = $this->dao->prepare(
             "SELECT p.*, pc.category_name, pc.category_slug, 
@@ -65,7 +65,7 @@ class PostManagerPDO extends PostManager
                 LEFT JOIN blog_user AS editor ON p.edited_by = editor.id 
                 WHERE p.id = :id"
         );
-        $request->bindValue(':id', (int)$id, \PDO::PARAM_INT);
+        $request->bindValue(':id', (int)$postID, \PDO::PARAM_INT);
         $request->execute();
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Post');
 
@@ -128,7 +128,6 @@ class PostManagerPDO extends PostManager
         } catch (\PDOException $e) {
             return $e->getMessage();
         }
-
     }
 
     protected function add(Post $post)
@@ -195,8 +194,5 @@ class PostManagerPDO extends PostManager
         } catch (\PDOException $e) {
             return $e->getMessage();
         }
-
     }
-
-
 }

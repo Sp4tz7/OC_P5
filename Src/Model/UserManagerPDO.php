@@ -11,9 +11,9 @@ class UserManagerPDO extends UserManager
         return $this->dao->query('SELECT COUNT(*) FROM blog_user')->fetchColumn();
     }
 
-    public function delete($id)
+    public function delete($userID)
     {
-        $this->dao->exec('DELETE FROM blog_user WHERE id = '.(int)$id);
+        $this->dao->exec('DELETE FROM blog_user WHERE id = '.(int)$userID);
     }
 
     public function getList($start = -1, $limit = -1)
@@ -35,12 +35,12 @@ class UserManagerPDO extends UserManager
         return $listeUsers;
     }
 
-    public function getUnique($id)
+    public function getUnique($userID)
     {
         $request = $this->dao->prepare(
             'SELECT * FROM blog_user WHERE id = :id'
         );
-        $request->bindValue(':id', (int)$id, \PDO::PARAM_INT);
+        $request->bindValue(':id', (int)$userID, \PDO::PARAM_INT);
         $request->execute();
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
 

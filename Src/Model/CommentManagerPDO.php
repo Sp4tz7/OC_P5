@@ -11,9 +11,9 @@ class CommentManagerPDO extends CommentManager
         return $this->dao->query('SELECT COUNT(*) FROM blog_comment')->fetchColumn();
     }
 
-    public function delete($id)
+    public function delete($commentID)
     {
-        $this->dao->exec('DELETE FROM blog_comment WHERE id = '.(int)$id);
+        $this->dao->exec('DELETE FROM blog_comment WHERE id = '.(int)$commentID);
     }
 
     public function getList($start = -1, $limit = -1, $status = null, $postId = null, $authorId = null)
@@ -51,7 +51,7 @@ class CommentManagerPDO extends CommentManager
         return $listComments;
     }
 
-    public function getUnique($id)
+    public function getUnique($commentID)
     {
         $request = $this->dao->prepare(
             "SELECT c.*, post.title AS 'post',
@@ -61,7 +61,7 @@ class CommentManagerPDO extends CommentManager
                 LEFT JOIN blog_post AS post ON c.post_id = post.id
                 WHERE c.id = :id"
         );
-        $request->bindValue(':id', (int)$id, \PDO::PARAM_INT);
+        $request->bindValue(':id', (int)$commentID, \PDO::PARAM_INT);
         $request->execute();
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
 
