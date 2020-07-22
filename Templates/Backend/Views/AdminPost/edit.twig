@@ -3,7 +3,8 @@
     {% embed 'modal-layout.twig' with {
         'title' : 'ADD NEW CATEGORY',
         'body': '<div class="form-group"><label class="control-label">New category name</label>
-    <input type="text" placeholder="Name" class="form-control" name="category_name" id="category_name" required></div>',
+    <input type="text" placeholder="Name" class="form-control" name="category_name" id="category_name" required>
+    <input type="hidden" name="csrf_token" id="addPostCategoryToken" value="' ~  csrf_token  ~ '"></div>',
         'button': 'Save',
         'id': 'addPostCategory'} %}
     {% endembed %}
@@ -120,12 +121,12 @@
             $('#addPostCategory').on('click', function (event) {
                 event.stopPropagation();
                 var name = $('#category_name').val();
-                var token = $('#addPostCategoryToken').val();
+                var csrf_token = $('#addPostCategoryToken').val();
                 if (name) {
                     $.ajax({
                         method: "POST",
                         url: "/admin/category/add/",
-                        data: {category_name: name, token: token},
+                        data: {category_name: name, csrf_token: csrf_token},
                         dataType: "json"
                     })
                         .done(function (data) {

@@ -4,7 +4,6 @@ namespace Controller\Frontend;
 
 use Config\config;
 use Core\AbstractController;
-use Core\FormManager;
 use Core\HTTPRequest;
 use Core\HTTPResponse;
 use Core\Mailer;
@@ -34,18 +33,18 @@ class FrontendController extends AbstractController
 
                 return false;
             }
-            $form = new FormManager();
-            if (!$form->compareCsrfToken()) {
+
+            if (!$this->formManager->compareCsrfToken()) {
                 $this->app->setFlash('error', ['title' => 'Form error', 'content' => 'Invalid Token']);
 
                 return false;
             }
-            if (!$form->postNotEmpty($_POST)) {
+            if (!$this->formManager->postNotEmpty($_POST)) {
                 $this->app->setFlash('error', ['title' => 'Form error', 'content' => 'All fields are required']);
 
                 return false;
             }
-            if (!$form->isEmail($request->getDataPost('email'))) {
+            if (!$this->formManager->isEmail($request->getDataPost('email'))) {
                 $this->app->setFlash('error', ['title' => 'Form error', 'content' => 'The email is not valid']);
 
                 return false;

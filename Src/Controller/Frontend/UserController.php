@@ -3,7 +3,6 @@
 namespace Controller\Frontend;
 
 use Core\AbstractController;
-use Core\FormManager;
 use Core\HTTPRequest;
 use Core\HTTPResponse;
 use Core\Mailer;
@@ -92,10 +91,9 @@ class UserController extends AbstractController
         $userManager = $this->managers->getManagerOf('User');
         $token       = $request->getDataGet('token');
         $user        = $userManager->getByToken($token);
-        $form        = new FormManager();
 
         if (is_object($user)) {
-            $token = $form->setToken();
+            $token = $this->formManager->setToken();
             $user->setToken($token['token']);
             $user->setTokenValidity($token['validity']);
             $userManager->save($user);
@@ -136,13 +134,12 @@ class UserController extends AbstractController
     {
         $userManager = $this->managers->getManagerOf('User');
         $redirect    = $request->postExists('redirect') ? $request->getDataPost('redirect') : '/login/';
-        $form        = new FormManager();
 
         // Sent from new password from
         if ($request->postExists('reset_password')) {
             $email = $request->getDataPost('email');
             $user  = $userManager->getByNicknameOrEmail($email);
-            $token = $form->setToken();
+            $token = $this->formManager->setToken();
             if (is_object($user)) {
                 if (!$user->getActive()) {
                     $this->app->setFlash('error', ['content' => 'Your account has been deactivated']);
@@ -250,7 +247,6 @@ class UserController extends AbstractController
 
     public function executeRegister(HTTPRequest $request, HTTPResponse $response)
     {
-        $form     = new FormManager();
         $redirect = $request->postExists('redirect') ? $request->getDataPost('redirect') : '/login/';
         if ($request->postExists('register_user')) {
             $userManager = $this->managers->getManagerOf('User');
@@ -281,7 +277,7 @@ class UserController extends AbstractController
             // Add new user
             $userManager = $this->managers->getManagerOf('User');
             $user        = new User();
-            $token       = $form->setToken();
+            $token       = $this->formManager->setToken();
             $user->setFirstname($request->getDataPost('firstname'));
             $user->setLastname($request->getDataPost('lastname'));
             $user->setNickname($request->getDataPost('username'));

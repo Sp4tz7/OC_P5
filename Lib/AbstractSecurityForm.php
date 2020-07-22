@@ -2,20 +2,20 @@
 
 namespace Core;
 
-abstract class AbstractSecurityForm
+
+abstract class AbstractSecurityForm extends ApplicationComponent
 {
 
     public function setCsrfToken()
     {
-
-        if (!isset($_SESSION['csrf_token'])) {
+        if (!$this->getApp()->getHttpRequest()->sessionExists('csrf_token')) {
             $csrf_token             = bin2hex(random_bytes(32));
-            $_SESSION['csrf_token'] = $csrf_token;
+            $this->getApp()->getHttpResponse()->setSession('csrf_token', $csrf_token);
 
             return $csrf_token;
         }
 
-        return $_SESSION['csrf_token'];
+        return $this->getApp()->getHttpRequest()->getSession('csrf_token');
 
     }
 

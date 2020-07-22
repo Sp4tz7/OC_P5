@@ -3,7 +3,6 @@
 namespace Controller\Backend;
 
 use Core\AbstractController;
-use Core\FormManager;
 use Core\HTTPRequest;
 use Core\HTTPResponse;
 use Entity\Post;
@@ -23,8 +22,8 @@ class AdminPostController extends AbstractController
 
     public function executeDelete(HTTPRequest $request, HTTPResponse $response)
     {
-        $form = new FormManager();
-        if ($request->getExists('id') and $form->compareCsrfToken()) {
+
+        if ($request->getExists('id') and $this->formManager->compareCsrfToken()) {
             $postManager = $this->managers->getManagerOf('Post');
             $post        = $postManager->getUnique($request->getDataGet('id'));
             unlink(APP_DIR.'Public/img/post/'.$post->getImageUrl());
@@ -48,9 +47,8 @@ class AdminPostController extends AbstractController
         $postManager = $this->managers->getManagerOf('Post');
         $userManager = $this->managers->getManagerOf('User');
         $post        = new Post();
-        $form        = new FormManager();
 
-        if ($request->postExists('add_post') and $form->compareCsrfToken()) {
+        if ($request->postExists('add_post') and $this->formManager->compareCsrfToken()) {
             $post = new Post();
             $user = $userManager->getUnique($request->getSession('UserAuth'));
 
@@ -193,10 +191,9 @@ class AdminPostController extends AbstractController
     public function executeAddCategory(HTTPRequest $request, HTTPResponse $response)
     {
         $postManager = $this->managers->getManagerOf('Post');
-        $form        = new FormManager();
 
         if ($request->postExists('category_name')) {
-            if ($form->compareCsrfToken()) {
+            if ($this->formManager->compareCsrfToken()) {
                 $categoryName = $request->getDataPost('category_name');
                 $slug         = Service::slugIt($categoryName);
                 $result       = $postManager->addCategory($categoryName, $slug);
@@ -235,10 +232,9 @@ class AdminPostController extends AbstractController
 
         $postManager = $this->managers->getManagerOf('Post');
         $userManager = $this->managers->getManagerOf('User');
-        $form        = new FormManager();
 
         if ($request->postExists('edit_post') and ($request->getDataPost('edit_post') === $request->getDataGet('id'))) {
-            if ($form->compareCsrfToken()) {
+            if ($this->formManager->compareCsrfToken()) {
                 $post = $postManager->getUnique($request->getDataPost('edit_post'));
                 $user = $userManager->getUnique($request->getSession('UserAuth'));
 
@@ -287,7 +283,7 @@ class AdminPostController extends AbstractController
                         ]
                     );
                 }
-                $form->killCsrfToken();
+                $this->formManager->killCsrfToken();
             } else {
                 $this->app->setFlash(
                     'error',

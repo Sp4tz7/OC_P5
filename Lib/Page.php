@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use Core\FormManager;
-
 class Page extends ApplicationComponent
 {
     protected $contentFile;
@@ -14,7 +12,7 @@ class Page extends ApplicationComponent
 
     public function addVar($var, $value)
     {
-        if ( ! is_string($var) || is_numeric($var) || empty($var)) {
+        if (!is_string($var) || is_numeric($var) || empty($var)) {
             throw new \InvalidArgumentException('The variable name should be a valid string');
         }
 
@@ -23,9 +21,9 @@ class Page extends ApplicationComponent
 
     public function getGeneratedPage()
     {
-        $templateDir = ! empty($this->templateDir) ? $this->templateDir : APP_DIR.'Templates/'.$this->app->getEnv();
+        $templateDir = !empty($this->templateDir) ? $this->templateDir : APP_DIR.'Templates/'.$this->app->getEnv();
 
-        if ( ! file_exists($templateDir)) {
+        if (!file_exists($templateDir)) {
             throw new \RuntimeException('The view '.$templateDir.' does not exist');
         }
         $loader = new \Twig\Loader\FilesystemLoader(
@@ -36,7 +34,8 @@ class Page extends ApplicationComponent
             ]
         );
         $twig   = new \Twig\Environment(
-            $loader, [
+            $loader,
+            [
                 'debug' => true,
                 //'cache' => APP_DIR.'/Cache',
             ]
@@ -44,11 +43,11 @@ class Page extends ApplicationComponent
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         $twig->addExtension(new \Twig\Extra\String\StringExtension());
 
-        $form = new FormManager();
+        $form       = new FormManager($this->app);
         $csrf_token = $form->setCsrfToken();
-        $token = $form->setToken();
-        $page  = [
-            'page'  => [
+        $token      = $form->setToken();
+        $page       = [
+            'page' => [
                 'body_id' => $this->app->getAction(),
             ],
             'flashes' => $this->app->hasFlash() ? $this->app->getFlash() : false,
@@ -60,7 +59,6 @@ class Page extends ApplicationComponent
         $page = array_merge($page, $this->getVars());
         echo $twig->render($this->contentFile, $page);
         $this->app->getHttpResponse()->setSession('token', $token);
-
     }
 
     public function dirExists($dir)
@@ -79,7 +77,7 @@ class Page extends ApplicationComponent
 
     public function setTemplateDir($templateDir)
     {
-        if ( ! is_string($templateDir) || empty($templateDir)) {
+        if (!is_string($templateDir) || empty($templateDir)) {
             throw new \InvalidArgumentException('The view directory is not valid');
         }
 
@@ -100,12 +98,11 @@ class Page extends ApplicationComponent
     {
         $this->app->setEnv('Frontend');
         $this->setContentFile('404.twig');
-
     }
 
     public function setContentFile($contentFile)
     {
-        if ( ! is_string($contentFile) || empty($contentFile)) {
+        if (!is_string($contentFile) || empty($contentFile)) {
             throw new \InvalidArgumentException('The view name is not valid');
         }
 
