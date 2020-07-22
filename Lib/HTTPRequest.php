@@ -19,13 +19,28 @@ class HTTPRequest extends ApplicationComponent
         return $this->getExists($key) ? $_GET[$key] : null;
     }
 
-    public function getReferrer(){
-        return $_SERVER['HTTP_REFERER'];
-    }
-
     public function getExists($key)
     {
         return isset($_GET[$key]);
+    }
+
+    public function getFileData($name, $value)
+    {
+        return $this->fileExists($name, $value) ? $_FILES[$name][$value] : null;
+    }
+
+    public function fileExists($key, $value = null)
+    {
+        if ($value) {
+            return isset($_FILES[$key][$value]);
+        }
+
+        return isset($_FILES[$key]);
+    }
+
+    public function getReferrer()
+    {
+        return $_SERVER['HTTP_REFERER'];
     }
 
     public function getSession($key)
@@ -48,14 +63,14 @@ class HTTPRequest extends ApplicationComponent
         return $this->postExists($key) ? $_POST[$key] : null;
     }
 
-    public function getAllPost()
-    {
-        return isset($_POST) ? $_POST : null;
-    }
-
     public function postExists($key)
     {
         return isset($_POST[$key]);
+    }
+
+    public function getAllPost()
+    {
+        return isset($_POST) ? $_POST : null;
     }
 
     public function requestURI()

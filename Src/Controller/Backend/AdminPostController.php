@@ -22,7 +22,6 @@ class AdminPostController extends AbstractController
 
     public function executeDelete(HTTPRequest $request, HTTPResponse $response)
     {
-
         if ($request->getExists('id') and $this->formManager->compareCsrfToken()) {
             $postManager = $this->managers->getManagerOf('Post');
             $post        = $postManager->getUnique($request->getDataGet('id'));
@@ -96,18 +95,18 @@ class AdminPostController extends AbstractController
     private function uploadImage($name)
     {
         // Image not mandatory
-        if (!$_FILES["blog_image"]["tmp_name"]) {
+        if (!$this->getApp()->getHttpRequest()->fileExists('blog_image')) {
             return false;
         }
 
-        $file_src      = $_FILES["blog_image"]["tmp_name"];
+        $file_src      = $this->getApp()->getHttpRequest()->getFileData('blog_image', 'tmp_name');
         $target_dir    = APP_DIR."/Public/img/post/";
-        $target_file   = $target_dir.basename($_FILES["blog_image"]["name"]);
+        $target_file   = $target_dir.basename($this->getApp()->getHttpRequest()->getFileData('blog_image', 'name'));
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         $target_final  = $target_dir.$name.'.jpg';
 
         // Check if image file is a actual image or fake image
-        $check = getimagesize($_FILES["blog_image"]["tmp_name"]);
+        $check = getimagesize($this->getApp()->getHttpRequest()->getFileData('blog_image', 'tmp_name'));
         if ($check === false) {
             $this->app->setFlash(
                 'error',
@@ -121,12 +120,15 @@ class AdminPostController extends AbstractController
         }
 
         // Check file size
-        if ($_FILES["blog_image"]["size"] > 320000000) {
+        if ($this->getApp()->getHttpRequest()->getFileData('blog_image', 'size') > 320000000) {
             $this->app->setFlash(
                 'error',
                 [
                     'title' => 'Image Upload error',
-                    'content' => 'Your image is to large ('.$_FILES["blog_image"]["size"].')',
+                    'content' => 'Your image is to large ('.$this->getApp()->getHttpRequest()->getFileData(
+                        'blog_image',
+                        'size'
+                    ).')',
                 ]
             );
 
@@ -227,7 +229,6 @@ class AdminPostController extends AbstractController
 
     public function executeEdit(HTTPRequest $request, HTTPResponse $response)
     {
-
         $this->adminOnly();
 
         $postManager = $this->managers->getManagerOf('Post');
