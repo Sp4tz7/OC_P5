@@ -39,7 +39,7 @@ class FrontendController extends AbstractController
 
                 return false;
             }
-            if (!$this->formManager->postNotEmpty($_POST)) {
+            if (!$this->formManager->postNotEmpty($request->getAllPost())) {
                 $this->app->setFlash('error', ['title' => 'Form error', 'content' => 'All fields are required']);
 
                 return false;
