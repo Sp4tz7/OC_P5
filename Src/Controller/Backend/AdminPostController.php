@@ -126,9 +126,9 @@ class AdminPostController extends AbstractController
                 [
                     'title' => 'Image Upload error',
                     'content' => 'Your image is to large ('.$this->getApp()->getHttpRequest()->getFileData(
-                        'blog_image',
-                        'size'
-                    ).')',
+                            'blog_image',
+                            'size'
+                        ).')',
                 ]
             );
 
@@ -252,7 +252,7 @@ class AdminPostController extends AbstractController
                 $new_slug = $post->getSlug();
 
                 // Rename Image if title/slug has changer
-                if ($old_slug != $new_slug and !$_FILES["blog_image"]["name"]) {
+                if ($old_slug != $new_slug and !$this->getApp()->getHttpRequest()->fileExists('blog_image', 'name')) {
                     $image_name = $this->setImageName($post->getImageUrl(), $new_slug);
                     $post->setImageUrl($image_name);
                 }
