@@ -2,7 +2,6 @@
 
 namespace Entity;
 
-
 class User extends Entity
 {
     protected $id;
@@ -58,11 +57,9 @@ class User extends Entity
         $isInt    = ['show_full_name', 'send_email_replay', 'send_email_replay', 'send_email_approve'];
         foreach ($notEmpty as $value) {
             if (empty($this->$value)) {
-
                 return 'The '.ucfirst($value).' cannot be empty';
             }
-            if ( ! is_string($this->$value)) {
-
+            if (!is_string($this->$value)) {
                 return 'The '.ucfirst($value).' should be a valid string: '.$value.' given!';
             }
         }
@@ -72,12 +69,11 @@ class User extends Entity
             foreach ($array as $item) {
                 $method .= ucfirst($item);
             }
-            if ( ! is_int($this->$method())) {
+            if (!is_int($this->$method())) {
                 return 'The '.ucfirst($value).' is not an integer: '.$this->$method().' given!';
             }
-
         }
-        if ( ! filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return 'The email is not valid';
         }
 
@@ -261,5 +257,4 @@ class User extends Entity
     {
         $this->role = $role;
     }
-
 }

@@ -11,6 +11,7 @@ abstract class AbstractController extends ApplicationComponent
     protected $view = '';
     protected $page = null;
     protected $managers = null;
+    protected $formManager = null;
 
     public function __construct(\Core\Application $app, $view, $action)
     {
@@ -21,7 +22,8 @@ abstract class AbstractController extends ApplicationComponent
         $this->managers = new Managers('PDO', PDOFactory::getMysqlConnexion());
         $this->setApp($app);
         $this->setAction($action);
-        $this->page = new Page($this->app);
+        $this->page = new Page($app);
+        $this->formManager = new FormManager($app);
         $this->setView($action);
         $this->execute();
 

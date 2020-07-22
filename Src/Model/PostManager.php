@@ -23,10 +23,10 @@ abstract class PostManager extends Manager
 
     abstract public function count();
 
-    abstract public function delete($id);
+    abstract public function delete($postID);
 
     abstract public function getList($debut = -1, $limit = -1);
 
-    abstract public function getUnique($id);
+    abstract public function getUnique($postID);
 
 }

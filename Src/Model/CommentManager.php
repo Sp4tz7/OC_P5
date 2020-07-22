@@ -23,10 +23,10 @@ abstract class CommentManager extends Manager
 
     abstract public function count();
 
-    abstract public function delete($id);
+    abstract public function delete($commentID);
 
     abstract public function getList($debut = -1, $limite = -1);
 
-    abstract public function getUnique($id);
+    abstract public function getUnique($commentID);
 
 }

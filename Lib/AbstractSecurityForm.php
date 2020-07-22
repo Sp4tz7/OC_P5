@@ -2,20 +2,20 @@
 
 namespace Core;
 
-abstract class AbstractSecurityForm
+
+abstract class AbstractSecurityForm extends ApplicationComponent
 {
 
     public function setCsrfToken()
     {
-
-        if (!isset($_SESSION['csrf_token'])) {
-            $csrf_token             = bin2hex(random_bytes(32));
-            $_SESSION['csrf_token'] = $csrf_token;
+        if (!$this->getApp()->getHttpRequest()->sessionExists('csrf_token')) {
+            $csrf_token = bin2hex(random_bytes(32));
+            $this->getApp()->getHttpResponse()->setSession('csrf_token', $csrf_token);
 
             return $csrf_token;
         }
 
-        return $_SESSION['csrf_token'];
+        return $this->getApp()->getHttpRequest()->getSession('csrf_token');
 
     }
 
@@ -29,13 +29,13 @@ abstract class AbstractSecurityForm
 
     public function compareCsrfToken()
     {
-        if (isset($_POST['csrf_token'])
-            and $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+        if ($this->getApp()->getHttpRequest()->postExists('csrf_token')
+            and $this->getApp()->getHttpRequest()->getDataPost('csrf_token') === $this->getApp()->getHttpRequest()->getSession('csrf_token')) {
             return true;
         }
 
-        if (isset($_GET['csrf_token'])
-            and $_GET['csrf_token'] === $_SESSION['csrf_token']) {
+        if ($this->getApp()->getHttpRequest()->getExists('csrf_token')
+            and $this->getApp()->getHttpRequest()->getDataGet('csrf_token') === $this->getApp()->getHttpRequest()->getSession('csrf_token')) {
             return true;
         }
 
@@ -45,7 +45,7 @@ abstract class AbstractSecurityForm
 
     public function killCsrfToken()
     {
-        unset($_SESSION['csrf_token']);
+        $this->getApp()->getHttpResponse()->killSession('csrf_token');
     }
 
 }

@@ -51,7 +51,7 @@ footer {
 }
 
 .page-quick-sidebar-wrapper {
-  transition: right .3s;
+  transition: right 0.3s;
   z-index: 9999;
   position: fixed;
   top: 30%;
@@ -126,7 +126,7 @@ a.post-list {
   letter-spacing: 1px;
 }
 
-.li:before {
+.li::before {
   background: #32c5d2;
   content: '';
   width: 21px;

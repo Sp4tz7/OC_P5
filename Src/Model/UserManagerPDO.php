@@ -8,17 +8,17 @@ class UserManagerPDO extends UserManager
 {
     public function count()
     {
-        return $this->dao->query('SELECT COUNT(*) FROM user')->fetchColumn();
+        return $this->dao->query('SELECT COUNT(*) FROM blog_user')->fetchColumn();
     }
 
-    public function delete($id)
+    public function delete($userID)
     {
-        $this->dao->exec('DELETE FROM user WHERE id = '.(int)$id);
+        $this->dao->exec('DELETE FROM blog_user WHERE id = '.(int)$userID);
     }
 
     public function getList($start = -1, $limit = -1)
     {
-        $sql = 'SELECT * FROM user ORDER BY id, lastname ASC';
+        $sql = 'SELECT * FROM blog_user ORDER BY id, lastname ASC';
 
         if ($start != -1 || $limit != -1) {
             $sql .= ' LIMIT '.(int)$limit.' OFFSET '.(int)$start;
@@ -35,12 +35,12 @@ class UserManagerPDO extends UserManager
         return $listeUsers;
     }
 
-    public function getUnique($id)
+    public function getUnique($userID)
     {
         $request = $this->dao->prepare(
-            'SELECT * FROM user WHERE id = :id'
+            'SELECT * FROM blog_user WHERE id = :id'
         );
-        $request->bindValue(':id', (int)$id, \PDO::PARAM_INT);
+        $request->bindValue(':id', (int)$userID, \PDO::PARAM_INT);
         $request->execute();
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
 
@@ -53,7 +53,7 @@ class UserManagerPDO extends UserManager
 
     public function getByNicknameOrEmail($nickname)
     {
-        $request = $this->dao->prepare('SELECT * FROM user WHERE nickname = :nickname OR email = :nickname');
+        $request = $this->dao->prepare('SELECT * FROM blog_user WHERE nickname = :nickname OR email = :nickname');
         $request->bindValue(':nickname', $nickname, \PDO::PARAM_STR);
         $request->execute();
 
@@ -67,8 +67,7 @@ class UserManagerPDO extends UserManager
 
     public function getByToken($token)
     {
-        $date    = new \DateTime();
-        $request = $this->dao->prepare('SELECT * FROM user WHERE token = :token');
+        $request = $this->dao->prepare('SELECT * FROM blog_user WHERE token = :token');
 
         $request->bindValue(':token', $token, \PDO::PARAM_STR);
         $request->execute();
@@ -83,7 +82,7 @@ class UserManagerPDO extends UserManager
     protected function add(User $user)
     {
         $requete = $this->dao->prepare(
-            'INSERT INTO user SET active = :active,
+            'INSERT INTO blog_user SET active = :active,
                                 email = :email,
                                 firstname = :firstname,
                                 lastname = :lastname,
@@ -120,7 +119,7 @@ class UserManagerPDO extends UserManager
     protected function modify(User $user)
     {
         $requete = $this->dao->prepare(
-            'UPDATE user SET active = :active,
+            'UPDATE blog_user SET active = :active,
                                 email = :email,
                                 firstname = :firstname,
                                 lastname = :lastname,

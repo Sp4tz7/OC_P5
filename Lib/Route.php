@@ -29,16 +29,17 @@ class Route
 
     public function hasVars()
     {
-        return ! empty($this->varsNames);
+        return !empty($this->varsNames);
     }
 
     public function match($url)
     {
         if (preg_match('`^'.$this->url.'$`', $url, $matches)) {
             return $matches;
-        } else {
-            return false;
         }
+
+        return false;
+
     }
 
     public function getAction()

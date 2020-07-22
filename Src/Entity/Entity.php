@@ -8,13 +8,13 @@ abstract class Entity implements \ArrayAccess
 {
     use Hydrator;
 
-    protected $erreurs = [];
+    protected $errors = [];
     protected $id;
 
-    public function __construct(array $donnees = [])
+    public function __construct(array $data = [])
     {
-        if (!empty($donnees)) {
-            $this->hydrate($donnees);
+        if (!empty($data)) {
+            $this->hydrate($data);
         }
     }
 
@@ -23,9 +23,9 @@ abstract class Entity implements \ArrayAccess
         return empty($this->id);
     }
 
-    public function erreurs()
+    public function errors()
     {
-        return $this->erreurs;
+        return $this->errors;
     }
 
     public function getId()
@@ -33,9 +33,9 @@ abstract class Entity implements \ArrayAccess
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId($objectID)
     {
-        $this->id = (int)$id;
+        $this->id = (int)$objectID;
     }
 
     public function offsetGet($var)
@@ -61,6 +61,6 @@ abstract class Entity implements \ArrayAccess
 
     public function offsetUnset($var)
     {
-        throw new \Exception('Cannot delete any values');
+        throw new \Exception('Cannot delete '.$var);
     }
 }
