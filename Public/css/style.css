@@ -5,6 +5,7 @@ html {
 body {
   padding-top: 56px;
   font-family: Hack, monospace;
+  min-width: 320px;
 }
 
 a:hover {
@@ -50,19 +51,26 @@ footer {
   width: 400px;
 }
 
-.page-quick-sidebar-wrapper {
-  transition: right 0.3s;
-  z-index: 9999;
-  position: fixed;
-  top: 30%;
-  bottom: 0;
-  width: 150px;
-  right: -150px;
-  overflow: hidden;
+#categories {
+  padding-inline-start: 0;
 }
 
-.page-quick-sidebar-wrapper.active {
-  right: 0;
+#categories li svg {
+  font-size: 0.7em;
+  margin-top: 5px;
+}
+
+.category-list {
+  border-bottom: 1px solid #6c757d;
+}
+
+.category-link {
+  color: #6c757d;
+  line-height: 20px;
+}
+
+.c-content-feature .c-icon-wrapper {
+  min-height: 125px;
 }
 
 .c-icon-wrapper svg {
@@ -119,11 +127,16 @@ a.post-list {
   font-size: 1em;
 }
 
+.breadcrumb-list {
+  float: right;
+}
+
 .breadcrumb-title {
   color: #000;
-  font-weight: 500;
-  font-size: 2em;
+  font-weight: 800;
+  font-size: 1.5em;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .li::before {
@@ -210,6 +223,7 @@ a.post-list {
 nav {
   border-bottom: 2px solid #32c5d2;
   overflow: hidden;
+  line-height: 25px;
 }
 
 .card-text.bg-info {
@@ -240,4 +254,16 @@ nav {
 .social .svg-inline--fa:hover {
   background-color: #32c5d2;
   color: #fff;
+}
+
+@media all and (max-width: 650px) {
+
+  #categories div span {
+    display: none;
+  }
+
+  .breadcrumb-list {
+    float: left;
+  }
+
 }

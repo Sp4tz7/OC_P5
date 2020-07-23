@@ -34,16 +34,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item {% if page.body_id == 'home' %}active{% endif %}">
                         <a class="nav-link" href="/">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/post/all/">Blog</a>
+                        <a class="nav-link {% if page.body_id in ['list', 'post'] %}active{% endif %}"
+                           href="/post/all/">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact/">Contact</a>
+                        <a class="nav-link {% if page.body_id == 'contact' %}active{% endif %}"
+                           href="/contact/">Contact</a>
                     </li>
                     {% if user %}
                         <li><a class="nav-link" href="/admin/my-account/"><i class="fas fa-user fa-fw ml-2"></i></i> My
@@ -80,30 +82,32 @@
 <script src="/plugins/jquery/jquery.min.js"></script>
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/plugins/toastr/js/toastr.min.js"></script>
-<script>
-    {% if flashes %}
-    {% for flash in flashes %}
-    Command: toastr.{{ flash.type }}("{{ flash.message['content']|raw|trim }}", "{{ flash.message['title']|raw|trim }}")
-    {% endfor %}
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": true,
-        "progressBar": true,
-        "positionClass": "toast-top-center",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
-    {% endif %}
-</script>
+
+{% if flashes %}
+    <script>
+        {% for flash in flashes %}
+        Command: toastr.{{ flash.type }}("{{ flash.message['content']|raw|trim }}", "{{ flash.message['title']|raw|trim }}")
+        {% endfor %}
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
+{% endif %}
+
 {% block custom_script %}
 
 {% endblock %}

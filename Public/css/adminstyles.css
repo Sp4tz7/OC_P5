@@ -4171,7 +4171,7 @@ input[type=button].btn-block {
 
 .nav-link {
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.8rem;
 }
 
 .nav-link:hover, .nav-link:focus {
@@ -10748,7 +10748,7 @@ body {
 
 .sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-heading {
   padding: 1.75rem 1rem 0.75rem;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: bold;
   text-transform: uppercase;
 }
