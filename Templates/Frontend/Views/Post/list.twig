@@ -2,11 +2,9 @@
 {% block content %}
     <div class="content-box">
         <div class="container">
-            <button type="button" class="float-right btn btn-outline-info quick-sidebar-toggler" data-toggle="collapse"
-                    aria-expanded="false"><i id="arrow" class="fas fa-arrow-left"></i> CATEGORIES
-            </button>
-            <div class="row align-items-center my-5">
-                <div class="col-md-12">
+
+            <div class="row  my-5">
+                <div class="col-md-9">
                     {% if posts %}
                         <div class="row"> {% embed 'extend-list.twig' with {'pagination': true} %}{% endembed %}</div>
                     {% else %}
@@ -14,27 +12,24 @@
                         </div>
                     {% endif %}
                 </div>
-                <div id="categories" class="page-quick-sidebar-wrapper">
-                    <span class="p-2">Categories</span>
-                    <ul class="list-group mt-2">
-                        {% for category in categories %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="/post/{{ category.category_slug }}/">{{ category.category_name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                <div class="col-md-3">
+                    <div class="c-content-ver-nav">
+                        <div class="c-content-title-1 c-theme c-title-md c-margin-t-40">
+                            <span class="h4">Categories</span>
+                            <div class="left-separator"></div>
+                        </div>
+                        <ul id="categories">
+                            {% for category in categories %}
+                                <li class="d-flex category-list p-2">
+                                    <i class="fa fa-chevron-right mr-1"></i> <a class="category-link"
+                                       href="/post/{{ category.category_slug }}/">{{ category.category_name }}</a>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    {% block custom_script %}
-        <script>
-            $(document).ready(function () {
-                $('.quick-sidebar-toggler').on('click', function () {
-                    $('#categories').toggleClass('active');
-                });
-
-            });
-        </script>
-    {% endblock %}
 {% endblock %}

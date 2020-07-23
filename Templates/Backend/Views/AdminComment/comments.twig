@@ -53,14 +53,16 @@
                                         <i class="fas fa-comment-slash text-danger" title="Rejected"></i>
                                     {% endif %}
                                 </td>
-                                <td><a href="/post/{{ comment.getPostId() }}/" class="mr-2"><i class="fas fa-eye"></i></a>
-                                    <a href="/admin/comment/edit/{{ comment.getId() }}"><i class="fas fa-edit"></i></a>
+                                <td><a href="/post/{{ comment.getPostId() }}/" class="float-left mr-2 text-dark" title="View comment"><i
+                                                class="fas fa-eye"></i></a>
+                                    <a href="/admin/comment/edit/{{ comment.getId() }}" class="float-left text-dark" title="Edit comment"><i
+                                                class="fas fa-edit"></i></a>
                                     <a href="#" data-target="#modal" data-toggle="modal" data-id="{{ comment.getId() }}"
-                                       class="delete_comment mx-2"><i class="fas fa-trash"></i></a>
+                                       class="float-left delete_comment mx-2 text-dark" title="Delete comment"><i class="fas fa-trash"></i></a>
                                     <a href="/admin/comment/approve/{{ comment.getId() }}/{{ csrf_token }}/"
-                                       class="approve_comment"><i class="fas fa-check"></i></a>
+                                       class="float-left approve_comment text-dark" title="Approve comment"><i class="fas fa-comment"></i></a>
                                     <a href="/admin/comment/reject/{{ comment.getId() }}/{{ csrf_token }}/"
-                                       class="reject_comment mx-2"><i class="fas fa-times"></i></a>
+                                       class="float-left reject_comment mx-2 text-dark" title="Reject comment"><i class="fas fa-comment-slash"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}
