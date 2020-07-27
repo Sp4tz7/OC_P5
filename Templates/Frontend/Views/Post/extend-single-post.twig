@@ -1,14 +1,16 @@
 <div class="col-md-4 mb-5">
     <div class="card h-100">
         <div class="card-body">
-
             <a class="badge badge-info float-right mb-2"
                href="/post/{{ single_post.getCategorySlug()|default('all') }}/">{{ single_post.getCategoryName() }} </a>
-            <span class="float-right mx-2 badge badge-info"><i class="far fa-comments"></i> {{ single_post.getNbComments() }}</span>
-            <span style="font-size: 75%" class="text-muted float-left mb-2">{{ single_post.getDateAdd()|date('d M Y') }} </span>
-            {% if single_post.getImageUrl() %}
-                <img src="/img/post/{{ single_post.getImageUrl() }}" class="img-fluid mb-3"/>
-            {% endif %}
+            <span class="float-right mx-2 badge badge-info"><i
+                        class="far fa-comments"></i> {{ single_post.getNbComments() }}</span>
+            <span style="font-size: 75%"
+                  class="text-muted float-left mb-2">{{ single_post.getDateAdd()|date('d M Y') }} </span>
+            <div class="post-image">{% if single_post.getImageUrl() %}
+                    <img src="/img/post/{{ single_post.getImageUrl() }}" class="img-fluid mb-3"/>
+                {% endif %}
+            </div>
             <h3 class="card-title">{{ single_post.getTitle() }}</h3>
             <p class="card-text">{{ single_post.getAbstractContent() }}</p>
         </div>
