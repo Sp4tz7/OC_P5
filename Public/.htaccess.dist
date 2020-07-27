@@ -1,0 +1,16 @@
+#URL rewriting mode
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    #FORCE HTTPS
+    RewriteCond %{HTTPS} off [OR]
+    RewriteCond %{HTTP_HOST} ^www. [NC]
+    RewriteRule (.*) https://siker.ch/$1 [R=301,L]
+    #IGNORE FILES AND DIRECTORIES
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # ADD A SLASH AT THE END OF EACH URL
+    RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    #REDIRECT TO BOOTSTRAP FILE
+    RewriteRule ^(.*)$ bootstrap.php [QSA,L]
+</IfModule>

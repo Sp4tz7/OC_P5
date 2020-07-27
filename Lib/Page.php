@@ -26,19 +26,23 @@ class Page extends ApplicationComponent
         if (!file_exists($templateDir)) {
             throw new \RuntimeException('The view '.$templateDir.' does not exist');
         }
-        $loader = new \Twig\Loader\FilesystemLoader(
+        $loader            = new \Twig\Loader\FilesystemLoader(
             [
                 APP_DIR.'Templates/'.$this->app->getEnv(),
                 APP_DIR.'Templates/'.$this->app->getEnv().'/Views/',
                 $this->dirExists(APP_DIR.'Templates/'.$this->app->getEnv().'/Views/'.$this->app->getName().'/'),
             ]
         );
-        $twig   = new \Twig\Environment(
-            $loader,
+        $twig_array_loader =
             [
-                'debug' => true,
-                //'cache' => APP_DIR.'/Cache',
-            ]
+                'debug' => USE_DEBUG,
+            ];
+        if (USE_CACHE) {
+            $twig_array_loader['cache'] = APP_DIR.'/Cache';
+        }
+        $twig = new \Twig\Environment(
+            $loader,
+            $twig_array_loader
         );
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         $twig->addExtension(new \Twig\Extra\String\StringExtension());
@@ -54,6 +58,7 @@ class Page extends ApplicationComponent
             'csrf_token' => $csrf_token,
             'token' => $token,
             'siteName' => SITE_NAME,
+            'siteVersion' => SITE_VERSION,
         ];
 
         $page = array_merge($page, $this->getVars());
