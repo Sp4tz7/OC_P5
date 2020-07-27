@@ -6,6 +6,7 @@ use Core\AbstractController;
 use Core\HTTPRequest;
 use Core\HTTPResponse;
 use Entity\Post;
+use Imagine\Image\Box;
 use Service\Service;
 
 class AdminPostController extends AbstractController
@@ -95,99 +96,44 @@ class AdminPostController extends AbstractController
     private function uploadImage($name)
     {
         // Image not mandatory
-        if (!$this->getApp()->getHttpRequest()->fileExists('blog_image')) {
+        if (!$this->getApp()->getHttpRequest()->fileExists('blog_image') or
+            $this->getApp()->getHttpRequest()->getFileData('blog_image', 'size') == 0
+        ) {
             return false;
         }
 
-        $file_src      = $this->getApp()->getHttpRequest()->getFileData('blog_image', 'tmp_name');
-        $target_dir    = APP_DIR."/Public/img/post/";
-        $target_file   = $target_dir.basename($this->getApp()->getHttpRequest()->getFileData('blog_image', 'name'));
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        $target_final  = $target_dir.$name.'.jpg';
+        $imagine    = new \Imagine\Imagick\Imagine();
+        $file_src   = $this->getApp()->getHttpRequest()->getFileData('blog_image', 'tmp_name');
+        $target_dir = APP_DIR."Public/img/post/";
 
-        // Check if image file is a actual image or fake image
-        $check = getimagesize($this->getApp()->getHttpRequest()->getFileData('blog_image', 'tmp_name'));
-        if ($check === false) {
+        try {
+            $image = $imagine->open($file_src);
+
+            // Convert image to 16.9 ratio
+            $width  = 1400;
+            $height = 788;
+            $ratio  = $image->getSize()->getWidth() / $image->getSize()->getHeight();
+
+            if ($width / $height > $ratio) {
+                $width = floor($height * $ratio);
+            } else {
+                $height = floor($width / $ratio);
+            }
+
+            $image->resize(new Box($width, $height))->save($target_dir.$name.IMG_EXT);
+            $image->resize(new Box(212, 119))->save($target_dir.$name.'_thumb'.IMG_EXT);
+
+        } catch (\Exception $exceptione) {
             $this->app->setFlash(
                 'error',
                 [
                     'title' => 'Image Upload error',
-                    'content' => 'Your file is not an image',
+                    'content' => $exceptione->getMessage(),
                 ]
             );
-
-            return false;
         }
 
-        // Check file size
-        if ($this->getApp()->getHttpRequest()->getFileData('blog_image', 'size') > 320000000) {
-            $this->app->setFlash(
-                'error',
-                [
-                    'title' => 'Image Upload error',
-                    'content' => 'Your image is to large ('.$this->getApp()->getHttpRequest()->getFileData(
-                            'blog_image',
-                            'size'
-                        ).')',
-                ]
-            );
-
-            return false;
-        }
-
-        // Allow only image format
-        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-            $this->app->setFlash(
-                'error',
-                [
-                    'title' => 'Image Upload error',
-                    'content' => 'Sorry, only JPG, JPEG, PNG files are allowed.',
-                ]
-            );
-
-            return false;
-        }
-
-        // Convert image to jpg and 16.9 ratio
-        $width  = 1400;
-        $height = 788;
-        list($img_width, $img_height, $type) = getimagesize($file_src);
-        $ratio = $img_width / $img_height;
-
-        if ($width / $height > $ratio) {
-            $width = floor($height * $ratio);
-        } else {
-            $height = floor($width / $ratio);
-        }
-
-        switch ($type) {
-            case 1:
-                $img_src = imagecreatefromgif($file_src);
-                break;
-            case 2:
-                $img_src = imagecreatefromjpeg($file_src);
-                break;
-            case 3:
-                $img_src = imagecreatefrompng($file_src);
-                break;
-        }
-
-        $new_image = imagecreatetruecolor($width, $height);
-        imagecopyresampled($new_image, $img_src, 0, 0, 0, 0, $width, $height, $img_width, $img_height);
-
-        if (!imagejpeg($new_image, $target_final)) {
-            $this->app->setFlash(
-                'error',
-                [
-                    'title' => 'Image Upload error',
-                    'content' => 'Unexpected error. Your file has not been uploaded.',
-                ]
-            );
-
-            return false;
-        }
-
-        return $name.'.jpg';
+        return $name.IMG_EXT;
     }
 
     public function executeAddCategory(HTTPRequest $request, HTTPResponse $response)
@@ -251,9 +197,15 @@ class AdminPostController extends AbstractController
 
                 $new_slug = $post->getSlug();
 
-                // Rename Image if title/slug has changer
-                if ($old_slug != $new_slug and !$this->getApp()->getHttpRequest()->fileExists('blog_image', 'name')) {
-                    $image_name = $this->setImageName($post->getImageUrl(), $new_slug);
+                // Rename Image if title/slug has changed
+                if ($old_slug != $new_slug and $this->getApp()->getHttpRequest()->getFileData(
+                        'blog_image',
+                        'size'
+                    ) == 0) {
+
+                    $image_name = $this->setImageName($old_slug, $new_slug);
+                    var_dump($image_name);
+
                     $post->setImageUrl($image_name);
                 }
 
@@ -299,7 +251,7 @@ class AdminPostController extends AbstractController
         $post       = $postManager->getUnique($request->getDataGet('id'));
 
         if (is_object($post) and $post->getId()) {
-            $image = '/img/post/'.$post->getSlug().'.jpg';
+            $image = '/img/post/'.$post->getSlug().'_thumb'.IMG_EXT;
             if (file_exists(APP_DIR.'Public/'.$image)) {
                 $this->page->addVar('image', $image);
             }
@@ -312,12 +264,30 @@ class AdminPostController extends AbstractController
 
     private function setImageName($old_name, $new_name)
     {
-        $target   = APP_DIR.'/Public/img/post/';
-        $new_name = $new_name.'.jpg';
-        if (file_exists($target.$old_name)) {
-            rename($target.$old_name, $target.$new_name);
+        $imagine    = new \Imagine\Imagick\Imagine();
+        $target_dir = APP_DIR."Public/img/post/";
+
+        try {
+            $image = $imagine->open($target_dir.$old_name.IMG_EXT);
+            $thumb = $imagine->open($target_dir.$old_name.'_thumb'.IMG_EXT);
+
+            $image->save($target_dir.$new_name.IMG_EXT);
+            $thumb->save($target_dir.$new_name.'_thumb'.IMG_EXT);
+
+            unlink($target_dir.$old_name.IMG_EXT);
+            unlink($target_dir.$old_name.'_thumb'.IMG_EXT);
+
+        } catch (\Exception $exceptione) {
+            $this->app->setFlash(
+                'error',
+                [
+                    'title' => 'Image Upload error',
+                    'content' => $exceptione->getMessage(),
+                ]
+            );
         }
 
-        return $new_name;
+        return $new_name.IMG_EXT;
+
     }
 }

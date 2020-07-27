@@ -44,7 +44,11 @@ footer {
 }
 
 .post-image {
-  min-height: 30vh;
+  min-height: 120px;
+}
+
+#home .post-image img {
+  min-width: 305px;
 }
 
 #login,

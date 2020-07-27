@@ -20,6 +20,13 @@ You can also:
 -  See your pending/approved/rejected comments in the admin zone
 -  Become an administrator if authorized
 
+### Requirements
+
+In order to use this framework, the following points must be respected
+
+-  PHP version 7.0
+-  PHP [Imagick](http://pecl.php.net/package/imagick/3.4.4/windows) lib installed according to your PHP version
+
 ### Installation
 
 This _PHP Blog_ project requires [PHP](https://php.net/) 7.0+ and [Composer](https://getcomposer.org/) to run.
