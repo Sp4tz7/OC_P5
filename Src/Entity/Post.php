@@ -50,6 +50,14 @@ class Post extends Entity
     /**
      * @return mixed
      */
+    public function getImageThumb()
+    {
+        return $this->getSlug().'_thumb'.IMG_EXT;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getImageUrl()
     {
         return $this->image_url;

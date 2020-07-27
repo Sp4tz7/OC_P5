@@ -9,6 +9,7 @@ class HTTPResponse extends ApplicationComponent
     public function redirect($location)
     {
         header('Location: '.$location);
+        exit();
     }
 
     public function redirect404()
@@ -25,7 +26,8 @@ class HTTPResponse extends ApplicationComponent
         header($header);
     }
 
-    public function setJson($data){
+    public function setJson($data)
+    {
         return json_encode($data);
     }
 
@@ -36,7 +38,7 @@ class HTTPResponse extends ApplicationComponent
 
     public function killKookie($name)
     {
-        $this->setCookie($name, '', time() - 360 , '/');
+        $this->setCookie($name, '', time() - 360, '/');
     }
 
     // Set 2 last arguments to true by default
@@ -55,7 +57,6 @@ class HTTPResponse extends ApplicationComponent
     public function killSession($name)
     {
         unset($_SESSION[$name]);
-
     }
 
     public function setPage(Page $page)

@@ -8,7 +8,7 @@
             <span style="font-size: 75%"
                   class="text-muted float-left mb-2">{{ single_post.getDateAdd()|date('d M Y') }} </span>
             <div class="post-image">{% if single_post.getImageUrl() %}
-                    <img src="/img/post/{{ single_post.getImageUrl() }}" class="img-fluid mb-3"/>
+                    <img src="/img/post/{{ single_post.getImageThumb() }}" class="img-fluid mb-3"/>
                 {% endif %}
             </div>
             <h3 class="card-title">{{ single_post.getTitle() }}</h3>
