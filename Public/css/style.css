@@ -48,7 +48,7 @@ footer {
 }
 
 #home .post-image img {
-  min-width: 305px;
+  min-width: 100%;
 }
 
 #login,
