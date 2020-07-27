@@ -1,2 +1,6 @@
-/vendor/*
+/Cache/*
+/Config/Config.php
+/Public/.htaccess
+/Public/.sitemaps.xml
 /Public/img/post/*
+/vendor/*

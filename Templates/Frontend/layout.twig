@@ -13,12 +13,16 @@
                 {{ siteName }}
             {% endif %}
         </title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
         <!-- Bootstrap core CSS -->
-        <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/style.css" rel="stylesheet">
-        <script src="/plugins/fontawesome/js/font-awesome.min.js"></script>
-        <link href="/plugins/toastr/css/toastr.css" rel="stylesheet"/>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/hack-font/3.003/web/hack.min.css" rel="stylesheet"/>
+        <link href="/plugins/bootstrap/css/bootstrap.min.css?v={{ siteVersion }}" rel="stylesheet">
+        <link href="/css/style.css?v={{ siteVersion }}" rel="stylesheet">
+        <script src="/plugins/fontawesome/js/font-awesome.min.js?v={{ siteVersion }}"></script>
+        <link href="/plugins/toastr/css/toastr.css?v={{ siteVersion }}" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/hack-font/3.003/web/hack.min.css?v={{ siteVersion }}" rel="stylesheet"/>
         {% block custom_sytle %}
         {% endblock %}
     {% endblock %}
@@ -67,11 +71,11 @@
     {% endblock %}
 </div>
 
-
 {% block footer %}
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white mr-0">Copyright &copy; sp4tz {{ "now"|date("Y") }} |
+            <p class="m-0 text-center text-white mr-0">Copyright
+                &copy; {{ siteName }} {{ "now"|date("Y") }} {{ siteVersion }} |
                 <a href="/sitemap/" class="mr-0 text-white">Sitemaps</a> |
                 <a href="/admin/" class="mr-0 text-white">Administration</a>
             </p>
@@ -79,9 +83,9 @@
     </footer>
 {% endblock %}
 
-<script src="/plugins/jquery/jquery.min.js"></script>
-<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/plugins/toastr/js/toastr.min.js"></script>
+<script src="/plugins/jquery/jquery.min.js?v={{ siteVersion }}"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js?v={{ siteVersion }}"></script>
+<script src="/plugins/toastr/js/toastr.min.js?v={{ siteVersion }}"></script>
 
 {% if flashes %}
     <script>

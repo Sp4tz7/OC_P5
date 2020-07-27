@@ -21,12 +21,26 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://ocp5git/post/dev/</loc>
+    <loc>http://ocp5git/post/asd/</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://ocp5git/post/dev/test/</loc>
-    <lastmod>2020-07-08</lastmod>
+    <loc>http://ocp5git/post/asda/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://ocp5git/post/asda/asdddsds/</loc>
+    <lastmod>2020-07-27</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://ocp5git/post/asda/asdasd/</loc>
+    <lastmod>2020-07-27</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://ocp5git/post/asda/asd/</loc>
+    <lastmod>2020-07-27</lastmod>
     <priority>0.7</priority>
   </url>
 </urlset>

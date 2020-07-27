@@ -7,6 +7,9 @@ define('SITE_URL', '');                                         // Enter the ful
 define('TIME_ZONE', 'Europe/Zurich');                           // Change your timezone if needed
 define('PASSWORD_MIN_LENGTH', 6);
 define('SITE_NAME', 'MY Blog');
+define('SITE_VERSION', '1.0');
+define('USE_DEBUG', false);                                     // Set true for DEV env
+define('USE_CACHE', true);                                      // Set false for DEV env
 
 final class config
 {
