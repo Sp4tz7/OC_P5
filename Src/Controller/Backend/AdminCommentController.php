@@ -47,7 +47,7 @@ class AdminCommentController extends AbstractController
             $this->app->setFlash(
                 'success',
                 [
-                    'title' => 'Comment has benn approved',
+                    'title' => 'Comment has been approved',
                     'content' => '',
                 ]
             );
@@ -113,7 +113,7 @@ class AdminCommentController extends AbstractController
             $this->app->setFlash(
                 'success',
                 [
-                    'title' => 'Comment has benn rejected',
+                    'title' => 'Comment has been rejected',
                     'content' => '',
                 ]
             );

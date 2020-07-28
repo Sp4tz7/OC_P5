@@ -72,7 +72,7 @@ class UserController extends AbstractController
                         '/'
                     );
                 }
-                $this->app->setFlash('success', ['content' => 'You hav successfully logged in.']);
+                $this->app->setFlash('success', ['content' => 'You have successfully logged in.']);
                 $response->redirect($redirect);
 
             } else {
