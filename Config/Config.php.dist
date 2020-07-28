@@ -13,6 +13,11 @@ define('USE_CACHE', true);                                      // Set false for
 define('IMG_EXT', '.jpg');                                      // Set to webp if your web host has WebP installed
 define('GA_API_ID', null);                                      // Enter your Google Analytics API ID. Ex: UA-000000000-0
 
+error_reporting(0);
+if (USE_DEBUG) {
+    error_reporting(E_ALL);
+}
+
 final class config
 {
     public const ReCaptchaSecret = ''                           // Enter your secret from https://www.google.com/recaptcha
