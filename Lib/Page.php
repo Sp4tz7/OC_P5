@@ -59,6 +59,7 @@ class Page extends ApplicationComponent
             'token' => $token,
             'siteName' => SITE_NAME,
             'siteVersion' => SITE_VERSION,
+            'gaApiId' => GA_API_ID,
         ];
 
         $page = array_merge($page, $this->getVars());
