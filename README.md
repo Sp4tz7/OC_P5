@@ -24,12 +24,12 @@ You can also:
 
 In order to use this framework, the following points must be respected
 
--  PHP version 7.0
+-  PHP version >=7.2.5
 -  PHP [Imagick](http://pecl.php.net/package/imagick/3.4.4/windows) lib installed according to your PHP version
 
 ### Installation
 
-This _PHP Blog_ project requires [PHP](https://php.net/) 7.0+ and [Composer](https://getcomposer.org/) to run.
+This _PHP Blog_ project requires [PHP](https://php.net/) 7.2.5+ and [Composer](https://getcomposer.org/) to run.
 
 Install the whole project from Github and run Composer vendors dependencies.
 
