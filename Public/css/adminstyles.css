@@ -10917,3 +10917,13 @@ pre {
   position: relative;
   background-color: #fff;
 }
+
+@media all and (max-width: 650px) {
+  .card .nav-tabs li a.active {
+    border-bottom: 2px solid #36c6d3;
+  }
+
+  .card .nav-tabs li a {
+    padding-bottom: 2px;
+  }
+}
