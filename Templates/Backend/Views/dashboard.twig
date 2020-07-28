@@ -119,7 +119,7 @@
 {% endblock %}
 {% block custom_script %}
     {{ parent() }}
-    <script>
+    <script nonce="{{ nonce }}">
         $(document).ready(function () {
             $('.delete_comment').on('click', function () {
                 $('#deleteComment').attr('href', '/admin/comment/delete/'+$(this).data('id')+'/{{ csrf_token }}/');

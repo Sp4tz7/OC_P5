@@ -116,7 +116,7 @@
 {% endblock %}
 {% block custom_script %}
     {{ parent() }}
-    <script>
+    <script nonce="{{ nonce }}">
         $(document).ready(function () {
             $('#addPostCategory').on('click', function (event) {
                 event.stopPropagation();

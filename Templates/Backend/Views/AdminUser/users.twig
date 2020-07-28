@@ -69,7 +69,7 @@
 {% endblock %}
 {% block custom_script %}
     {{ parent() }}
-    <script>
+    <script nonce="{{ nonce }}">
         $(document).ready(function () {
             $('.delete_user').on('click', function () {
                 $('#deleteUser').attr('href', '/admin/user/delete/' + $(this).data('id') + '/{{ csrf_token }}/');

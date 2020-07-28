@@ -4,7 +4,7 @@
     {% block head %}
         {% if gaApiId %}
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ gaApiId }}"></script>
-        <script>
+        <script nonce="{{ nonce }}">
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -97,7 +97,7 @@
 <script src="/plugins/toastr/js/toastr.min.js?v={{ siteVersion }}"></script>
 
 {% if flashes %}
-    <script>
+    <script nonce="{{ nonce }}">
         {% for flash in flashes %}
         Command: toastr.{{ flash.type }}("{{ flash.message['content']|raw|trim }}", "{{ flash.message['title']|raw|trim }}")
         {% endfor %}

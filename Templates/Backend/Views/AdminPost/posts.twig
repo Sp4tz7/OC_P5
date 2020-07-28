@@ -64,7 +64,7 @@
 
 {% block custom_script %}
     {{ parent() }}
-    <script>
+    <script nonce="{{ nonce }}">
         $(document).ready(function () {
             $('.delete_post').on('click', function () {
                 $('#deletePost').attr('href', '/admin/post/delete/'+$(this).data('id')+'/{{ csrf_token }}/');

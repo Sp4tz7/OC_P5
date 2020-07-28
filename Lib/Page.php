@@ -21,6 +21,13 @@ class Page extends ApplicationComponent
 
     public function getGeneratedPage()
     {
+        $nonce = bin2hex(random_bytes(16));
+        $this->getApp()->getHttpResponse()->addHeader("X-Frame-Options: DENY");
+        $this->getApp()->getHttpResponse()->addHeader("X-Content-Type-Options : nosniff");
+        $this->getApp()->getHttpResponse()->addHeader("Referrer-Policy: strict-origin-when-cross-origin");
+        $this->getApp()->getHttpResponse()->addHeader("feature-policy: accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none'");
+        $this->getApp()->getHttpResponse()->addHeader("Content-Security-Policy: script-src 'self' 'nonce-".$nonce."' www.googletagmanager.com www.google.com");
+
         $templateDir = !empty($this->templateDir) ? $this->templateDir : APP_DIR.'Templates/'.$this->app->getEnv();
 
         if (!file_exists($templateDir)) {
@@ -60,6 +67,7 @@ class Page extends ApplicationComponent
             'siteName' => SITE_NAME,
             'siteVersion' => SITE_VERSION,
             'gaApiId' => GA_API_ID,
+            'nonce' => $nonce,
         ];
 
         $page = array_merge($page, $this->getVars());

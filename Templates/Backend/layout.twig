@@ -61,27 +61,27 @@
                     {% endif %}
                 </div>
             </div>
-    <div class="sb-sidenav-footer">
-        <div class="small">Logged in as: {{ user.getNickname() }}</div>
-
-    </div>
-    </nav>
-</div>
-<div id="layoutSidenav_content">
-    <main>
-        {% block main %}
-
-        {% endblock %}
-    </main>
-    <footer class="py-4 bg-light mt-auto">
-        <div class="container-fluid">
-            <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright &copy; {{ siteName }} | Sp4tz {{ "now"|date("Y") }}</div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as: {{ user.getNickname() }}</div>
 
             </div>
-        </div>
-    </footer>
-</div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            {% block main %}
+
+            {% endblock %}
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; {{ siteName }} | Sp4tz {{ "now"|date("Y") }}</div>
+
+                </div>
+            </div>
+        </footer>
+    </div>
 </div>
 <script src="/plugins/jquery/jquery.min.js"></script>
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -93,29 +93,31 @@
 {% block custom_script %}
     <script src="/js/admin.js"></script>
 {% endblock %}
-<script>
-    {% if flashes %}
-    {% for flash in flashes %}
-    Command: toastr.{{ flash.type }}("{{ flash.message['content'] }}", "{{ flash.message['title'] }}")
-    {% endfor %}
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": true,
-        "progressBar": true,
-        "positionClass": "toast-top-center",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
-    {% endif %}
-</script>
+
+{% if flashes %}
+    <script nonce="{{ nonce }}">
+        {% for flash in flashes %}
+        Command: toastr.{{ flash.type }}("{{ flash.message['content'] }}", "{{ flash.message['title'] }}")
+        {% endfor %}
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
+{% endif %}
+
 </body>
 </html>

@@ -1,7 +1,7 @@
 {% extends "login.twig" %}
 {% block custom_script %}
     {{ parent() }}
-    <script>
+    <script nonce="{{ nonce }}">
     $('.login-form').addClass('d-none');
     $('.register-form').removeClass('d-none');
     </script>

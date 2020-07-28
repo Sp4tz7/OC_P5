@@ -120,7 +120,7 @@
 {% endblock %}
 {% block custom_script %}
     <script src="/js/scripts.js"></script>
-    <script>
+    <script nonce="{{ nonce }}">
         $(document).ready(function () {
             $('.reply').on('click', function () {
                 var commentId = $(this).attr('data-comment-id');
