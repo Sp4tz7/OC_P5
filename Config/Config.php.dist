@@ -11,6 +11,7 @@ define('SITE_VERSION', '1.0');
 define('USE_DEBUG', false);                                     // Set true for DEV env
 define('USE_CACHE', true);                                      // Set false for DEV env
 define('IMG_EXT', '.jpg');                                      // Set to webp if your web host has WebP installed
+define('GA_API_ID', null);                                      // Enter your Google Analytics API ID. Ex: UA-000000000-0
 
 final class config
 {
