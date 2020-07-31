@@ -2,14 +2,42 @@
 
 namespace Core;
 
+/**
+ * Class Page
+ * @package Core
+ */
 class Page extends ApplicationComponent
 {
+    /**
+     * @var
+     */
     protected $contentFile;
+
+    /**
+     * @var
+     */
     protected $templateDir;
+
+    /**
+     * @var array
+     */
     protected $vars = [];
+
+    /**
+     * @var
+     */
     protected $name;
+
+    /**
+     * @var
+     */
     protected $app;
 
+
+    /**
+     * @param $var
+     * @param $value
+     */
     public function addVar($var, $value)
     {
         if (!is_string($var) || is_numeric($var) || empty($var)) {
@@ -19,6 +47,11 @@ class Page extends ApplicationComponent
         $this->vars[$var] = $value;
     }
 
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function getGeneratedPage()
     {
         $nonce = bin2hex(random_bytes(16));
@@ -75,6 +108,10 @@ class Page extends ApplicationComponent
         $this->app->getHttpResponse()->setSession('token', $token);
     }
 
+    /**
+     * @param $dir
+     * @return bool
+     */
     public function dirExists($dir)
     {
         if (is_dir($dir)) {
@@ -84,11 +121,17 @@ class Page extends ApplicationComponent
         return false;
     }
 
+    /**
+     * @return array
+     */
     public function getVars()
     {
         return $this->vars;
     }
 
+    /**
+     * @param $templateDir
+     */
     public function setTemplateDir($templateDir)
     {
         if (!is_string($templateDir) || empty($templateDir)) {
@@ -98,22 +141,34 @@ class Page extends ApplicationComponent
         $this->templateDir = $templateDir;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->app->getName();
     }
 
+    /**
+     * @return string
+     */
     public function getEnv()
     {
         return $this->app->getEnv();
     }
 
+    /**
+     *
+     */
     public function set404()
     {
         $this->app->setEnv('Frontend');
         $this->setContentFile('404.twig');
     }
 
+    /**
+     * @param $contentFile
+     */
     public function setContentFile($contentFile)
     {
         if (!is_string($contentFile) || empty($contentFile)) {

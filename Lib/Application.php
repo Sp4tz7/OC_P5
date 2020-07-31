@@ -2,6 +2,10 @@
 
 namespace Core;
 
+/**
+ * Class Application
+ * @package Core
+ */
 class Application
 {
 
@@ -9,27 +13,35 @@ class Application
      * @var HTTPRequest
      */
     protected $httpRequest;
+
     /**
      * @var HTTPResponse
      */
     protected $httpResponse;
+
     /**
      * @var
      */
     protected $env = 'Frontend';
+
     /**
      * @var
      */
     protected $name;
+
     /**
      * @var
      */
     protected $action;
+
     /**
      * @var
      */
     protected $config;
 
+    /**
+     * Application constructor.
+     */
     public function __construct()
     {
         $this->httpRequest  = new HTTPRequest($this);
@@ -141,6 +153,9 @@ class Application
         return strtolower($this->action);
     }
 
+    /**
+     * @return HTTPResponse
+     */
     public function getHttpResponse()
     {
         return $this->httpResponse;
@@ -159,12 +174,18 @@ class Application
     }
 
 
+    /**
+     * @return HTTPRequest
+     */
     public function getHttpRequest()
     {
         return $this->httpRequest;
     }
 
 
+    /**
+     * @return mixed|null
+     */
     public function getFlash()
     {
         $flash = $this->httpRequest->getSession('flashes');
@@ -190,6 +211,9 @@ class Application
 
     }
 
+    /**
+     * @return bool
+     */
     public function hasFlash()
     {
         return $this->httpRequest->sessionExists('flashes');

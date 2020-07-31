@@ -4,18 +4,34 @@ namespace Model;
 
 use Entity\User;
 
+/**
+ * Class UserManagerPDO
+ * @package Model
+ */
 class UserManagerPDO extends UserManager
 {
+    /**
+     * @return mixed
+     */
     public function count()
     {
         return $this->dao->query('SELECT COUNT(*) FROM blog_user')->fetchColumn();
     }
 
+    /**
+     * @param $userID
+     * @return mixed|void
+     */
     public function delete($userID)
     {
         $this->dao->exec('DELETE FROM blog_user WHERE id = '.(int)$userID);
     }
 
+    /**
+     * @param int $start
+     * @param int $limit
+     * @return mixed
+     */
     public function getList($start = -1, $limit = -1)
     {
         $sql = 'SELECT * FROM blog_user ORDER BY id, lastname ASC';
@@ -35,6 +51,10 @@ class UserManagerPDO extends UserManager
         return $listeUsers;
     }
 
+    /**
+     * @param $userID
+     * @return mixed|null
+     */
     public function getUnique($userID)
     {
         $request = $this->dao->prepare(
@@ -51,6 +71,10 @@ class UserManagerPDO extends UserManager
         return null;
     }
 
+    /**
+     * @param $nickname
+     * @return mixed
+     */
     public function getByNicknameOrEmail($nickname)
     {
         $request = $this->dao->prepare('SELECT * FROM blog_user WHERE nickname = :nickname OR email = :nickname');
@@ -65,6 +89,10 @@ class UserManagerPDO extends UserManager
 
     }
 
+    /**
+     * @param $token
+     * @return mixed
+     */
     public function getByToken($token)
     {
         $request = $this->dao->prepare('SELECT * FROM blog_user WHERE token = :token');
@@ -79,6 +107,10 @@ class UserManagerPDO extends UserManager
 
     }
 
+    /**
+     * @param User $user
+     * @return mixed|string
+     */
     protected function add(User $user)
     {
         $requete = $this->dao->prepare(
@@ -116,6 +148,10 @@ class UserManagerPDO extends UserManager
         }
     }
 
+    /**
+     * @param User $user
+     * @return mixed|string
+     */
     protected function modify(User $user)
     {
         $requete = $this->dao->prepare(

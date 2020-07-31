@@ -4,23 +4,90 @@ namespace Entity;
 
 use Service\Service;
 
+/**
+ * Class Post
+ * @package Entity
+ */
 class Post extends Entity
 {
+    /**
+     * @var
+     */
     protected $id;
+
+    /**
+     * @var
+     */
     protected $category_id;
+
+    /**
+     * @var
+     */
     protected $category_name;
+
+    /**
+     * @var
+     */
     protected $category_slug;
+
+    /**
+     * @var
+     */
     protected $title;
+
+    /**
+     * @var
+     */
     protected $slug;
+
+    /**
+     * @var
+     */
     protected $abstract_content;
+
+    /**
+     * @var
+     */
     protected $content;
+
+    /**
+     * @var
+     */
     protected $image_url;
+
+    /**
+     * @var
+     */
     protected $date_add;
+
+    /**
+     * @var
+     */
     protected $date_edit;
+
+    /**
+     * @var
+     */
     protected $author;
+
+    /**
+     * @var
+     */
     protected $created_by;
+
+    /**
+     * @var
+     */
     protected $edited_by;
+
+    /**
+     * @var
+     */
     protected $nb_comments;
+
+    /**
+     * @var
+     */
     protected $active;
 
     /**
@@ -29,14 +96,6 @@ class Post extends Entity
     public function getCategorySlug()
     {
         return $this->category_slug;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNbComments()
-    {
-        return $this->nb_comments;
     }
 
     /**
@@ -50,9 +109,33 @@ class Post extends Entity
     /**
      * @return mixed
      */
+    public function getNbComments()
+    {
+        return $this->nb_comments;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getImageThumb()
     {
         return $this->getSlug().'_thumb'.IMG_EXT;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($title): void
+    {
+        $this->slug = Service::slugIt($title);
     }
 
     /**
@@ -87,6 +170,9 @@ class Post extends Entity
         $this->author = $author;
     }
 
+    /**
+     * @return string
+     */
     public function isValid()
     {
         $notEmpty = ['title', 'category_id', 'slug', 'created_by'];
@@ -148,22 +234,6 @@ class Post extends Entity
     public function setTitle($title): void
     {
         $this->title = $title;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param mixed $slug
-     */
-    public function setSlug($title): void
-    {
-        $this->slug = Service::slugIt($title);
     }
 
     /**

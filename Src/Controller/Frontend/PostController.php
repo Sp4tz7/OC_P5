@@ -2,15 +2,23 @@
 
 namespace Controller\Frontend;
 
-use Core\AbstractController;
 use Config\config;
+use Core\AbstractController;
 use Core\HTTPRequest;
 use Core\HTTPResponse;
 use Core\Mailer;
 use Entity\Comment;
 
+/**
+ * Class PostController
+ * @package Controller\Frontend
+ */
 class PostController extends AbstractController
 {
+    /**
+     * @param HTTPRequest $request
+     * @return bool
+     */
     public function executePost(HTTPRequest $request)
     {
         $postManager    = $this->managers->getManagerOf('Post');
@@ -45,11 +53,14 @@ class PostController extends AbstractController
             $this->page->addVar('content', 'This blog post does not exists');
             $this->page->addVar('title', 'Oups! Post not found! ');
         }
-
-
-
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @return bool
+     * @throws \Exception
+     */
     public function executeAddComment(HTTPRequest $request, HTTPResponse $response)
     {
         $redirect = $request->postExists('redirect') ? $request->getDataPost('redirect') : '/';
@@ -120,6 +131,10 @@ class PostController extends AbstractController
         $response->redirect($redirect);
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     */
     public function executeId(HTTPRequest $request, HTTPResponse $response)
     {
         $postManager = $this->managers->getManagerOf('Post');
@@ -134,6 +149,9 @@ class PostController extends AbstractController
 
     }
 
+    /**
+     * @param HTTPRequest $request
+     */
     public function executeList(HTTPRequest $request)
     {
         $postManager  = $this->managers->getManagerOf('Post');

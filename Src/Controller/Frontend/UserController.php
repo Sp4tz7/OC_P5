@@ -8,8 +8,17 @@ use Core\HTTPResponse;
 use Core\Mailer;
 use Entity\User;
 
+/**
+ * Class UserController
+ * @package Controller\Frontend
+ */
 class UserController extends AbstractController
 {
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @return bool
+     */
     public function executeLogin(HTTPRequest $request, HTTPResponse $response)
     {
         $userManager = $this->managers->getManagerOf('User');
@@ -86,6 +95,12 @@ class UserController extends AbstractController
 
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @return bool
+     * @throws \Exception
+     */
     public function executeNewActivation(HTTPRequest $request, HTTPResponse $response)
     {
         $userManager = $this->managers->getManagerOf('User');
@@ -130,6 +145,12 @@ class UserController extends AbstractController
         }
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @return bool
+     * @throws \Exception
+     */
     public function executeNewPassword(HTTPRequest $request, HTTPResponse $response)
     {
         $userManager = $this->managers->getManagerOf('User');
@@ -233,6 +254,10 @@ class UserController extends AbstractController
 
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     */
     public function executeLogout(HTTPRequest $request, HTTPResponse $response)
     {
         if ($request->cookieExists('User')) {
@@ -245,6 +270,12 @@ class UserController extends AbstractController
         $response->redirect('/');
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @return bool
+     * @throws \Exception
+     */
     public function executeRegister(HTTPRequest $request, HTTPResponse $response)
     {
         $redirect = $request->postExists('redirect') ? $request->getDataPost('redirect') : '/login/';

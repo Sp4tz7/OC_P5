@@ -2,8 +2,15 @@
 
 namespace Core;
 
+/**
+ * Trait Hydrator
+ * @package Core
+ */
 trait Hydrator
 {
+    /**
+     * @param $data
+     */
     public function hydrate($data)
     {
         foreach ($data as $key => $value) {

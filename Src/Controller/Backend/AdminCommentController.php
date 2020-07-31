@@ -7,6 +7,10 @@ use Core\HTTPRequest;
 use Core\HTTPResponse;
 use Core\Mailer;
 
+/**
+ * Class AdminCommentController
+ * @package Controller\Backend
+ */
 class AdminCommentController extends AbstractController
 {
     public function executeComments()
@@ -17,6 +21,10 @@ class AdminCommentController extends AbstractController
         $this->page->addVar('comments', $comments);
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     */
     public function executeDelete(HTTPRequest $request, HTTPResponse $response)
     {
         if ($request->getExists('id') and $this->formManager->compareCsrfToken()) {
@@ -34,6 +42,11 @@ class AdminCommentController extends AbstractController
         }
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @throws \Exception
+     */
     public function executeApprove(HTTPRequest $request, HTTPResponse $response)
     {
         if ($request->getExists('id') and $this->formManager->compareCsrfToken()) {
@@ -100,6 +113,11 @@ class AdminCommentController extends AbstractController
         }
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @throws \Exception
+     */
     public function executeReject(HTTPRequest $request, HTTPResponse $response)
     {
         if ($request->getExists('id') and $this->formManager->compareCsrfToken()) {
@@ -143,6 +161,10 @@ class AdminCommentController extends AbstractController
         }
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     */
     public function executeEdit(HTTPRequest $request, HTTPResponse $response)
     {
         $this->adminOnly();
@@ -208,6 +230,4 @@ class AdminCommentController extends AbstractController
             $this->app->setFlash('error', ['content' => 'error']);
         }
     }
-
-
 }

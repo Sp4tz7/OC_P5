@@ -4,8 +4,15 @@ namespace Application\Pdo;
 
 use Config\Config;
 
+/**
+ * Class PDOFactory
+ * @package Application\Pdo
+ */
 class PDOFactory
 {
+    /**
+     * @return \PDO
+     */
     public static function getMysqlConnexion()
     {
         $data     = Config::getDbSettings();

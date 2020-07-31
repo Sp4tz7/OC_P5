@@ -4,10 +4,20 @@ namespace Core;
 
 use Application\Pdo\PDOFactory;
 
+/**
+ * Class SiteMapsManager
+ * @package Core
+ */
 class SiteMapsManager
 {
+    /**
+     * @var array
+     */
     protected $routes_urls = [];
 
+    /**
+     * SiteMapsManager constructor.
+     */
     public function __construct()
     {
         $xml = new \DOMDocument;
@@ -60,6 +70,9 @@ class SiteMapsManager
         }
     }
 
+    /**
+     * @return array[]
+     */
     public function getUrls()
     {
         $urls = [

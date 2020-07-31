@@ -4,18 +4,37 @@ namespace Model;
 
 use Entity\Comment;
 
+/**
+ * Class CommentManagerPDO
+ * @package Model
+ */
 class CommentManagerPDO extends CommentManager
 {
+    /**
+     * @return mixed
+     */
     public function count()
     {
         return $this->dao->query('SELECT COUNT(*) FROM blog_comment')->fetchColumn();
     }
 
+    /**
+     * @param $commentID
+     * @return mixed|void
+     */
     public function delete($commentID)
     {
         $this->dao->exec('DELETE FROM blog_comment WHERE id = '.(int)$commentID);
     }
 
+    /**
+     * @param int  $start
+     * @param int  $limit
+     * @param null $status
+     * @param null $postId
+     * @param null $authorId
+     * @return mixed
+     */
     public function getList($start = -1, $limit = -1, $status = null, $postId = null, $authorId = null)
     {
         $sql = "SELECT c.*, post.title AS 'post',
@@ -51,6 +70,10 @@ class CommentManagerPDO extends CommentManager
         return $listComments;
     }
 
+    /**
+     * @param $commentID
+     * @return mixed|null
+     */
     public function getUnique($commentID)
     {
         $request = $this->dao->prepare(
@@ -72,6 +95,10 @@ class CommentManagerPDO extends CommentManager
         return null;
     }
 
+    /**
+     * @param Comment $comment
+     * @return int|mixed|string
+     */
     protected function add(Comment $comment)
     {
         $request = $this->dao->prepare(
@@ -101,6 +128,10 @@ class CommentManagerPDO extends CommentManager
         }
     }
 
+    /**
+     * @param Comment $comment
+     * @return mixed|string
+     */
     protected function modify(Comment $comment)
     {
         $request = $this->dao->prepare(

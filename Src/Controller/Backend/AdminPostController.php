@@ -9,6 +9,10 @@ use Entity\Post;
 use Imagine\Image\Box;
 use Service\Service;
 
+/**
+ * Class AdminPostController
+ * @package Controller\Backend
+ */
 class AdminPostController extends AbstractController
 {
     public function executePosts()
@@ -21,6 +25,10 @@ class AdminPostController extends AbstractController
         $this->page->addVar('posts', $posts);
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     */
     public function executeDelete(HTTPRequest $request, HTTPResponse $response)
     {
         if ($request->getExists('id') and $this->formManager->compareCsrfToken()) {
@@ -40,6 +48,10 @@ class AdminPostController extends AbstractController
         }
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     */
     public function executeAdd(HTTPRequest $request, HTTPResponse $response)
     {
         $this->adminOnly();
@@ -93,6 +105,10 @@ class AdminPostController extends AbstractController
         $this->page->addVar('editPost', $post);
     }
 
+    /**
+     * @param $name
+     * @return bool|string
+     */
     private function uploadImage($name)
     {
         // Image not mandatory
@@ -122,7 +138,6 @@ class AdminPostController extends AbstractController
 
             $image->resize(new Box($width, $height))->save($target_dir.$name.IMG_EXT);
             $image->resize(new Box(212, 119))->save($target_dir.$name.'_thumb'.IMG_EXT);
-
         } catch (\Exception $exceptione) {
             $this->app->setFlash(
                 'error',
@@ -136,6 +151,10 @@ class AdminPostController extends AbstractController
         return $name.IMG_EXT;
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     */
     public function executeAddCategory(HTTPRequest $request, HTTPResponse $response)
     {
         $postManager = $this->managers->getManagerOf('Post');
@@ -173,6 +192,10 @@ class AdminPostController extends AbstractController
         $this->page->setContentFile('ajax.twig');
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     */
     public function executeEdit(HTTPRequest $request, HTTPResponse $response)
     {
         $this->adminOnly();
@@ -199,10 +222,9 @@ class AdminPostController extends AbstractController
 
                 // Rename Image if title/slug has changed
                 if ($old_slug != $new_slug and $this->getApp()->getHttpRequest()->getFileData(
-                        'blog_image',
-                        'size'
-                    ) == 0) {
-
+                    'blog_image',
+                    'size'
+                ) == 0) {
                     $image_name = $this->setImageName($old_slug, $new_slug);
                     var_dump($image_name);
 
@@ -262,6 +284,11 @@ class AdminPostController extends AbstractController
         }
     }
 
+    /**
+     * @param $old_name
+     * @param $new_name
+     * @return string
+     */
     private function setImageName($old_name, $new_name)
     {
         $imagine    = new \Imagine\Imagick\Imagine();
@@ -276,7 +303,6 @@ class AdminPostController extends AbstractController
 
             unlink($target_dir.$old_name.IMG_EXT);
             unlink($target_dir.$old_name.'_thumb'.IMG_EXT);
-
         } catch (\Exception $exceptione) {
             $this->app->setFlash(
                 'error',
@@ -288,6 +314,5 @@ class AdminPostController extends AbstractController
         }
 
         return $new_name.IMG_EXT;
-
     }
 }

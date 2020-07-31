@@ -9,6 +9,10 @@ use Core\HTTPResponse;
 use Core\Mailer;
 use Core\SiteMapsManager;
 
+/**
+ * Class FrontendController
+ * @package Controller\Frontend
+ */
 class FrontendController extends AbstractController
 {
     public function executeHome()
@@ -19,6 +23,12 @@ class FrontendController extends AbstractController
         $this->page->addVar('title', 'Home');
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @return bool
+     * @throws \Exception
+     */
     public function executeContact(HTTPRequest $request, HTTPResponse $response)
     {
         if ($request->postExists('contact_form')) {
