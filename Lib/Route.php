@@ -2,15 +2,50 @@
 
 namespace Core;
 
+/**
+ * Class Route
+ * @package Core
+ */
 class Route
 {
+    /**
+     * @var
+     */
     protected $action;
+
+    /**
+     * @var
+     */
     protected $env;
+
+    /**
+     * @var
+     */
     protected $app;
+
+    /**
+     * @var
+     */
     protected $url;
+
+    /**
+     * @var
+     */
     protected $varsNames;
+
+    /**
+     * @var array
+     */
     protected $vars = [];
 
+    /**
+     * Route constructor.
+     * @param       $url
+     * @param       $env
+     * @param       $app
+     * @param       $action
+     * @param array $varsNames
+     */
     public function __construct($url, $env, $app, $action, array $varsNames)
     {
         $this->setUrl($url);
@@ -20,6 +55,9 @@ class Route
         $this->setVarsNames($varsNames);
     }
 
+    /**
+     * @param $url
+     */
     public function setUrl($url)
     {
         if (is_string($url)) {
@@ -27,11 +65,18 @@ class Route
         }
     }
 
+    /**
+     * @return bool
+     */
     public function hasVars()
     {
         return !empty($this->varsNames);
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     public function match($url)
     {
         if (preg_match('`^'.$this->url.'$`', $url, $matches)) {
@@ -42,11 +87,17 @@ class Route
 
     }
 
+    /**
+     * @return mixed
+     */
     public function getAction()
     {
         return $this->action;
     }
 
+    /**
+     * @param $action
+     */
     public function setAction($action)
     {
         if (is_string($action)) {
@@ -54,11 +105,17 @@ class Route
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getApp()
     {
         return $this->app;
     }
 
+    /**
+     * @param $app
+     */
     public function setApp($app)
     {
         if (is_string($app)) {
@@ -66,11 +123,17 @@ class Route
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getEnv()
     {
         return $this->env;
     }
 
+    /**
+     * @param $env
+     */
     public function setEnv($env)
     {
         if (is_string($env)) {
@@ -78,21 +141,33 @@ class Route
         }
     }
 
+    /**
+     * @return array
+     */
     public function getVars()
     {
         return $this->vars;
     }
 
+    /**
+     * @param array $vars
+     */
     public function setVars(array $vars)
     {
         $this->vars = $vars;
     }
 
+    /**
+     * @return mixed
+     */
     public function getVarsNames()
     {
         return $this->varsNames;
     }
 
+    /**
+     * @param array $varsNames
+     */
     public function setVarsNames(array $varsNames)
     {
         $this->varsNames = $varsNames;

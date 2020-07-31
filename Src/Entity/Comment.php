@@ -3,18 +3,62 @@
 namespace Entity;
 
 
+/**
+ * Class Comment
+ * @package Entity
+ */
 class Comment extends Entity
 {
+    /**
+     * @var
+     */
     protected $id;
+
+    /**
+     * @var
+     */
     protected $parent_id;
+
+    /**
+     * @var
+     */
     protected $post_id;
+
+    /**
+     * @var
+     */
     protected $post;
+
+    /**
+     * @var
+     */
     protected $user_id;
+
+    /**
+     * @var
+     */
     protected $author;
+
+    /**
+     * @var
+     */
     protected $message;
+
+    /**
+     * @var
+     */
     protected $status;
+
+    /**
+     * @var
+     */
     protected $date_add;
+
+    /**
+     * @var
+     */
     protected $date_edit;
+
 
     /**
      * @return mixed
@@ -29,9 +73,12 @@ class Comment extends Entity
      */
     public function setParentId($parent_id): void
     {
-        $this->parent_id = $parent_id === null? null: (int)$parent_id;
+        $this->parent_id = $parent_id === null ? null : (int)$parent_id;
     }
 
+    /**
+     * @return string
+     */
     public function isValid()
     {
         $notEmpty = ['message', 'status'];
@@ -145,6 +192,7 @@ class Comment extends Entity
 
     /**
      * @param mixed $date_add
+     * @throws \Exception
      */
     public function setDateAdd($date_add): void
     {
@@ -162,6 +210,7 @@ class Comment extends Entity
 
     /**
      * @param mixed $date_edit
+     * @throws \Exception
      */
     public function setDateEdit($date_edit): void
     {

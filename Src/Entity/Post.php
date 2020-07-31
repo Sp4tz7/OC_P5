@@ -4,23 +4,90 @@ namespace Entity;
 
 use Service\Service;
 
+/**
+ * Class Post
+ * @package Entity
+ */
 class Post extends Entity
 {
+    /**
+     * @var
+     */
     protected $id;
+
+    /**
+     * @var
+     */
     protected $category_id;
+
+    /**
+     * @var
+     */
     protected $category_name;
+
+    /**
+     * @var
+     */
     protected $category_slug;
+
+    /**
+     * @var
+     */
     protected $title;
+
+    /**
+     * @var
+     */
     protected $slug;
+
+    /**
+     * @var
+     */
     protected $abstract_content;
+
+    /**
+     * @var
+     */
     protected $content;
+
+    /**
+     * @var
+     */
     protected $image_url;
+
+    /**
+     * @var
+     */
     protected $date_add;
+
+    /**
+     * @var
+     */
     protected $date_edit;
+
+    /**
+     * @var
+     */
     protected $author;
+
+    /**
+     * @var
+     */
     protected $created_by;
+
+    /**
+     * @var
+     */
     protected $edited_by;
+
+    /**
+     * @var
+     */
     protected $nb_comments;
+
+    /**
+     * @var
+     */
     protected $active;
 
     /**
@@ -32,19 +99,19 @@ class Post extends Entity
     }
 
     /**
-     * @return mixed
-     */
-    public function getNbComments()
-    {
-        return $this->nb_comments;
-    }
-
-    /**
      * @param mixed $category_slug
      */
     public function setCategorySlug($category_slug): void
     {
         $this->category_slug = $category_slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbComments()
+    {
+        return $this->nb_comments;
     }
 
     /**
@@ -79,6 +146,9 @@ class Post extends Entity
         $this->author = $author;
     }
 
+    /**
+     * @return string
+     */
     public function isValid()
     {
         $notEmpty = ['title', 'category_id', 'slug', 'created_by'];
@@ -200,6 +270,7 @@ class Post extends Entity
 
     /**
      * @param mixed $date_add
+     * @throws \Exception
      */
     public function setDateAdd($date_add): void
     {
@@ -217,6 +288,7 @@ class Post extends Entity
 
     /**
      * @param mixed $date_edit
+     * @throws \Exception
      */
     public function setDateEdit($date_edit): void
     {

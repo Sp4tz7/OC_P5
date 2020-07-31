@@ -2,22 +2,82 @@
 
 namespace Entity;
 
+/**
+ * Class User
+ * @package Entity
+ */
 class User extends Entity
 {
+    /**
+     * @var
+     */
     protected $id;
+
+    /**
+     * @var
+     */
     protected $firstname;
+
+    /**
+     * @var
+     */
     protected $lastname;
+
+    /**
+     * @var
+     */
     protected $email;
+
+    /**
+     * @var
+     */
     protected $nickname;
+
+    /**
+     * @var
+     */
     protected $password;
+
+    /**
+     * @var
+     */
     protected $register_date;
+
+    /**
+     * @var
+     */
     protected $active;
+
+    /**
+     * @var
+     */
     protected $token;
+
+    /**
+     * @var
+     */
     protected $token_validity;
+
+    /**
+     * @var
+     */
     protected $role;
+
+    /**
+     * @var
+     */
     protected $show_full_name;
+
+    /**
+     * @var
+     */
     protected $send_email_replay;
+
+    /**
+     * @var
+     */
     protected $send_email_approve;
+
 
     /**
      * @return mixed
@@ -51,6 +111,9 @@ class User extends Entity
         $this->token = $token;
     }
 
+    /**
+     * @return string
+     */
     public function isValid()
     {
         $notEmpty = ['firstname', 'lastname', 'nickname', 'role'];
@@ -219,6 +282,7 @@ class User extends Entity
 
     /**
      * @param mixed $register_date
+     * @throws \Exception
      */
     public function setRegisterDate($register_date)
     {

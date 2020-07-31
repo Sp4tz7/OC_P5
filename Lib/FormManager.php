@@ -2,9 +2,16 @@
 
 namespace Core;
 
+/**
+ * Class FormManager
+ * @package Core
+ */
 class FormManager extends AbstractSecurityForm
 {
-
+    /**
+     * @param $data
+     * @return bool
+     */
     public function postNotEmpty($data)
     {
         foreach ($data as $item) {
@@ -19,7 +26,10 @@ class FormManager extends AbstractSecurityForm
         }
     }
 
-
+    /**
+     * @param $email
+     * @return bool
+     */
     public function isEmail($email)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -29,6 +39,4 @@ class FormManager extends AbstractSecurityForm
         return true;
 
     }
-
 }
-

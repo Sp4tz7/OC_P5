@@ -2,6 +2,10 @@
 
 namespace Core;
 
+/**
+ * Class Application
+ * @package Core
+ */
 class Application
 {
 
@@ -9,38 +13,43 @@ class Application
      * @var HTTPRequest
      */
     protected $httpRequest;
+
     /**
      * @var HTTPResponse
      */
     protected $httpResponse;
+
     /**
      * @var
      */
     protected $env = 'Frontend';
+
     /**
      * @var
      */
     protected $name;
+
     /**
      * @var
      */
     protected $action;
+
     /**
      * @var
      */
     protected $config;
 
+    /**
+     * Application constructor.
+     */
     public function __construct()
     {
         $this->httpRequest  = new HTTPRequest($this);
         $this->httpResponse = new HTTPResponse($this);
-        //$this->config = new Config($this);
     }
 
     /**
-     * Initiate the router and return the controller
-     *
-     * @return Controller
+     * @return bool|mixed
      */
     public function init()
     {
@@ -99,8 +108,6 @@ class Application
     }
 
     /**
-     * Return the name of the current application
-     *
      * @return string
      */
     public function getName()
@@ -109,8 +116,6 @@ class Application
     }
 
     /**
-     * Return the application environment
-     *
      * @return string
      */
     public function getEnv()
@@ -119,7 +124,7 @@ class Application
     }
 
     /**
-     * @param string $env
+     * @param $env
      */
     public function setEnv($env)
     {
@@ -132,8 +137,6 @@ class Application
     }
 
     /**
-     * Return the application action
-     *
      * @return string
      */
     public function getAction()
@@ -141,13 +144,16 @@ class Application
         return strtolower($this->action);
     }
 
+    /**
+     * @return HTTPResponse
+     */
     public function getHttpResponse()
     {
         return $this->httpResponse;
     }
 
     /**
-     * @param string $name
+     * @param $name
      */
     public function setAppName($name)
     {
@@ -158,13 +164,17 @@ class Application
         $this->$name = strtolower($name);
     }
 
-
+    /**
+     * @return HTTPRequest
+     */
     public function getHttpRequest()
     {
         return $this->httpRequest;
     }
 
-
+    /**
+     * @return mixed|null
+     */
     public function getFlash()
     {
         $flash = $this->httpRequest->getSession('flashes');
@@ -176,8 +186,6 @@ class Application
     /**
      * @param string $type
      * @param array  $data
-     *
-     * @return void
      */
     public function setFlash($type = 'success', array $data)
     {
@@ -190,6 +198,9 @@ class Application
 
     }
 
+    /**
+     * @return bool
+     */
     public function hasFlash()
     {
         return $this->httpRequest->sessionExists('flashes');

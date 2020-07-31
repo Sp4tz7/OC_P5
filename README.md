@@ -1,5 +1,5 @@
 # PHP Blog OpenClassRooms P5
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e03001e53ac4555ae3d45b355afc681)](https://app.codacy.com/manual/Sp4tz7/OC_P5?utm_source=github.com&utm_medium=referral&utm_content=Sp4tz7/OC_P5&utm_campaign=Badge_Grade_Dashboard)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e03001e53ac4555ae3d45b355afc681)](https://app.codacy.com/manual/Sp4tz7/OC_P5?utm_source=github.com&utm_medium=referral&utm_content=Sp4tz7/OC_P5&utm_campaign=Badge_Grade_Dashboard) ![PHP](https://img.shields.io/badge/PHP-%3E%3D%207.2.5-green) [![Security Headers](https://img.shields.io/badge/SecurityHeaders-A%2B-green)](https://securityheaders.com/?q=https%3A%2F%2Fsiker.ch%2F)
 
 This project is part of the 5th course of my OpenClassRooms course
 -  Build a complete website blog from scratch
@@ -20,16 +20,32 @@ You can also:
 -  See your pending/approved/rejected comments in the admin zone
 -  Become an administrator if authorized
 
+### Requirements
+
+In order to use this framework, the following points must be respected
+
+-  PHP version >=7.2.5
+-  PHP [Imagick](http://pecl.php.net/package/imagick/3.4.4/windows) lib installed according to your PHP version
+
 ### Installation
 
-This _PHP Blog_ project requires [PHP](https://php.net/) 7.0+ and [Composer](https://getcomposer.org/) to run.
+This _PHP Blog_ project requires [PHP](https://php.net/) 7.2.5+ and [Composer](https://getcomposer.org/) to run.
 
 Install the whole project from Github and run Composer vendors dependencies.
 
+#### File
 ```sh
 git clone https://github.com/Sp4tz7/OC_P5.git
 cd OC_P5
 composer install
+```
+
+#### Database
+
+```
+mysql> CREATE DATABASE IF NOT EXISTS php_blog DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+mysql> USE php_blog
+mysql> SOURCE YOUR/ROOT/PATH/Database/Dump_php_blog.sql
 ```
 
 ### Configuration

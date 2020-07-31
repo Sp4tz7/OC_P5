@@ -5,16 +5,46 @@ namespace Core;
 use Config\config;
 use PHPMailer\PHPMailer\PHPMailer;
 
+/**
+ * Class Mailer
+ * @package Core
+ */
 class Mailer
 {
-
+    /**
+     * @var
+     */
     protected $user;
+
+    /**
+     * @var
+     */
     protected $template;
+
+    /**
+     * @var
+     */
     protected $subject;
+
+    /**
+     * @var array
+     */
     protected $vars = [];
+
+    /**
+     * @var
+     */
     protected $message;
+
+    /**
+     * @var
+     */
     protected $email_to;
 
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     public function sendEmail()
     {
         if (!$this->email_to) {
@@ -67,6 +97,9 @@ class Mailer
         }
     }
 
+    /**
+     * @param $template
+     */
     public function setEmailTemplate($template)
     {
         $directory         = APP_DIR.'Templates/Mail/';
@@ -76,28 +109,38 @@ class Mailer
         }
     }
 
+    /**
+     * @param $subject
+     */
     public function setEmailSubject($subject)
     {
         $this->subject = $subject;
     }
 
+    /**
+     * @param \Entity\User $user
+     */
     public function setUserData(\Entity\User $user)
     {
         $this->user     = $user;
         $this->email_to = $user->getEmail();
     }
 
+    /**
+     * @param $email
+     */
     public function setEmailTo($email)
     {
         $this->email_to = $email;
     }
 
+    /**
+     * @param $vars
+     */
     public function setVars($vars)
     {
         if (is_array($vars)) {
             $this->vars = $vars;
         }
     }
-
-
 }

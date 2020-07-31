@@ -8,13 +8,21 @@ use Core\HTTPResponse;
 use Core\Mailer;
 use Entity\User;
 
+/**
+ * Class AdminUserController
+ * @package Controller\Backend
+ */
 class AdminUserController extends AbstractController
 {
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @return bool
+     */
     public function executeMyAccount(HTTPRequest $request, HTTPResponse $response)
     {
         $userManager = $this->managers->getManagerOf('User');
         $user        = $userManager->getUnique($request->getSession('UserAuth'));
-
 
         // Change password
         if ($request->postExists('change_password') and $this->formManager->compareCsrfToken()) {
@@ -98,6 +106,11 @@ class AdminUserController extends AbstractController
 
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     * @throws \Exception
+     */
     public function executeAdd(HTTPRequest $request, HTTPResponse $response)
     {
         $userManager = $this->managers->getManagerOf('User');
@@ -160,6 +173,9 @@ class AdminUserController extends AbstractController
 
     }
 
+    /**
+     * @param HTTPRequest $request
+     */
     public function executeEdit(HTTPRequest $request)
     {
         $this->adminOnly();
@@ -217,6 +233,10 @@ class AdminUserController extends AbstractController
         }
     }
 
+    /**
+     * @param HTTPRequest  $request
+     * @param HTTPResponse $response
+     */
     public function executeDelete(HTTPRequest $request, HTTPResponse $response)
     {
 

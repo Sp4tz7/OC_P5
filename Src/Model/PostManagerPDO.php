@@ -4,23 +4,43 @@ namespace Model;
 
 use Entity\Post;
 
+/**
+ * Class PostManagerPDO
+ * @package Model
+ */
 class PostManagerPDO extends PostManager
 {
+    /**
+     * @return mixed
+     */
     public function count()
     {
         return $this->dao->query('SELECT COUNT(*) FROM blog_post')->fetchColumn();
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategories()
     {
         return $this->dao->query('SELECT * FROM blog_post_category')->fetchAll();
     }
 
+    /**
+     * @param $postID
+     * @return mixed|void
+     */
     public function delete($postID)
     {
         $this->dao->exec('DELETE FROM blog_post WHERE id = '.(int)$postID);
     }
 
+    /**
+     * @param int  $start
+     * @param int  $limit
+     * @param null $categoryId
+     * @return mixed
+     */
     public function getList($start = -1, $limit = -1, $categoryId = null)
     {
         $sql = "SELECT p.*, pc.category_name, pc.category_slug, COUNT(c.id) AS 'nb_comments',
@@ -53,6 +73,10 @@ class PostManagerPDO extends PostManager
         return $listPosts;
     }
 
+    /**
+     * @param $postID
+     * @return mixed|null
+     */
     public function getUnique($postID)
     {
         $request = $this->dao->prepare(
@@ -76,6 +100,10 @@ class PostManagerPDO extends PostManager
         return null;
     }
 
+    /**
+     * @param $slug
+     * @return |null
+     */
     public function getCategoryBySlug($slug)
     {
         $request = $this->dao->prepare(
@@ -91,6 +119,10 @@ class PostManagerPDO extends PostManager
         return null;
     }
 
+    /**
+     * @param $slug
+     * @return |null
+     */
     public function getBySlug($slug)
     {
         $request = $this->dao->prepare(
@@ -114,6 +146,11 @@ class PostManagerPDO extends PostManager
         return null;
     }
 
+    /**
+     * @param $name
+     * @param $slug
+     * @return int|string
+     */
     public function addCategory($name, $slug)
     {
         $request = $this->dao->prepare('INSERT INTO blog_post_category 
@@ -130,6 +167,10 @@ class PostManagerPDO extends PostManager
         }
     }
 
+    /**
+     * @param Post $post
+     * @return int|mixed|string
+     */
     protected function add(Post $post)
     {
         $request = $this->dao->prepare(
@@ -163,6 +204,10 @@ class PostManagerPDO extends PostManager
         }
     }
 
+    /**
+     * @param Post $post
+     * @return mixed|string
+     */
     protected function modify(Post $post)
     {
         $request = $this->dao->prepare(
