@@ -31,8 +31,8 @@
                                         <img src="/img/post/{{ post.getImageUrl() }}" class="img-fluid">
                                     </figure>
                                 {% endif %}
-                                <h1 class="text-center display-3">{{ post.getTitle() }}</h1>
-                                <div class="lead text-center mb-5">{{ post.getAbstractContent()|raw|nl2br }}</div>
+                                <div class="text-center display-4 mb-4">{{ post.getTitle() }}</div>
+                                <h2 class="lead text-center mb-5">{{ post.getAbstractContent()|raw|nl2br }}</h2>
                                 <span class="float-right"></span>
                                 <div class="my-5 text-justify">{{ post.getContent()|raw|nl2br }}</div>
                                 <span class="float-right text-muted mb-5">Last edited: {{ post.getDateEdit()|date('D d/m/Y')|default(post.getDateAdd()|date('D d/m/Y')) }}</span>
